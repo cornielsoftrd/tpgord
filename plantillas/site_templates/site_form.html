@@ -1,0 +1,42 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+{% block title %}
+<title>Formulario de Sites</title>
+{% endblock title %}
+ 
+
+ 
+{% block content %}
+
+
+{% if request  %}
+<div class="register-photo">
+    <div class="form-container">
+        <div class="image-holder" style="background:url({% static 'images/3.jpg'%})"></div>
+        <form method="post" action="{% url 'crear_site' %}" class="formulario_crear_site">
+        {% csrf_token %}
+            <h2 class="text-center"><strong>Formulario</strong> de Sites</h2>
+            
+            <div class="form-group">{{form.id_site}}</div>
+             <div class="form-group">{{form.nombre_site}}</div>
+             
+             
+             <div class="form-group">{{form.errors}}</div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Guardar</button></div>
+            
+            </form>
+    </div>
+</div>
+
+
+
+
+
+</div>
+{% endif %}
+    
+
+    
+            
+{% endblock content %}
+

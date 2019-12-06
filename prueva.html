@@ -1,0 +1,62 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title> 
+	How to know which radio button 
+	is selected via jQuery? 
+</title> 
+</head> 
+
+<body> 
+	<h1 style="color: green"> 
+	GeeksForGeeks 
+</h1> 
+	<b> 
+	How to know which radio 
+	button is selected via jQuery? 
+</b> 
+	<p> 
+		<form id="myForm"> 
+			<label> 
+				<input
+					type="radio"
+					name="option"
+					value="free"> 
+			Free Membership 
+			</label> 
+			<label> 
+				<input type="radio"
+					name="option"
+					value="premium"> 
+			Premium Membership 
+			</label> 
+		</form> 
+	
+	
+	<p> 
+	The value of the option selected is: 
+	<span class="output"></span> 
+</p> 
+	<button id="btn"> 
+	Check option button 
+</button> 
+	
+	<script src= 
+"https://code.jquery.com/jquery-2.2.4.min.js"> 
+</script> 
+	
+	<script type="text/javascript"> 
+		
+	// Check the radio button value. 
+		$('#btn').on('click', function() { 
+			output = 
+			$('input[name=option]:checked', 
+				'#myForm').val(); 
+			
+			document.querySelector( 
+			'.output').textContent = output; 
+		}); 
+	</script> 
+</body> 
+
+</html> 

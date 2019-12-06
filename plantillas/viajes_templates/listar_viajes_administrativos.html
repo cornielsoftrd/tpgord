@@ -1,0 +1,78 @@
+{% extends "base/base.html" %}
+
+
+{% block content %}
+<div class="container-fluid table-responsive " >
+		<div class="row">
+			<div class="col-md-12 ">
+				<nav class="navbar  navbar-light bg-light">
+				
+				<div class="col-6"><b class="navbar-brand" href="#">Mis Viajes</b> </div>
+			
+					<div class="col-6" >
+					
+						<form method="get" name="buscar" >
+							<div class="input-group md-form form-sm    ">
+								<a class="btn btn-info mr-2" href="{% url 'reportexls' %}"> <i class="fas fa-file-export"></i> </a>
+								<input class="form-control  " type="text" placeholder="Numero de viaje" aria-label="Search" name="dato">
+								<div class="input-group-append">
+								<button type="submit" class="btn btn-info"><i class="fas fa-search text-grey"></i></button>
+								</div>
+							</div>
+						</form>
+					
+					</div>
+				</nav>
+				<table class="table table-bordered table-dark table-striped">
+				<thead class="thead-light">
+				<tr >
+					<th> Numero</th>
+					<th> Usuario</th>
+					<th> Vendor</th>
+					<th> Fecha</th>
+					<th> Hora</th>
+					<th> origen</th>
+					<th> Destino</th>
+					<th> Vehiculo</th>
+					<th> Visita</th>
+					<th> Contacto</th>
+					<th> Observaciones</th>
+                    <th> Estado </th>
+                    <th colspan="2"  style="width:  5%">Acciones</th>
+					<th style="width:  5%"> <a class="fa fa-plus" href="{% url 'crear_viaje_admin' %}"><a></th>
+
+				</tr>
+				</thead> 	
+
+			   {% if object_list %}
+				<tbody>
+				 {% for viaje_admin in object_list  %}
+					<tr>
+						<td>{{viaje_admin.numero_viaje}}</td>
+                        <td>{{viaje_admin.usuario}}</td>
+                        <td>{{viaje_admin.vendor}}</td>
+                        <td>{{viaje_admin.fecha_viaje}}</td>
+                        <td>{{viaje_admin.hora_viaje}}</td>
+                        <td>{{viaje_admin.origen}}</td>
+                        <td>{{viaje_admin.destino}}</td>
+                        <td>{{viaje_admin.tipo_vehiculo}}</td>
+                        <td>{{viaje_admin.tipo_visita}}</td>
+                        <td>{{viaje_admin.numero_contacto}}</td>
+                        <td>{{viaje_admin.observaciones}}</td>
+                        <td>{{viaje_admin.estado}}</td>
+
+					</tr>
+				{% endfor %}
+				{%else%}
+				
+				<td colspan="11" style="">No hay Hay Pasajeros en la Cola del Viaje</td>
+				</tbody>
+
+			   {% endif %}
+
+
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

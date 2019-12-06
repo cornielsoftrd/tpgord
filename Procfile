@@ -1,0 +1,1 @@
+web: gunicorn transportetp.wsgi --log-file -

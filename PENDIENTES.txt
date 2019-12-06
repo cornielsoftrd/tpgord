@@ -1,0 +1,1 @@
+En el modelo Vieje, arreglar el nombre de Campaña_pasajero y poner Cuenta_pasajero, que es el q se usa en en todas las demas

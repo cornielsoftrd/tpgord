@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="{% static 'images/tp-icon.ico'%}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    {% block title %}<title>TPGO</title>{% endblock title %}
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/styles.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/corniel.css'%}">
+
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css'%}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/all.css'%}">
+    
+ 
+    
+ 
+</head>
+
+<body>
+<!--Start nav Bar-->
+
+    <nav class="navbar navbar-dark navbar-expand-md" id="app-navbar">
+        <div class="container-fluid"><a class="navbar-brand" href="{%url 'home'%}"><img class="icon ion-ios-infinite" src="{% static 'images/logo_tp.svg'%}" width="150" id="brand-logo"></i></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+           
+            <!--el menu de navegacion solo saldra si el usuario esta logueado-->
+            
+            {% if  user.is_authenticated %}
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <!--
+                      <li class="nav-item" role="presentation"><a class="nav-link" href='generar_viaje'> 
+                    <h5>{{request.session.tipo_viaje}}</h5></a></li>
+
+                <li class="nav-item" role="presentation"><a class="nav-link" href='generar_viaje'> 
+                    <h5>{{request.session.numero_viaje}}</h5></a></li>
+                    -->
+              
+                    <!-- Dropdown Admin  -->
+                    
+                    {% if user.is_admin or user.is_superuser%}
+                        
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Administrar
+                    </a>
+                    <div class="dropdown-menu">
+                        
+                        <a class="dropdown-item" href="{% url 'viajes_admin'%}">Viajes Administrativos</a>
+
+
+                        <a class="dropdown-item" href="{% url 'pasajeros'%}">Pasajeros</a>
+                        <a class="dropdown-item" href="{% url 'vendor'%}">Vendor</a>
+                        <a class="dropdown-item" href="{% url 'transportistas'%}">Transportistas</a>
+                        <a class="dropdown-item" href="{% url 'rutas' %}">Rutas</a>
+                        <a class="dropdown-item" href="{% url 'cuentas'%}">Cuentas</a>
+                        <a class="dropdown-item" href="{% url 'sites'%}">Sites</a>
+                    </div>
+                    </li>
+                    {% endif %}
+                    <!-- Fin Dropdown Admin -->
+
+                    
+                   
+                        
+                   
+                        
+                    <!-- Dropdown Viajes  -->
+                {% if user.is_transportista %}
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Viajes
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'crear_viaje'%}">Crear Viaje</a>
+                        <a class="dropdown-item" href="{% url 'viaje_en_curso'%}">Viaje En Curso</a>
+                        <a class="dropdown-item" href="{% url 'mis_viajes' %}">Mis Viajes</a>
+
+                    </div>
+                    </li>
+                {% endif %}
+                    <!-- Fin Dropdown Viajes -->
+
+                     
+                     <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'logout'%}">LOGOUT</a></li>
+                      <li class="nav-item" role="presentation"><a class="nav-link" href="">{{request.session.hora}}</a></li>
+                  
+
+                     
+                     
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+       
+
+    <!--End Nav Bar-->
+
+    <!--Aqui se Mostrara un alerta con cualquier mensaje que se haya generado atraves de Django Mesajes, lo puse
+    en el archivo base ya que este esta heredado en todas las plantillas, si se genera un mensaje el alerta saldra con el texto del mensaje
+    este Script solo se vera agregado en plantillas que no hereden de la base.html-->
+
+    {% if messages %}
+    {% for message in messages %}
+    <script>
+      mensaje = '{{ message }}';
+      alert(mensaje);
+    </script>
+     <!--<strong>Atencion!</strong> {{ message }}-->
+    {% endfor %}
+{% endif %}
+
+<div class="container ">
+	<div class="col-xs-12 mt-5">
+        {% block content %}
+            contenido
+        {% endblock content %}
+	</div>
+</div>
+    <!--contenido Footer-->
+    
+    {% block footer %}
+     
+    {% endblock footer %}
+     <div class="">
+        
+        <footer class="fijar">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 footer-navigation">
+                    <a class="navbar-brand" href="{%url 'home'%}"><img class="icon ion-ios-infinite" src="{% static 'images/logo_tp.svg'%}" width="150" id="brand-logo"></i></a>
+                    <h3>{{ user.username }}</h3>
+                    <p class="links"><a href="#">Home</a><strong> · </strong><a href="#">acerca de</a><strong> · </strong><a href="#">Contactos</a></p>
+                    <p
+                        class="company-name">Teleperformance © 2019 </p>
+                </div>
+                <div class="col-sm-6 col-md-4 footer-contacts">
+                    <div><span class="fa fa-map-marker footer-contacts-icon"> </span>
+                        <p><span class="new-line-span">Ave Roberto Pastoriza 256</span> Santo Domingo RD</p>
+                    </div>
+                    <div><i class="fa fa-phone footer-contacts-icon"></i>
+                        <p class="footer-center-info email text-left">809-732-6433</p>
+                    </div>
+                    <div><i class="fa fa-envelope footer-contacts-icon"></i>
+                        <p> <a href="#" target="_blank">manuel.c.a.075@gmail.com</a></p>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-4 footer-about">
+                    <h4>Acerca de </h4>
+                    <p> Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet. </p>
+                    <div class="social-links social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-github"></i></a></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+
+
+
+
+    <script src="{% static 'js/jquery.min.js'%}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/script.min.js'%}"></script>
+    <script src="{% static 'js/jsQR.js'%}"></script>
+
+    {% block js %}
+    {% endblock js %}
+</body>
+
+</html>

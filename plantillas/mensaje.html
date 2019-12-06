@@ -1,0 +1,19 @@
+ {% block content %}
+
+ <!--Aqui se Mostrara un alerta con cualquier mensaje que se haya generado atraves de Django Mesajes, lo puse
+    en el archivo base ya que este esta heredado en todas las plantillas, si se genera un mensaje el alerta saldra con el texto del mensaje
+    este Script solo se vera agregado en plantillas que no hereden de la base.html-->
+    {% if messages %}
+    {% for message in messages %}
+    <script>
+      mensaje = '{{ message }}';
+      alert(mensaje);
+      window.close();
+    </script>
+     <!--<strong>Atencion!</strong> {{ message }}-->
+    {% endfor %}
+{% endif %}
+
+
+
+{% endblock content %}

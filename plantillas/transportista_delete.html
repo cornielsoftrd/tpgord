@@ -1,0 +1,53 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+{% block title %}
+<title>Borrar Transportista</title>
+{% endblock title %}
+ 
+
+ 
+{% block content %}
+
+
+{% if request  %}
+    
+<div class="register-photo">
+    <div class="form-container">
+        <div class="image-holder" style="background:url({% static 'images/3.jpg'%})"></div>
+        <form method="post">
+        {% csrf_token %}
+            <h2 class="text-center"><strong>Borrar</strong> Transportista</h2>
+
+              <h2 class="text-center">Se <strong>eliminira </strong>el trasnpoirtista </h2>
+            
+            
+       
+            
+            <div class="form-group"><label class="ml-3">Codigo : <strong>{{transportista.codigo_transportista}}</strong></label></div>
+        
+
+            <div class="form-group"><label class="ml-3">desea continuar? <strong></strong></label></div>
+
+            <div class="form-group"><label class="ml-3">
+            
+            
+                <input type="submit" class="btn btn-danger" value="Borrar">
+                <a class="btn btn-success" href="{% url 'transportistas'%}" style="color: white">Cancelar</a>
+            
+            
+            </div>
+
+
+           
+            
+            </form>
+    </div>
+
+</div>
+{% endif %}
+    
+
+
+	 
+    
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+<title> Viajes Administrativos</title>
+{% endblock title %}
+ 
+
+ 
+{% block content %}
+	
+		    <div class="register-photo">
+        <div class="form-container">
+            <div class="image-holder" style="background:url({% static 'images/3.jpg'%})"></div>
+            
+            {% if request.user.is_admin %}
+            <form method="post">
+                {% csrf_token %}
+                    <h2 class="text-center"><strong>Viajes</strong> Administrativos</h2>
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="numero_viaje" placeholder="Numero de Viaje" value="{{request.session.numero_viaje_admin}}" placeholder="Usuario" readonly>
+                <div class="input-group-append">
+                <a href="{% url 'generar_viaje_admin'%}" class="btn btn-info" ><i class="fas fa-sync"></i></a>
+                </div>
+            </div>
+
+            <div class="form-group"><input type="text" class="form-control" name="usuario"  value="{{request.user.username}}" placeholder="Usuario" readonly required></div>
+            
+            <div class="form-group">{{form.vendor}}</div>
+            
+
+
+           
+            <!--<div class="form-group"><input type="text" class="form-control" name="vendor"  placeholder="Vendor" required></div>-->
+
+
+            <div class="form-group"><input type="date" class="form-control" name="fecha_viaje"  placeholder="Fecha de viaje" required></div>
+            <div class="form-group"><input type="time" class="form-control" name="hora_viaje"  placeholder="Hora del viaje" required></div>
+            <div class="form-group"><input type="text" class="form-control" name="origen"  placeholder="Origen" required></div>
+            <div class="form-group"><input type="text" class="form-control" name="destino"  placeholder="Destino" required></div>
+           
+            <div class="form-group">
+                <select name="tipo_vehiculo" class="form-control" required>
+                    <option  value="microbus">Microbus</option>
+                    <option  value="camioneta">Camioneta</option>
+                    <option  value="sedan ">Sedan</option> 
+                    <option  value="lujo">Lujo</option> 
+                    <option  value="blindado">Blindado</option>  
+                </select>
+            </div>
+
+            <div class="form-group">
+                <select name="tipo_visita" class="form-control" required>
+                    <option>Tipo de Visita</option>
+                    <option value="a">A</option>
+                    <option value="b">B</option>
+                    <option value="c">C</option>
+                </select>
+            </div>
+
+            <div class="form-group"><input type="text" class="form-control" placeholder = "numero de contacto" name="numero_contacto" required></div>
+            <div class="form-group"><textarea class="form-control text-center" placeholder = "observaciones" style="size:46px;" name="observaciones" required></textarea></div>
+
+                    <div class="form-group">{{form.errors}}</div>
+                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Crear</button></div>
+                    
+                    </form>
+            {% endif %}
+                
+            
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}}}
