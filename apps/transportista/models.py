@@ -8,8 +8,8 @@ class Transportista(models.Model):
     codigo_transportista = models.BigAutoField(
         primary_key=True
     )  # la cedula del transportista
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=30)
+    apellido = models.CharField(max_length=30)
     ruta = models.ManyToManyField(Ruta)
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True, blank=True)
 
