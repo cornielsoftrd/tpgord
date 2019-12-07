@@ -6,7 +6,7 @@ class Vendor(models.Model):
         primary_key=True
     )  # la cedula del transportista
     nombre_vendor = models.CharField(max_length=50)
-    nombre_vendor = models.CharField(max_length=50)
+    
 
 
     def __str__(self):

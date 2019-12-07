@@ -5,11 +5,11 @@ from apps.vendor.models import Vendor
 
 # Create your models here.
 class Transportista(models.Model):
-    codigo_transportista = models.BigAutoField(
+    codigo_transportista = models.BigIntegerField(
         primary_key=True
     )  # la cedula del transportista
-    nombre = models.CharField(max_length=30)
-    apellido = models.CharField(max_length=30)
+    nombre = models.CharField(max_length=50)
+    apellido = models.CharField(max_length=50)
     ruta = models.ManyToManyField(Ruta)
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True, blank=True)
 
