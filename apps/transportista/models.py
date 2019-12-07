@@ -11,7 +11,7 @@ class Transportista(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     ruta = models.ManyToManyField(Ruta)
-    vendor = models.ForeignKey(Vendor,  null=True, blank=True)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return "%s %s" % (self.nombre, self.apellido)
