@@ -5,7 +5,7 @@ from apps.vendor.models import Vendor
 
 # Create your models here.
 class Transportista(models.Model):
-    codigo_transportista = models.BigIntegerField(
+    codigo_transportista = models.CharField(max_length=50,
         primary_key=True
     )  # la cedula del transportista
     nombre = models.CharField(max_length=50)
