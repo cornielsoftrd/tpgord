@@ -44,8 +44,8 @@ class ViajeAdministrativo(models.Model):
     tipo_vehiculo = models.CharField(max_length=30)
     tipo_visita = models.CharField(max_length=30)
     numero_contacto = models.CharField(max_length=30)
-    observaciones = models.TextField(max_length=30)
-    estado = models.TextField(max_length=30, default="Pendiente")
+    observaciones = models.TextField(blank=True)
+    estado = models.CharField(max_length=30, default="Pendiente")
 
     def __str__(self):
         return "%s" % (self.usuario)
