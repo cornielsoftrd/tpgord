@@ -765,6 +765,7 @@ class reporte_viaje_excel(TemplateView):
 
 def generar_viaje_admin(request):
      #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
+     #la nomenclatura de los viajes Administrativos es la misma q los viajes normales, solo q en vez de TPG es TPGAD
     if not request.user.is_transportista and not request.user.is_superuser:
         messages.success(request, "No tiene permisos Para Acceder a seccion")
         return redirect("home")
