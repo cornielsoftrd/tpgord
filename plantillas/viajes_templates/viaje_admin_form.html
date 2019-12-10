@@ -19,7 +19,7 @@
                     <h2 class="text-center"><strong>Viajes</strong> Administrativos</h2>
 
             <div class="input-group mb-3">
-                <input type="text" class="form-control" name="numero_viaje" placeholder="Numero de Viaje" value="{{request.session.numero_viaje_admin}}" placeholder="Usuario" readonly>
+                <input type="text" class="form-control" name="numero_viaje" placeholder="Numero de Viaje" value="{{request.session.numero_viaje_admin}}" placeholder="Usuario" readonly required>
                 <div class="input-group-append">
                 <a href="{% url 'generar_viaje_admin'%}" class="btn btn-info" ><i class="fas fa-sync"></i></a>
                 </div>

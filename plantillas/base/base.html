@@ -65,11 +65,7 @@
                     {% endif %}
                     <!-- Fin Dropdown Admin -->
 
-                    
-                   
-                        
-                   
-                        
+  
                     <!-- Dropdown Viajes  -->
                 {% if user.is_transportista %}
                     <li class="nav-item dropdown">
@@ -89,10 +85,7 @@
                      
                      <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'logout'%}">LOGOUT</a></li>
                       <li class="nav-item" role="presentation"><a class="nav-link" href="">{{request.session.hora}}</a></li>
-                  
 
-                     
-                     
                 </ul>
             </div>
             {% endif %}
