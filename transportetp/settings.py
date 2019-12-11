@@ -149,12 +149,13 @@ LOGOUT_REDIRECT_URL = "/login"
 
 EMAIL_USER_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 25
 EMAIL_HOST_USER = "tpgoapp@gmail.com"
 EMAIL_HOST_PASSWORD = "Test_12345"
-EMAIL_BACKEND = (
-    "django.core.mail.backends.smtp.EmailBackend"  # During development only
-)
+EMAIL_PORT = 587
+
+"""EMAIL_BACKEND = (
+    "django.core.mail.backends.console.EmailBackend"  # During development only
+)"""
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "TestSite Team <tpgoapp@gmail.com>"
 
