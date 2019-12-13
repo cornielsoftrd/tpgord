@@ -1,70 +1,78 @@
+
 {% extends 'base/base.html' %}
-{% load staticfiles %}
-
-
 {% block content %}
 
-{% if request  %}
+{% if request %}
 
- 		<div class="container-fluid table-responsive " >
-		<div class="row">
-			<div class="col-md-12 ">
-				<nav class="navbar  navbar-light bg-light">
-					
-				
-				<div class="col-6"><b class="navbar-brand" href="#">Transportistas</b> </div>
-			
-					<div class="col-6" >
-					
-						<form method="get" name="buscar" >
-
-							<div class="input-group md-form form-sm    ">
-								<input class="form-control  " type="text" placeholder="Nombre de Transportista" aria-label="Search" name="dato">
-								<div class="input-group-append">
-								<button type="submit" class="btn btn-info"><i class="fas fa-search text-grey"></i></button>
+	 <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                               
+                           <nav class="navbar bg-tp_magenta_pink  text-white">
+							<div class="col-6"><b class="navbar-brand" href="#">Transportistas</b> </div>
+								<div class="col-6" >								
+									<form method="get" name="buscar" >
+										<div class="input-group md-form form-sm    ">
+											<input class="form-control  " type="text" placeholder="Id del Transportista" aria-label="Search" name="dato">
+											<div class="input-group-append">
+											<button type="submit" class="btn btn-info"><i class="fas fa-search text-grey"></i></button>
+											</div>
+										</div>
+									</form>
+								
 								</div>
-							</div>
-						</form>
-					
-					</div>
-				</nav>
-				<table class="table table-bordered table-dark table-striped">
-				<thead class="thead-light">
-					<tr >
-						<th>Codigo Transportista</th>
-						<th>Vendor</th>
-			            <th>Nombre</th>
-			            <th>Apellido</th>
-			            <th>Ruta</th>
-						
-						<th colspan="2"  style="width:  5%">Acciones</th>
-						<th style="width:  5%"> <a class="fa fa-plus" href="{% url 'crear_transportista' %}"><a></th>  
-					</tr>
-				</thead>       	
-			   {% if object_list %}
-					<tbody>
-					 {% for transportista in object_list  %}
-						<tr>
-							<td>{{transportista.codigo_transportista}}</td>
-							<td>{{transportista.vendor}}</td>
-							<td>{{transportista.nombre}}</td>
-				            <td>{{transportista.apellido}}</td>
-							<!--<td>{{transportista.ruta}}</td>-->
+							</nav>
 
-							<!--Botones de Accion-->
-							<td><a class="fa fa-pencil-square-o fa-lg" href=" {% url 'editar_transportista' transportista.codigo_transportista %}"></a></td>
-				            <td><a class="fa fa-trash fa-lg" href=" {% url 'borrar_transportista' transportista.codigo_transportista %}"></a></td>
-						</tr>
-						{% endfor %}
-					</tbody>
-					 {% else %}
-				{% endif %}
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="bg-primary  text-white">
+                                          <tr >
+										<th>Codigo Transportista</th>
+										<th>Vendor</th>
+							            <th>Nombre</th>
+							            <th>Apellido</th>
+							            <!--<th>Ruta</th>-->
+										
+										<th colspan="2"  style="width:  5%">Acciones</th>
+										<th style="width:  5%" class="bg-dark"> <a class="fa fa-plus" href="{% url 'crear_transportista' %}"></a></th>  
+									</tr>
+                                        </thead>
 
+                                        {% if object_list %}
+									<tbody>
+								 {% for transportista in object_list  %}
+									<tr>
+										<td>{{transportista.codigo_transportista}}</td>
+										<td>{{transportista.vendor}}</td>
+										<td>{{transportista.nombre}}</td>
+							            <td>{{transportista.apellido}}</td>
+										<!--<td>{{transportista.ruta}}</td>-->
 
-				</table>
-			</div>
-		</div>
-	</div>
-	
-	{% endif %}
+										<!--Botones de Accion-->
+										<td><a class="icon-pencil" href=" {% url 'editar_transportista' transportista.codigo_transportista %}"></a></td>
+							            <td><a class="icon-trash" href=" {% url 'borrar_transportista' transportista.codigo_transportista %}"></a></td>
+									</tr>
+									{% endfor %}
+								</tbody>
+								 {% else %}
+							{% endif %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                 {% endif %}
 	 {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+

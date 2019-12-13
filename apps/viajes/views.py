@@ -272,43 +272,48 @@ class agregar_viaje_manual(View):
 # esta funcion devuelve los viajes en curso, tomando como filtro el numero de viaje que que esta en el momento
 
 def listar_viaje_en_curso(request):
-     #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
-    if not request.user.is_transportista and not request.user.is_superuser:
-        messages.success(request, "No tiene permisos Para Acceder a seccion")
-        return redirect("home")
-            
-    qs = Viaje.objects.filter(numero_viaje=request.session["numero_viaje"])
 
-    # contar el numero de pasajeros en este queryset
-    cantidad_pasajeros = qs.count()
+    try:
+        #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
+        if not request.user.is_transportista and not request.user.is_superuser:
+            messages.success(request, "No tiene permisos Para Acceder a seccion")
+            return redirect("home")
+                
+        qs = Viaje.objects.filter(numero_viaje=request.session["numero_viaje"]).order_by('-fecha_viaje')
 
-    # definir el precio del viaje
-    # viajes de 1 a 3 personas paga 12 dolares
-    # viajes de 4 a 15 personas paga 26 dolares
+        # contar el numero de pasajeros en este queryset
+        cantidad_pasajeros = qs.count()
 
-    if cantidad_pasajeros >= 1 and cantidad_pasajeros < 4:
-        precio_viaje = 12
+        # definir el precio del viaje
+        # viajes de 1 a 3 personas paga 12 dolares
+        # viajes de 4 a 15 personas paga 26 dolares
 
-    if cantidad_pasajeros >= 4 and cantidad_pasajeros < 16:
-        precio_viaje = 26
+        if cantidad_pasajeros >= 1 and cantidad_pasajeros < 4:
+            precio_viaje = 12
 
-    if cantidad_pasajeros < 1:
-        precio_viaje = 0
+        if cantidad_pasajeros >= 4 and cantidad_pasajeros < 16:
+            precio_viaje = 26
 
-    # calcular el precio por cada pasajero
-    if cantidad_pasajeros > 0:
-        precio_por_pasajero = precio_viaje / cantidad_pasajeros
-    else:
-        precio_por_pasajero = 0
+        if cantidad_pasajeros < 1:
+            precio_viaje = 0
 
-    context = {
-        "object_list": qs,
-        "cantidad_pasajeros": cantidad_pasajeros,
-        "precio_viaje": precio_viaje,
-        "precio_por_pasajero": precio_por_pasajero,
-    }
+        # calcular el precio por cada pasajero
+        if cantidad_pasajeros > 0:
+            precio_por_pasajero = precio_viaje / cantidad_pasajeros
+        else:
+            precio_por_pasajero = 0
 
-    return render(request, "listar_viaje_en_curso.html", context)
+        context = {
+            "object_list": qs,
+            "cantidad_pasajeros": cantidad_pasajeros,
+            "precio_viaje": precio_viaje,
+            "precio_por_pasajero": precio_por_pasajero,
+        }
+
+        return render(request, "listar_viaje_en_curso.html", context)
+    except Exception as e:
+        messages.success(request, str(e) +' '+ "Debe generar un dumero de viaje primero")
+        return redirect('home')
 
 
 # esta funcion devuelve los viajes que se han realizado por el transportista logueado al momento
@@ -320,13 +325,13 @@ def mis_viajes(request):
         return redirect("home")
 
     numero_exacto_viaje = request.GET.get("dato")
-    qs = Viaje.objects.filter(transportista=request.user.username)
+    qs = Viaje.objects.filter(transportista=request.user.username).order_by('-fecha_viaje')
 
     if numero_exacto_viaje != "" and numero_exacto_viaje is not None:
         qs = qs.filter(
             transportista=request.user.username,
             numero_viaje__icontains=numero_exacto_viaje,
-        )
+        ).order_by('-fecha_viaje')
 
     context = {
         "object_list": qs,

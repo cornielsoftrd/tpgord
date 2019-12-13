@@ -1,69 +1,71 @@
+
 {% extends 'base/base.html' %}
-
-
-
 {% block content %}
 
+{% if request %}
 
-{% if request%}
-
- 		<div class="container-fluid table-responsive " >
-		<div class="row">
-			<div class="col-md-12 ">
-				<nav class="navbar  navbar-light bg-light">
-					
-				
-				<div class="col-6"><b class="navbar-brand" href="#">Rutas </b> </div>
-			
-					<div class="col-6" >
-					
-						<form method="get" name="buscar" >
-
-							<div class="input-group md-form form-sm    ">
-								<input class="form-control  " type="text" placeholder="Nombre de Ruta" aria-label="Search" name="dato">
-								<div class="input-group-append">
-								<button type="submit" class="btn btn-info"><i class="fas fa-search text-grey"></i></button>
+	 <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                               
+                           <nav class="navbar bg-tp_magenta_pink  text-white">
+							<div class="col-6"><b class="navbar-brand" href="#">Rutas</b> </div>
+								<div class="col-6" >								
+									<form method="get" name="buscar" >
+										<div class="input-group md-form form-sm    ">
+											<input class="form-control  " type="text" placeholder="Nombre de la Ruta" aria-label="Search" name="dato">
+											<div class="input-group-append">
+											<button type="submit" class="btn btn-info"><i class="fas fa-search text-grey"></i></button>
+											</div>
+										</div>
+									</form>
+								
 								</div>
-							</div>
-						</form>
-					
-					</div>
-				</nav>
-				<table class="table table-bordered table-dark table-striped">
-								<thead class="thead-light">
-					<tr >
-						<th>ID</th>
-						<th>Nombre</th>
-						
-						<th colspan="2" style="width:  8%" >Acciones</th>
-						<th style="width:  5%"> <a class="fa fa-plus" href="{% url 'crear_ruta' %}"><a></th>  
-					</tr>
-				</thead> 	
+							</nav>
 
-			{% if object_list %}
-				<tbody>
-				{% for ruta in object_list  %}
-					<tr>
-						<td>{{ruta.id_ruta}}</td>
-						<td>{{ruta.nombre_ruta}}</td>
-					
-						<!--Botones de Accion-->
-						<td><a class="fa fa-pencil-square-o fa-lg" href=" {% url 'editar_ruta' ruta.id_ruta %}"></a></td>
-			            <td><a class="fa fa-trash fa-lg" href=" {% url 'borrar_ruta' ruta.id_ruta %}"></a></td>
-					</tr> 
-				{% endfor %}
-				</tbody>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="bg-primary  text-white">
+                                         <tr>
+										<th>ID</th>
+										<th>Nombre</th>
+										
+										<th colspan="2" style="width:  8%" >Acciones</th>
+										<th style="width:  5%" class="bg-dark"> <a class="fa fa-plus" href="{% url 'crear_ruta' %}"></a></th>  
+										</tr>
+                                        </thead>
 
-		    {% endif %}
+                                       {% if object_list %}
+									<tbody>
+									{% for ruta in object_list  %}
+										<tr>
+											<td>{{ruta.id_ruta}}</td>
+											<td>{{ruta.nombre_ruta}}</td>
+										
+											<!--Botones de Accion-->
+											<td><a class="icon-pencil" href=" {% url 'editar_ruta' ruta.id_ruta %}"></a></td>
+								            <td><a class="icon-trash" href=" {% url 'borrar_ruta' ruta.id_ruta %}"></a></td>
+										</tr> 
+									{% endfor %}
+									</tbody>
+
+							    {% endif %}
 
 
-				</table>
-			</div>
-		</div>
-	</div>
-	
-	{% endif %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                 {% endif %}
 	 {% endblock content %}
+
+
+
+
+
 
 
 

@@ -29,7 +29,7 @@ def listar_vendor(request):
     qs = Vendor.objects.all()
 
     if nombre_exato_vendor != "" and nombre_exato_vendor is not None:
-        qs = qs.filter(nombre_site__icontains=nombre_exato_vendor)
+        qs = qs.filter(nombre_vendor__icontains=nombre_exato_vendor)
 
     context = {
         "object_list": qs,

@@ -10,39 +10,51 @@
 {% block content %}
 	
 		   {% if request  %}
-           
-           {% else %}
-           {% endif %} <div class="register-photo">
-        <div class="form-container">
-            <div class="image-holder" style="background:url({% static 'images/3.jpg'%})"></div>
-            
-            {% if request.user.is_superuser %}
-            <form method="post">
-                {% csrf_token %}
-                    <h2 class="text-center"><strong>Formulario</strong> de Cuentas</h2>
+
+
+                        <div class="row">
                     
-                    <div class="form-group">{{form.id_cuenta}}</div>
-                     <div class="form-group">{{form.nombre_cuenta}}</div>
-                   
-                   
-                     
-                   
-                    
-                    <div class="form-group">{{form.errors}}</div>
-                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Guardar</button></div>
-                    
-                    </form>
+                    <div class="col-sm-12 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="text-center">Formulario de <strong>Cuentas</strong></h2>
+                                 
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-body">
+                                        
+                                        <div class="row">
+                                            <div class="col-md-4 m-auto">
+                                                <div class="form-group">{{form.id_cuenta}}</div>
+                                                <div class="form-group">{{form.nombre_cuenta}}</div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                        <div class="row">
+                                            <div class="col-md-4 m-auto">
+                                               <div class="form-group">{{form.errors}}</div>
+                                            </div>
+
+                                            
+                                        </div>
+
+                                    </div>
+                                    <div class="form-actions mt-4">
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-info">Guardar</button>
+                                             <a href="{% url 'cuentas' %}" class="btn btn-dark">Cancelar</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
                 
             
-        </div>
-    </div>
 
-
-
-
- 
-</div>
-	
     
 {% endblock content %}

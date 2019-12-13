@@ -2,77 +2,84 @@
 
 
 {% block content %}
-<div class="container-fluid table-responsive " >
-		<div class="row">
-			<div class="col-md-12 ">
-				<nav class="navbar  navbar-light bg-light">
-				
-				<div class="col-6"><b class="navbar-brand" href="#">Mis Viajes</b> </div>
-			
-					<div class="col-6" >
-					
-						<form method="get" name="buscar" >
-							<div class="input-group md-form form-sm    ">
-								<a class="btn btn-info mr-2" href="{% url 'reportexls' %}"> <i class="fas fa-file-export"></i> </a>
-								<input class="form-control  " type="text" placeholder="Numero de viaje" aria-label="Search" name="dato">
-								<div class="input-group-append">
-								<button type="submit" class="btn btn-info"><i class="fas fa-search text-grey"></i></button>
-								</div>
-							</div>
-						</form>
-					
-					</div>
-				</nav>
-				<table class="table table-bordered table-dark table-striped">
-				<thead class="thead-light">
-				<tr >
-					<th> ID</th>
-					<th> Viaje</th>
-					<th> Transportista</th>
-					<th> Fecha</th>
-					<th> Hora</th>
-					<th> Tipo</th>
-					<th> Pasajero</th>
-					<th> Nombre</th>
-					<th> Apellido</th>
-					<th> Campaña</th>
-					<th> Site</th>
-					<th> Ruta</th>
-					<th> Direccion</th>
-						 
-				</tr>
-				</thead> 	
-
-			   {% if object_list %}
-				<tbody>
-				 {% for viaje in object_list  %}
-					<tr>
-						<td>{{viaje.id_viaje}}</td>
-						<td>{{viaje.numero_viaje}}</td>
-						<td>{{viaje.transportista}}</td>
-						<td>{{viaje.fecha_viaje}}</td>
-						<td>{{viaje.hora_viaje}}</td>
-						<td>{{viaje.tipo_viaje}}</td>
-						<td>{{viaje.id_pasajero}}</td>
-						<td>{{viaje.nombre_pasajero}}</td>
-						<td>{{viaje.apellido_pasajero}}</td>
-						<td>{{viaje.campaña_pasajero}}</td>
-						<td>{{viaje.site_pasajero}}</td>
-						<td>{{viaje.ruta_pasajero}}</td>
-						<td>{{viaje.direccion_pasajero}}</td>
-
-					</tr>
-				{% endfor %}
-				{%else%}
-				
-				<td colspan="11" style="">No hay Hay Pasajeros en la Cola del Viaje</td>
-				</tbody>
-
-			   {% endif %}
 
 
-				</table>
-			</div>
-		</div>
-	</div>
+ <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+
+
+                                <nav class="navbar  navbar-light bg-light">
+									<div class="col-6"><b class="navbar-brand" href="#">Mis Viajes</b> </div>
+										<div class="col-6" >
+											<form method="get" name="buscar" >
+												<div class="input-group md-form form-sm    ">
+													<a class="btn btn-info mr-2" href="{% url 'reportexls' %}"> <i class="icon-cloud-download"></i> </a>
+													<input class="form-control  " type="text" placeholder="Numero de viaje" aria-label="Search" name="dato">
+													<div class="input-group-append">
+													<button type="submit" class="btn btn-info"><i class="fas fa-search text-grey"></i></button>
+													</div>
+												</div>
+											</form>
+										
+										</div>
+									</nav>
+
+                              
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="bg-primary text-white">
+                                            <tr>
+											<th> ID</th>
+											<th> Viaje</th>
+											<th> Transportista</th>
+											<th> Fecha</th>
+											<th> Hora</th>
+											<th> Tipo</th>
+											<th> Pasajero</th>
+											<th> Nombre</th>
+											<th> Apellido</th>
+											<th> Campaña</th>
+											<th> Site</th>
+											<th> Ruta</th>
+											<th> Direccion</th>
+ 
+											</tr>
+                                        </thead>
+                                       {% if object_list %}
+										<tbody class="border border-primary">
+										 {% for viaje in object_list  %}
+											<tr>
+												<td>{{viaje.id_viaje}}</td>
+												<td>{{viaje.numero_viaje}}</td>
+												<td>{{viaje.transportista}}</td>
+												<td>{{viaje.fecha_viaje}}</td>
+												<td>{{viaje.hora_viaje}}</td>
+												<td>{{viaje.tipo_viaje}}</td>
+												<td>{{viaje.id_pasajero}}</td>
+												<td>{{viaje.nombre_pasajero}}</td>
+												<td>{{viaje.apellido_pasajero}}</td>
+												<td>{{viaje.campaña_pasajero}}</td>
+												<td>{{viaje.site_pasajero}}</td>
+												<td>{{viaje.ruta_pasajero}}</td>
+												<td>{{viaje.direccion_pasajero}}</td>
+													<!--Botones de Accion-->
+								
+											</tr>
+										{% endfor %}
+										{%else%}
+										
+										<td colspan="11" style="">No hay pasajeros en la cola del viaje</td>
+										</tbody>
+
+									   {% endif %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+    
 {% endblock content %}
