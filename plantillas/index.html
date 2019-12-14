@@ -505,3 +505,151 @@
 {% endblock content %}
 
 
+{% block js %}
+
+<script type="text/javascript">
+    
+    $(function () {
+
+    // ==============================================================
+    // Gaficos de viajes Viajes
+    // ==============================================================
+
+    var chart1 = c3.generate({
+        bindto: '#viajes',
+        data: {
+            columns: [
+                ['Excepciones', {{viajes_con_excepcion}}],
+                ['Sin Excepciones', {{viajes_sin_excepcion}}],
+                ['Administrativos', {{cantidad_viajes_admin}}],
+
+                
+            ],
+
+            type: 'donut',
+            tooltip: {
+                show: true
+            }
+        },
+        donut: {
+            label: {
+                show: false
+            },
+            title: 'Viajes',
+            width: 18
+        },
+
+        legend: {
+            hide: true
+        },
+        color: {
+            pattern: [
+               
+                '#ff4f70',
+                '#01caf1',
+                '#5f76e8'
+            ]
+        }
+    });
+
+    d3.select('#viajes .c3-chart-arcs-title').style('font-family', 'Rubik');
+
+    // ============================================================== 
+    // viajes por mes, estos datos son tomados de contexto de la vista Home
+    // ============================================================== 
+    var data = {
+        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul', 'Ago','Sep','Oct','Nov','Dic'],
+        series: [
+            [
+
+            '{{viajes_enero}}',
+            '{{viajes_febrero}}',
+            '{{viajes_marzo}}',
+            '{{viajes_abril}}',
+            '{{viajes_mayo}}',
+            '{{viajes_junio}}',
+            '{{viajes_julio}}',
+            '{{viajes_agosto}}',
+            '{{viajes_septiembre}}',
+            '{{viajes_octubre}}',
+            '{{viajes_noviembre}}',
+            '{{viajes_diciembre}}',
+
+            ]
+        ]
+    };
+
+    var options = {
+        axisX: {
+            showGrid: false
+        },
+        seriesBarDistance: 1,
+        chartPadding: {
+            top: 15,
+            right: 15,
+            bottom: 5,
+            left: 0
+        },
+        plugins: [
+            Chartist.plugins.tooltip()
+        ],
+        width: '100%'
+    };
+
+    var responsiveOptions = [
+        ['screen and (max-width: 640px)', {
+            seriesBarDistance: 5,
+            axisX: {
+                labelInterpolationFnc: function (value) {
+                    return value[0];
+                }
+            }
+        }]
+    ];
+    new Chartist.Bar('.viajes_por_mes', data, options, responsiveOptions);
+
+    // ============================================================== 
+    // Visit By Location
+    // ==============================================================
+    jQuery('#visitbylocate').vectorMap({
+        map: 'world_mill_en',
+        backgroundColor: 'transparent',
+        borderColor: '#000',
+        borderOpacity: 0,
+        borderWidth: 0,
+        zoomOnScroll: false,
+        color: '#d5dce5',
+        regionStyle: {
+            initial: {
+                fill: '#d5dce5',
+                'stroke-width': 1,
+                'stroke': 'rgba(255, 255, 255, 0.5)'
+            }
+        },
+        enableZoom: true,
+        hoverColor: '#bdc9d7',
+        hoverOpacity: null,
+        normalizeFunction: 'linear',
+        scaleColors: ['#d5dce5', '#d5dce5'],
+        selectedColor: '#bdc9d7',
+        selectedRegions: [],
+        showTooltip: true,
+        onRegionClick: function (element, code, region) {
+            var message = 'You clicked "' + region + '" which has the code: ' + code.toUpperCase();
+            alert(message);
+        }
+    });
+
+    // ==============================================================
+    // Earning Stastics Chart
+    // ==============================================================
+     
+
+    $(window).on('resize', function () {
+        chart.update();
+    });
+});
+
+</script>
+
+{% endblock js %}
