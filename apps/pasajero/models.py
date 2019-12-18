@@ -18,7 +18,7 @@ class Pasajero(models.Model):
     id_pasajero = models.IntegerField(primary_key=True)  # el codigo del empleado
     nombre = models.CharField(max_length=50,)
     apellido = models.CharField(max_length=50)
-    direccion = models.CharField(max_length=50)
+    direccion = models.CharField(max_length=150)
     telefono = models.CharField(unique=True, max_length=50, null=True)
 
     # ruta = models.ForeignKey(Ruta, verbose_name="Ruta Pasajero", on_delete=models.SET_DEFAULT, null=False, blank=False)
