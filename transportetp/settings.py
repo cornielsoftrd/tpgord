@@ -157,7 +157,7 @@ EMAIL_PORT = 587
     "django.core.mail.backends.console.EmailBackend"  # During development only
 )"""
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = "TestSite Team <tpgoapp@gmail.com>"
+DEFAULT_FROM_EMAIL = "TPGO TEAM <tpgoapp@gmail.com>"
 
 # configuraciones adicionales
 SECURE_SSL_REDIRECT = True
