@@ -4,6 +4,7 @@ from apps.vendor.models import Vendor
 from apps.transportista.models import Transportista
 from apps.pasajero.models import Pasajero
 from apps.viajes.models import Viaje, ViajeAdministrativo
+from django.db.models import Count, Sum, Avg, Q
 
 from datetime import datetime
 # Create your views here.
@@ -13,12 +14,15 @@ class home_View(View):
         cantidad_transportistas =Transportista.objects.all().count
         cantidad_pasajeros =Pasajero.objects.all().count
         cantidad_viajes_admin =ViajeAdministrativo.objects.all().count
-        cantidad_viajes =Viaje.objects.all().count
+        #esta linea cuenta los viajes realizados donde el numero de viaje es distinto asi, se toma el numero de viaje exacto y no los cuenta por pasajeros agregados en el viaje
+        cantidad_viajes =Viaje.objects.values('numero_viaje').annotate(Count('numero_viaje',disctint=True)).count 
         viajes_con_excepcion =Viaje.objects.filter(excepcion=True).count
         viajes_sin_excepcion =Viaje.objects.filter(excepcion=False).count
 
         
         #extraer viajes normales por mes para pasar al grafico de barras
+
+        
      
         viajes_enero= Viaje.objects.filter(fecha_viaje__month=1).count
         viajes_febrero= Viaje.objects.filter(fecha_viaje__month=2).count
