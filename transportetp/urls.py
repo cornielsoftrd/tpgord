@@ -20,6 +20,8 @@ from django.contrib.auth.views import (
     LogoutView,
     PasswordResetView,
     PasswordResetForm,
+    PasswordChangeDoneView,
+    PasswordChangeView,
 )
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -106,7 +108,15 @@ urlpatterns = [
     path("login/", login_view, name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     # manejo de contraseñas
-    path("accounts/", include("django.contrib.auth.urls")),  # new
+    path("accounts/", include("django.contrib.auth.urls")),  
+
+    path('password_change/done/', PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'), 
+        name='password_change_done'),
+
+    path('password_change/',PasswordChangeView.as_view(template_name='registration/password_change.html'), 
+        name='password_change'),
+
+    # new
     # --------------
     # vistas de la App Home
     path("home", login_required(home_View.as_view()), name="home"),
