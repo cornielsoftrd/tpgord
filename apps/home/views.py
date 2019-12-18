@@ -23,19 +23,34 @@ class home_View(View):
         #extraer viajes normales por mes para pasar al grafico de barras
 
         
-     
-        viajes_enero= Viaje.objects.filter(fecha_viaje__month=1).count
-        viajes_febrero= Viaje.objects.filter(fecha_viaje__month=2).count
-        viajes_marzo= Viaje.objects.filter(fecha_viaje__month=3).count
-        viajes_abril= Viaje.objects.filter(fecha_viaje__month=4).count
-        viajes_mayo= Viaje.objects.filter(fecha_viaje__month=5).count
-        viajes_junio= Viaje.objects.filter(fecha_viaje__month=6).count
-        viajes_julio= Viaje.objects.filter(fecha_viaje__month=7).count
-        viajes_agosto= Viaje.objects.filter(fecha_viaje__month=8).count
-        viajes_septiembre= Viaje.objects.filter(fecha_viaje__month=9).count
-        viajes_octubre= Viaje.objects.filter(fecha_viaje__month=10).count
-        viajes_noviembre= Viaje.objects.filter(fecha_viaje__month=11).count
-        viajes_diciembre= Viaje.objects.filter(fecha_viaje__month=12).count
+        #aqui se cuentan los viajes por mes, contando los numeros de viajes distintos,asi un numero de viaje se contara una sola vez 
+        viajes_enero= Viaje.objects.filter(fecha_viaje__month=1).values('numero_viaje').annotate(Count('numero_viaje',disctict=True)).count #enero
+        viajes_febrero= Viaje.objects.filter(fecha_viaje__month=2).values('numero_viaje').annotate(Count('numero_viaje',disctict=True)).count  # FEBRERO
+        viajes_marzo= Viaje.objects.filter(fecha_viaje__month=3).values('numero_viaje').annotate(Count('numero_viaje',disctict=True)).count #MARZO
+        viajes_abril= Viaje.objects.filter(fecha_viaje__month=4).values('numero_viaje').annotate(Count('numero_viaje',disctict=True)).count #ABRIL
+        viajes_mayo= Viaje.objects.filter(fecha_viaje__month=5).values('numero_viaje').annotate(Count('numero_viaje',disctict=True)).count #MAYO
+        viajes_junio= Viaje.objects.filter(fecha_viaje__month=6).values('numero_viaje').annotate(Count('numero_viaje',disctict=True)).count #JUNIO
+        viajes_julio= Viaje.objects.filter(fecha_viaje__month=7).values('numero_viaje').annotate(Count('numero_viaje',disctict=True)).count #JULIO
+        viajes_agosto= Viaje.objects.filter(fecha_viaje__month=8).values('numero_viaje').annotate(Count('numero_viaje',disctict=True)).count #AGOSTO
+        viajes_septiembre= Viaje.objects.filter(fecha_viaje__month=9).values('numero_viaje').annotate(Count('numero_viaje',disctict=True)).count #SEPTIMBRE
+        viajes_octubre= Viaje.objects.filter(fecha_viaje__month=10).values('numero_viaje').annotate(Count('numero_viaje',disctict=True)).count #OCTUBRE
+        viajes_noviembre= Viaje.objects.filter(fecha_viaje__month=11).values('numero_viaje').annotate(Count('numero_viaje',disctict=True)).count #NOVIEMBRE
+        viajes_diciembre= Viaje.objects.filter(fecha_viaje__month=12).values('numero_viaje').annotate(Count('numero_viaje',disctict=True)).count #DICIEMBRE
+
+
+    #aqui se contaran los agentes llevados cada mes, contanto todas las vilas de viajes de ese mes, 
+        pasajeros_viajes_enero= Viaje.objects.filter(fecha_viaje__month=1).count
+        pasajeros_viajes_febrero= Viaje.objects.filter(fecha_viaje__month=2).count
+        pasajeros_viajes_marzo= Viaje.objects.filter(fecha_viaje__month=3).count
+        pasajeros_viajes_abril= Viaje.objects.filter(fecha_viaje__month=4).count
+        pasajeros_viajes_mayo= Viaje.objects.filter(fecha_viaje__month=5).count
+        pasajeros_viajes_junio= Viaje.objects.filter(fecha_viaje__month=6).count
+        pasajeros_viajes_julio= Viaje.objects.filter(fecha_viaje__month=7).count
+        pasajeros_viajes_agosto= Viaje.objects.filter(fecha_viaje__month=8).count
+        pasajeros_viajes_septiembre= Viaje.objects.filter(fecha_viaje__month=9).count
+        pasajeros_viajes_octubre= Viaje.objects.filter(fecha_viaje__month=10).count
+        pasajeros_viajes_noviembre= Viaje.objects.filter(fecha_viaje__month=11).count
+        pasajeros_viajes_diciembre= Viaje.objects.filter(fecha_viaje__month=12).count
 
 
         
@@ -65,6 +80,20 @@ class home_View(View):
         'viajes_octubre' : viajes_octubre,
         'viajes_noviembre' : viajes_noviembre,
         'viajes_diciembre' : viajes_diciembre,
+
+        #pasajeros llevados Por Mes por mes
+        'pasajeros_viajes_enero' : pasajeros_viajes_enero,
+        'pasajeros_viajes_febrero' : pasajeros_viajes_febrero,
+        'pasajeros_viajes_marzo' : pasajeros_viajes_marzo,
+        'pasajeros_viajes_abril' : pasajeros_viajes_abril,
+        'pasajeros_viajes_mayo' : pasajeros_viajes_mayo,
+        'pasajeros_viajes_junio' : pasajeros_viajes_junio,
+        'pasajeros_viajes_julio' : pasajeros_viajes_julio,
+        'pasajeros_viajes_agosto' : pasajeros_viajes_agosto,
+        'pasajeros_viajes_septiembre' : pasajeros_viajes_septiembre,
+        'pasajeros_viajes_octubre' : pasajeros_viajes_octubre,
+        'pasajeros_viajes_noviembre' : pasajeros_viajes_noviembre,
+        'pasajeros_viajes_diciembre' : pasajeros_viajes_diciembre,
         
         
 

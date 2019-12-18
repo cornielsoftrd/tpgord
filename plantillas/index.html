@@ -1,165 +1,191 @@
-{% extends "base/base.html" %}
+{% extends "base/base.html" %} {% block content %}
 
-{% block content %}
-  
 
-	
-	<!-- *************************************************************** -->
-                <!-- Start First Cards -->
-                <!-- *************************************************************** -->
-                <div class="card-group">
 
-                    <div class="card border-right">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">{{cantidad_vendors}}</h2>
-                                        
-                                    </div>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Vendors</h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
-                                </div>
-                            </div>
-                        </div>
+<!-- *************************************************************** -->
+<!-- Start First Cards -->
+<!-- *************************************************************** -->
+<div class="card-group">
+
+    <div class="card border-right">
+        <div class="card-body">
+            <div class="d-flex d-lg-flex d-md-block align-items-center">
+                <div>
+                    <div class="d-inline-flex align-items-center">
+                        <h2 class="text-dark mb-1 font-weight-medium">{{cantidad_vendors}}</h2>
+
                     </div>
-
-                    
-                    <div class="card border-right">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium"><sup
-                                            class="set-doller"></sup>{{cantidad_transportistas}}</h2>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Transportistas
-                                    </h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i class="fas fa-car"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="card border-right">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">{{cantidad_pasajeros}}</h2>
-                                        
-                                    </div>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Pasajeros</h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i class="icon-emotsmile"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <h2 class="text-dark mb-1 font-weight-medium">{{cantidad_viajes}}</h2>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Viajes</h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i class="icon-plane"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="card border-right">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">{{cantidad_viajes_admin}}</h2>
-                                        
-                                    </div>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Viajes Aministrativos</h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i class="icon-briefcase"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
+                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Vendors</h6>
                 </div>
+                <div class="ml-auto mt-md-3 mt-lg-0">
+                    <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-                <!-- *************************************************************** -->
-                <!-- End First Cards -->
-                <!-- *************************************************************** -->
-                <!-- *************************************************************** -->
-                <!-- Start Sales Charts Section -->
-                <!-- *************************************************************** -->
+    <div class="card border-right">
+        <div class="card-body">
+            <div class="d-flex d-lg-flex d-md-block align-items-center">
+                <div>
+                    <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium"><sup class="set-doller"></sup>{{cantidad_transportistas}}</h2>
+                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Transportistas
+                    </h6>
+                </div>
+                <div class="ml-auto mt-md-3 mt-lg-0">
+                    <span class="opacity-7 text-muted"><i class="fas fa-car"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Viajes</h4>
-                                <div id="viajes" class="mt-2" style="height:283px; width:100%;"></div>
-                                <ul class="list-style-none mb-0">
+
+    <div class="card border-right">
+        <div class="card-body">
+            <div class="d-flex d-lg-flex d-md-block align-items-center">
+                <div>
+                    <div class="d-inline-flex align-items-center">
+                        <h2 class="text-dark mb-1 font-weight-medium">{{cantidad_pasajeros}}</h2>
+
+                    </div>
+                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Pasajeros</h6>
+                </div>
+                <div class="ml-auto mt-md-3 mt-lg-0">
+                    <span class="opacity-7 text-muted"><i class="icon-emotsmile"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex d-lg-flex d-md-block align-items-center">
+                <div>
+                    <h2 class="text-dark mb-1 font-weight-medium">{{cantidad_viajes}}</h2>
+                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Viajes</h6>
+                </div>
+                <div class="ml-auto mt-md-3 mt-lg-0">
+                    <span class="opacity-7 text-muted"><i class="icon-plane"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card border-right">
+        <div class="card-body">
+            <div class="d-flex d-lg-flex d-md-block align-items-center">
+                <div>
+                    <div class="d-inline-flex align-items-center">
+                        <h2 class="text-dark mb-1 font-weight-medium">{{cantidad_viajes_admin}}</h2>
+
+                    </div>
+                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Viajes Aministrativos</h6>
+                </div>
+                <div class="ml-auto mt-md-3 mt-lg-0">
+                    <span class="opacity-7 text-muted"><i class="icon-briefcase"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- *************************************************************** -->
+<!-- End First Cards -->
+<!-- *************************************************************** -->
+<!-- *************************************************************** -->
+<!-- Start Sales Charts Section -->
+<!-- *************************************************************** -->
+
+
+<div class="row">
+    <div class="col-lg-4 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Viajes</h4>
+                <div id="viajes" class="mt-2" style="height:283px; width:100%;"></div>
+                <ul class="list-style-none mb-0">
 
 
 
-                                    <li>
-                                        <i class="fas fa-circle  text-danger font-10 mr-2"></i>
-                                        <span class="text-muted">Excepciones</span>
-                                        <span class="text-dark float-right font-weight-medium">{{viajes_con_excepcion}}</span>
-                                    </li>
-
-                                     
-
-                                      <li class="mt-3">
-                                        <i class="fas fa-circle  text-cyan  font-10 mr-2"></i>
-                                        <span class="text-muted">Sin Exepciones</span>
-                                        <span class="text-dark float-right font-weight-medium">{{viajes_sin_excepcion}}</span>
-                                    </li>
-
-                                     <li class="mt-3">
-                                        <i class="fas fa-circle text-primary font-10 mr-2"></i>
-                                        <span class="text-muted">Viajes Administrativos</span>
-                                        <span class="text-dark float-right font-weight-medium">{{cantidad_viajes_admin}}</span>
-                                    </li>
+                    <li>
+                        <i class="fas fa-circle  text-danger font-10 mr-2"></i>
+                        <span class="text-muted">Excepciones</span>
+                        <span class="text-dark float-right font-weight-medium">{{viajes_con_excepcion}}</span>
+                    </li>
 
 
-                                  
 
-                               
-                                </ul>
+                    <li class="mt-3">
+                        <i class="fas fa-circle  text-cyan  font-10 mr-2"></i>
+                        <span class="text-muted">Sin Exepciones</span>
+                        <span class="text-dark float-right font-weight-medium">{{viajes_sin_excepcion}}</span>
+                    </li>
+
+                    <li class="mt-3">
+                        <i class="fas fa-circle text-primary font-10 mr-2"></i>
+                        <span class="text-muted">Viajes Administrativos</span>
+                        <span class="text-dark float-right font-weight-medium">{{cantidad_viajes_admin}}</span>
+                    </li>
+
+
+
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-8 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Viajes Por Mes</h4>
+                <div id="#viajes_por_mes" class="viajes_por_mes mt-4 position-relative" style="height:294px;"></div>
+                <ul class="list-inline text-center mt-5 mb-2">
+                    <li class="list-inline-item text-muted font-italic">Viajes de este mes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-start">
+                    <h4 class="card-title mb-0">Pasajeros transportados por mes</h4>
+                    <div class="ml-auto">
+                        <div class="dropdown sub-dropdown">
+                            <button class="btn btn-link text-muted dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i data-feather="more-vertical"></i>
+                                        </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1">
+                                <a class="dropdown-item" href="#">Insert</a>
+                                <a class="dropdown-item" href="#">Update</a>
+                                <a class="dropdown-item" href="#">Delete</a>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="pl-4 mb-5">
+                    <div class="stats ct-charts position-relative" style="height: 315px;"></div>
+                </div>
+                <ul class="list-inline text-center mt-4 mb-0">
+                    <li class="list-inline-item text-muted font-italic">Pasajeros transportados por mes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
 
-                    <div class="col-lg-8 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Viajes Por Mes</h4>
-                                <div id="#viajes_por_mes" class="viajes_por_mes mt-4 position-relative" style="height:294px;"></div>
-                                <ul class="list-inline text-center mt-5 mb-2">
-                                    <li class="list-inline-item text-muted font-italic">Viajes de este mes</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-
-<!--
+    <!--
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
@@ -229,45 +255,17 @@
             
                 </div> 
             -->
-                <!-- *************************************************************** -->
-                <!-- End Sales Charts Section -->
-                <!-- *************************************************************** -->
-                <!-- *************************************************************** -->
-                <!-- Start Location and Earnings Charts Section -->
-                <!-- *************************************************************** -->
+    <!-- *************************************************************** -->
+    <!-- End Sales Charts Section -->
+    <!-- *************************************************************** -->
+    <!-- *************************************************************** -->
+    <!-- Start Location and Earnings Charts Section -->
+    <!-- *************************************************************** -->
 
-        <!-- 
-                <div class="row">
-                    <div class="col-md-6 col-lg-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-start">
-                                    <h4 class="card-title mb-0">Viajes Esta Semana</h4>
-                                    <div class="ml-auto">
-                                        <div class="dropdown sub-dropdown">
-                                            <button class="btn btn-link text-muted dropdown-toggle" type="button"
-                                                id="dd1" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <i data-feather="more-vertical"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1">
-                                                <a class="dropdown-item" href="#">Insert</a>
-                                                <a class="dropdown-item" href="#">Update</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pl-4 mb-5">
-                                    <div class="stats ct-charts position-relative" style="height: 315px;"></div>
-                                </div>
-                                <ul class="list-inline text-center mt-4 mb-0">
-                                    <li class="list-inline-item text-muted font-italic">Viajes de la semana</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-        -->
+
+    <div class="row">
+
+
 
         <!--
                     <div class="col-md-6 col-lg-4">
@@ -296,9 +294,9 @@
                     </div>
                 </div>
     -->
-                <!-- *************************************************************** -->
-                <!-- End Location and Earnings Charts Section -->
-                <!-- *************************************************************** -->
+        <!-- *************************************************************** -->
+        <!-- End Location and Earnings Charts Section -->
+        <!-- *************************************************************** -->
 
 
 
@@ -306,10 +304,10 @@
 
 
 
-                <!-- *************************************************************** -->
-                <!-- Start Top Leader Table -->
-                <!-- *************************************************************** -->
-       
+        <!-- *************************************************************** -->
+        <!-- Start Top Leader Table -->
+        <!-- *************************************************************** -->
+
 
         <!---
                 <div class="row">
@@ -495,161 +493,204 @@
                     </div>
                 </div>
     -->
-                <!-- *************************************************************** -->
-                <!-- End Top Leader Table -->
-                <!-- *************************************************************** -->
+        <!-- *************************************************************** -->
+        <!-- End Top Leader Table -->
+        <!-- *************************************************************** -->
 
 
 
-</div>
-{% endblock content %}
+    </div>
+    {% endblock content %} {% block js %}
+
+    <script type="text/javascript">
+        $(function() {
+            // ==============================================================
+            // Gaficos de viajes Viajes
+            // ==============================================================
+
+            var chart1 = c3.generate({
+                bindto: '#viajes',
+                data: {
+                    columns: [
+                        ['Excepciones', '{{viajes_con_excepcion}}'],
+                        ['Sin Excepciones', '{{viajes_sin_excepcion}}'],
+                        ['Administrativos', '{{cantidad_viajes_admin}}'],
 
 
-{% block js %}
+                    ],
 
-<script type="text/javascript">
-    
-    $(function () {
+                    type: 'donut',
+                    tooltip: {
+                        show: true
+                    }
+                },
+                donut: {
+                    label: {
+                        show: false
+                    },
+                    title: 'Viajes',
+                    width: 18
+                },
 
-    // ==============================================================
-    // Gaficos de viajes Viajes
-    // ==============================================================
+                legend: {
+                    hide: true
+                },
+                color: {
+                    pattern: [
 
-    var chart1 = c3.generate({
-        bindto: '#viajes',
-        data: {
-            columns: [
-                ['Excepciones', {{viajes_con_excepcion}}],
-                ['Sin Excepciones', {{viajes_sin_excepcion}}],
-                ['Administrativos', {{cantidad_viajes_admin}}],
-
-                
-            ],
-
-            type: 'donut',
-            tooltip: {
-                show: true
-            }
-        },
-        donut: {
-            label: {
-                show: false
-            },
-            title: 'Viajes',
-            width: 18
-        },
-
-        legend: {
-            hide: true
-        },
-        color: {
-            pattern: [
-               
-                '#ff4f70',
-                '#01caf1',
-                '#5f76e8'
-            ]
-        }
-    });
-
-    d3.select('#viajes .c3-chart-arcs-title').style('font-family', 'Rubik');
-
-    // ============================================================== 
-    // viajes por mes, estos datos son tomados de contexto de la vista Home
-    // ============================================================== 
-    var data = {
-        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul', 'Ago','Sep','Oct','Nov','Dic'],
-        series: [
-            [
-
-            '{{viajes_enero}}',
-            '{{viajes_febrero}}',
-            '{{viajes_marzo}}',
-            '{{viajes_abril}}',
-            '{{viajes_mayo}}',
-            '{{viajes_junio}}',
-            '{{viajes_julio}}',
-            '{{viajes_agosto}}',
-            '{{viajes_septiembre}}',
-            '{{viajes_octubre}}',
-            '{{viajes_noviembre}}',
-            '{{viajes_diciembre}}',
-
-            ]
-        ]
-    };
-
-    var options = {
-        axisX: {
-            showGrid: false
-        },
-        seriesBarDistance: 1,
-        chartPadding: {
-            top: 15,
-            right: 15,
-            bottom: 5,
-            left: 0
-        },
-        plugins: [
-            Chartist.plugins.tooltip()
-        ],
-        width: '100%'
-    };
-
-    var responsiveOptions = [
-        ['screen and (max-width: 640px)', {
-            seriesBarDistance: 5,
-            axisX: {
-                labelInterpolationFnc: function (value) {
-                    return value[0];
+                        '#ff4f70',
+                        '#01caf1',
+                        '#5f76e8'
+                    ]
                 }
-            }
-        }]
-    ];
-    new Chartist.Bar('.viajes_por_mes', data, options, responsiveOptions);
+            });
 
-    // ============================================================== 
-    // Visit By Location
-    // ==============================================================
-    jQuery('#visitbylocate').vectorMap({
-        map: 'world_mill_en',
-        backgroundColor: 'transparent',
-        borderColor: '#000',
-        borderOpacity: 0,
-        borderWidth: 0,
-        zoomOnScroll: false,
-        color: '#d5dce5',
-        regionStyle: {
-            initial: {
-                fill: '#d5dce5',
-                'stroke-width': 1,
-                'stroke': 'rgba(255, 255, 255, 0.5)'
-            }
-        },
-        enableZoom: true,
-        hoverColor: '#bdc9d7',
-        hoverOpacity: null,
-        normalizeFunction: 'linear',
-        scaleColors: ['#d5dce5', '#d5dce5'],
-        selectedColor: '#bdc9d7',
-        selectedRegions: [],
-        showTooltip: true,
-        onRegionClick: function (element, code, region) {
-            var message = 'You clicked "' + region + '" which has the code: ' + code.toUpperCase();
-            alert(message);
-        }
-    });
+            d3.select('#viajes .c3-chart-arcs-title').style('font-family', 'Rubik');
 
-    // ==============================================================
-    // Earning Stastics Chart
-    // ==============================================================
-     
+            // ============================================================== 
+            // viajes por mes, estos datos son tomados de contexto de la vista Home
+            // ============================================================== 
+            var data = {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                series: [
+                    [
 
-    $(window).on('resize', function () {
-        chart.update();
-    });
-});
+                        '{{viajes_enero}}',
+                        '{{viajes_febrero}}',
+                        '{{viajes_marzo}}',
+                        '{{viajes_abril}}',
+                        '{{viajes_mayo}}',
+                        '{{viajes_junio}}',
+                        '{{viajes_julio}}',
+                        '{{viajes_agosto}}',
+                        '{{viajes_septiembre}}',
+                        '{{viajes_octubre}}',
+                        '{{viajes_noviembre}}',
+                        '{{viajes_diciembre}}',
 
-</script>
+                    ]
+                ]
+            };
 
-{% endblock js %}
+            var options = {
+                axisX: {
+                    showGrid: false
+                },
+                seriesBarDistance: 1,
+                chartPadding: {
+                    top: 15,
+                    right: 15,
+                    bottom: 5,
+                    left: 0
+                },
+                plugins: [
+                    Chartist.plugins.tooltip()
+                ],
+                width: '100%'
+            };
+
+            var responsiveOptions = [
+                ['screen and (max-width: 640px)', {
+                    seriesBarDistance: 5,
+                    axisX: {
+                        labelInterpolationFnc: function(value) {
+                            return value[0];
+                        }
+                    }
+                }]
+            ];
+            new Chartist.Bar('.viajes_por_mes', data, options, responsiveOptions);
+
+            // ============================================================== 
+            // Visit By Location
+            // ==============================================================
+            jQuery('#visitbylocate').vectorMap({
+                map: 'world_mill_en',
+                backgroundColor: 'transparent',
+                borderColor: '#000',
+                borderOpacity: 0,
+                borderWidth: 0,
+                zoomOnScroll: false,
+                color: '#d5dce5',
+                regionStyle: {
+                    initial: {
+                        fill: '#d5dce5',
+                        'stroke-width': 1,
+                        'stroke': 'rgba(255, 255, 255, 0.5)'
+                    }
+                },
+                enableZoom: true,
+                hoverColor: '#bdc9d7',
+                hoverOpacity: null,
+                normalizeFunction: 'linear',
+                scaleColors: ['#d5dce5', '#d5dce5'],
+                selectedColor: '#bdc9d7',
+                selectedRegions: [],
+                showTooltip: true,
+                onRegionClick: function(element, code, region) {
+                    var message = 'You clicked "' + region + '" which has the code: ' + code.toUpperCase();
+                    alert(message);
+                }
+            });
+
+            // ============================================================== 
+            // viajes por mes, estos datos son tomados de contexto de la vista Home
+            // ============================================================== 
+            var data = {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                series: [
+                    [
+
+                        '{{pasajeros_viajes_enero}}',
+                        '{{pasajeros_viajes_febrero}}',
+                        '{{pasajeros_viajes_marzo}}',
+                        '{{pasajeros_viajes_abril}}',
+                        '{{pasajeros_viajes_mayo}}',
+                        '{{pasajeros_viajes_junio}}',
+                        '{{pasajeros_viajes_julio}}',
+                        '{{pasajeros_viajes_agosto}}',
+                        '{{pasajeros_viajes_septiembre}}',
+                        '{{pasajeros_viajes_octubre}}',
+                        '{{pasajeros_viajes_noviembre}}',
+                        '{{pasajeros_viajes_diciembre}}',
+
+                    ]
+                ]
+            };
+
+            var options = {
+                axisX: {
+                    showGrid: false
+                },
+                seriesBarDistance: 1,
+                chartPadding: {
+                    top: 15,
+                    right: 15,
+                    bottom: 5,
+                    left: 0
+                },
+                plugins: [
+                    Chartist.plugins.tooltip()
+                ],
+                width: '100%'
+            };
+
+            var responsiveOptions = [
+                ['screen and (max-width: 640px)', {
+                    seriesBarDistance: 5,
+                    axisX: {
+                        labelInterpolationFnc: function(value) {
+                            return value[0];
+                        }
+                    }
+                }]
+            ];
+            new Chartist.Line('.stats', data, options, responsiveOptions);
+
+            $(window).on('resize', function() {
+                "chart.update();"
+            });
+        })
+    </script>
+
+    {% endblock js %}
