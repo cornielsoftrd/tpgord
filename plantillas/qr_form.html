@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-{% load staticfiles %}
+{% load static %}
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -15,14 +16,13 @@
 <body>
     <nav class="navbar navbar-dark navbar-expand-md" id="app-navbar">
         <div class="container-fluid"><a class="navbar-brand" href="#"><i class="icon ion-ios-infinite" id="brand-logo"></i></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
+            <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="#">First Item</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#">Second Item</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#">Third Item</a></li>
                 </ul>
-        </div>
+            </div>
         </div>
     </nav>
 
@@ -36,7 +36,7 @@
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a href="#" class="forgot">Forgot your email or password?</a></form>
     </div>
 
-    
+
     <div class="register-photo">
         <div class="form-container">
             <div class="image-holder"></div>
@@ -58,8 +58,7 @@
                 <div class="col-sm-6 col-md-4 footer-navigation">
                     <h3><a href="#">Company<span>logo </span></a></h3>
                     <p class="links"><a href="#">Home</a><strong> · </strong><a href="#">Blog</a><strong> · </strong><a href="#">Pricing</a><strong> · </strong><a href="#">About</a><strong> · </strong><a href="#">Faq</a><strong> · </strong><a href="#">Contact</a></p>
-                    <p
-                        class="company-name">Company Name © 2015 </p>
+                    <p class="company-name">Company Name © 2015 </p>
                 </div>
                 <div class="col-sm-6 col-md-4 footer-contacts">
                     <div><span class="fa fa-map-marker footer-contacts-icon"> </span>
@@ -91,7 +90,6 @@
 </html>
 
 <form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
+    {% csrf_token %} {{form.as_p}}
     <input type='submit' value="Guardar">
 </form>

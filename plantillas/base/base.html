@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en">
 
 <head>
-	{% load staticfiles %}
+    {% load static %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
@@ -40,8 +40,7 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-        data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -62,7 +61,7 @@
                                 <img src="{% static 'images/logo-tp.png' %} " alt="Teleperformance" style="width:100%; height:100%; " class="dark-logo" />
                             </b>
                             <!--End Logo icon -->
-                            
+
                         </a>
                     </div>
                     <!-- ============================================================== -->
@@ -71,9 +70,7 @@
                     <!-- ============================================================== -->
                     <!-- Toggle which is visible on mobile only -->
                     <!-- ============================================================== -->
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
-                        data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
                             class="ti-more"></i></a>
                 </div>
                 <!-- ============================================================== -->
@@ -86,9 +83,7 @@
                     <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
                         <!-- Notification -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)"
-                                id="bell" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                            <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)" id="bell" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span><i data-feather="bell" class="svg-icon"></i></span>
                                 <span class="badge badge-primary notify-no rounded-circle">5</span>
                             </a>
@@ -96,8 +91,8 @@
                                 <ul class="list-style-none">
                                     <li>
                                         <div class="message-center notifications position-relative">
-                                         <!-- Message -->
-                                   <!--            <a href="javascript:void(0)"
+                                            <!-- Message -->
+                                            <!--            <a href="javascript:void(0)"
                                                 class="message-item d-flex align-items-center border-bottom px-3 py-2">
                                                 <div class="btn btn-danger rounded-circle btn-circle"><i
                                                         data-feather="airplay" class="text-white"></i></div>
@@ -112,7 +107,7 @@
 
 
                                             <!-- Message -->
-                                      <!--         <a href="javascript:void(0)"
+                                            <!--         <a href="javascript:void(0)"
                                                 class="message-item d-flex align-items-center border-bottom px-3 py-2">
                                                 <span class="btn btn-success text-white rounded-circle btn-circle"><i
                                                         data-feather="calendar" class="text-white"></i></span>
@@ -127,7 +122,7 @@
 
 
                                             <!-- Message -->
-                                      <!--         <a href="javascript:void(0)"
+                                            <!--         <a href="javascript:void(0)"
                                                 class="message-item d-flex align-items-center border-bottom px-3 py-2">
                                                 <span class="btn btn-info rounded-circle btn-circle"><i
                                                         data-feather="settings" class="text-white"></i></span>
@@ -142,7 +137,7 @@
                                             </a> -->
 
                                             <!-- Message -->
-                                      <!--         <a href="javascript:void(0)"
+                                            <!--         <a href="javascript:void(0)"
                                                 class="message-item d-flex align-items-center border-bottom px-3 py-2">
                                                 <span class="btn btn-primary rounded-circle btn-circle"><i
                                                         data-feather="box" class="text-white"></i></span>
@@ -170,19 +165,17 @@
                         <!-- create new -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i data-feather="settings" class="svg-icon"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                                 {% if user.is_transportista%}
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal_generar_viaje">Generar Viaje</a>
-                                {% endif %}
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal_generar_viaje">Generar Viaje</a> {% endif %}
 
                             </div>
                         </li>
-                    <!--
+                        <!--
                         <li class="nav-item d-none d-md-block">
                             <a class="nav-link" href="javascript:void(0)">
                                 <div class="customize-input">
@@ -207,7 +200,7 @@
                         <!-- Search -->
                         <!-- ============================================================== -->
 
-                    <!--
+                        <!--
                         <li class="nav-item d-none d-md-block">
                             <a class="nav-link" href="javascript:void(0)">
                                 <form>
@@ -224,13 +217,9 @@
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <img src="{% static 'images/tp_logo_2.png' %}" alt="Usuario:" class="rounded-circle"
-                                    width="40">
-                                <span class="ml-2 d-none d-lg-inline-block"><span>Hola,</span> <span
-                                        class="text-dark">{{user.first_name }} {{user.last_name}}</span> <i data-feather="chevron-down"
-                                        class="svg-icon"></i></span>
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{% static 'images/tp_logo_2.png' %}" alt="Usuario:" class="rounded-circle" width="40">
+                                <span class="ml-2 d-none d-lg-inline-block"><span>Hola,</span> <span class="text-dark">{{user.first_name }} {{user.last_name}}</span> <i data-feather="chevron-down" class="svg-icon"></i></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
 
@@ -238,7 +227,7 @@
                                         class="icon-key mr-2 ml-1"></i>
                                     Cambiar Contraseña</a>
 
-                            <!-- 
+                                <!-- 
 
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="credit-card"
                                         class="svg-icon mr-2 ml-1"></i>
@@ -291,22 +280,20 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{% url 'home' %}"
-                                aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{% url 'home' %}" aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
 
 
                         <li class="list-divider"></li>
 
 
-                        
+
 
                         <li class="nav-small-cap"><span class="hide-menu">Transportista</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
-                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">Viajes</span></a>
-                           
+
 
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
                                 <li class="sidebar-item"><a href="{% url 'crear_viaje' %}" class="sidebar-link"><span
@@ -326,17 +313,16 @@
 
 
 
-                                  <li class="list-divider"></li>
+                        <li class="list-divider"></li>
 
 
-                        
+
 
                         <li class="nav-small-cap"><span class="hide-menu">Gerencia</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
-                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">Administrar</span></a>
-                           
+
 
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
                                 <li class="sidebar-item"><a href="{% url 'viajes_admin' %}" class="sidebar-link"><span
@@ -352,17 +338,17 @@
                                         </span></a>
                                 </li>
 
-                                  <li class="sidebar-item"><a href="{% url 'transportistas' %}" class="sidebar-link"><span
+                                <li class="sidebar-item"><a href="{% url 'transportistas' %}" class="sidebar-link"><span
                                             class="hide-menu">Transportistas
                                         </span></a>
                                 </li>
 
-                                  <li class="sidebar-item"><a href="{% url 'rutas' %}" class="sidebar-link"><span
+                                <li class="sidebar-item"><a href="{% url 'rutas' %}" class="sidebar-link"><span
                                             class="hide-menu">Rutas
                                         </span></a>
                                 </li>
 
-                                  <li class="sidebar-item"><a href="{% url 'cuentas' %}" class="sidebar-link"><span
+                                <li class="sidebar-item"><a href="{% url 'cuentas' %}" class="sidebar-link"><span
                                             class="hide-menu">Cuentas
                                         </span></a>
                                 </li>
@@ -374,12 +360,11 @@
                             </ul>
                         </li>
 
-                      
+
 
                         <li class="list-divider"></li>
-                        
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{% url 'logout' %}"
-                                aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
+
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{% url 'logout' %}" aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
                                     class="hide-menu">Cerrar sesion</span></a></li>
                     </ul>
                 </nav>
@@ -397,7 +382,7 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-    <!--
+            <!--
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
@@ -430,100 +415,90 @@
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             <!-- ============================================================== -->
-          
-            
+
+
 
 
             <!-- Container fluid  Bloque de Contenido-->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                
-                 {% block content %}
-                  contenido
-                 {% endblock content %}
+
+                {% block content %} contenido {% endblock content %}
 
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid bloque de contenido -->
 
-             <!--Aqui se Mostrara un alerta con cualquier mensaje que se haya generado atraves de Django Mesajes, lo puse
+            <!--Aqui se Mostrara un alerta con cualquier mensaje que se haya generado atraves de Django Mesajes, lo puse
     en el archivo base ya que este esta heredado en todas las plantillas, si se genera un mensaje el alerta saldra con el texto del mensaje
     este Script solo se vera agregado en plantillas que no hereden de la base.html-->
 
 
-<!-- Modal generar viaje, este modal se crea aqui para que el usuario pueda generar un viaje en cualquier pantalla delcsistema mediante el boton generar viaje en dropdown d ela chicharra en el navbar superior, esta opcion solo se mostrara si el usuario es trasportista -->
-<div class="modal fade" id="modal_generar_viaje" tabindex="-1" role="dialog" aria-labelledby="modal_agregarTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Elija el tipo de viaje</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <!-- Modal generar viaje, este modal se crea aqui para que el usuario pueda generar un viaje en cualquier pantalla delcsistema mediante el boton generar viaje en dropdown d ela chicharra en el navbar superior, esta opcion solo se mostrara si el usuario es trasportista -->
+            <div class="modal fade" id="modal_generar_viaje" tabindex="-1" role="dialog" aria-labelledby="modal_agregarTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Elija el tipo de viaje</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
-         <div class="row d-flex justify-content-center align-items-center">
+                        </div>
+                        <div class="modal-body">
+                            <div class="row d-flex justify-content-center align-items-center">
 
-                   <form action="generar_viaje" method="POST">
-                  {% csrf_token %}
-                    <div class="mt-3">
+                                <form action="generar_viaje" method="POST">
+                                    {% csrf_token %}
+                                    <div class="mt-3">
 
-                        <div class="">
-                      <b class='col-auto'>Hora de Partida:</b><input class="col-auto" type="time" id="hora_viaje" name="hora_viaje" required>
-                      </div>
-                      
+                                        <div class="">
+                                            <b class='col-auto'>Hora de Partida:</b><input class="col-auto" type="time" id="hora_viaje" name="hora_viaje" required>
+                                        </div>
 
-          <!-- Radio Para Seleccionar el Tipo de Viaje que se hara, si es de entrada o de salida, este formulario se envia a pagina de generar viajes, para capturar los datos-->
-                      <!-- Default unchecked -->
-                       <b>Tipo de Viaje:</b>
-                  <div class="form-check-inline custom-radio  mt-2 ml-5">
-                        <input type="radio" value= "salida" class="custom-control-input" id="viaje_salida" name="tipo_viaje" checked>
-                        <label class="custom-control-label" for="viaje_salida">Salida</label>
+
+                                        <!-- Radio Para Seleccionar el Tipo de Viaje que se hara, si es de entrada o de salida, este formulario se envia a pagina de generar viajes, para capturar los datos-->
+                                        <!-- Default unchecked -->
+                                        <b>Tipo de Viaje:</b>
+                                        <div class="form-check-inline custom-radio  mt-2 ml-5">
+                                            <input type="radio" value="salida" class="custom-control-input" id="viaje_salida" name="tipo_viaje" checked>
+                                            <label class="custom-control-label" for="viaje_salida">Salida</label>
+                                        </div>
+
+                                        <div class="form-check-inline custom-radio  ml-5">
+                                            <input type="radio" value="entrada" class="custom-control-input" id="viaje_entrada" name="tipo_viaje">
+                                            <label class="custom-control-label" for="viaje_entrada">Entrada</label>
+                                        </div>
+
+
+
+
+
+                                    </div>
+
+                            </div>
+
                         </div>
 
-                  <div class="form-check-inline custom-radio  ml-5">
-                      <input type="radio" value="entrada" class="custom-control-input" id="viaje_entrada" name="tipo_viaje" >
-                      <label class="custom-control-label" for="viaje_entrada">Entrada</label>
+                        <div class="modal-footer">
+
+
+                            <input class="btn btn-info" type='submit' value="Generar Viaje">
+                            <!--<button type="button" class="btn btn-primary" onclick="cerrar_lector()">Save changes</button>-->
+                        </div>
+
+                        </form>
                     </div>
+                </div>
+            </div>
+            <!--Fin Modal generar viaje-->
 
-                   
-
-            
-
-          </div>
-
-        </div>
-
-       </div>
-
-      <div class="modal-footer">
-    
-     
-        <input class="btn btn-info" type='submit' value="Generar Viaje">
-        <!--<button type="button" class="btn btn-primary" onclick="cerrar_lector()">Save changes</button>-->
-      </div>
-
-    </form>
-    </div>
-  </div>
-</div>
-<!--Fin Modal generar viaje-->
-
-    {% if messages %}
-    {% for message in messages %}
-    <script>
-      mensaje = '{{ message }}';
-      alert(mensaje);
-    </script>
-     <!--<strong>Atencion!</strong> {{ message }}-->
-    {% endfor %}
-	{% endif %}
-
-
-
-		{% block footer %}
-     
-    	{% endblock footer %}
+            {% if messages %} {% for message in messages %}
+            <script>
+                mensaje = '{{ message }}';
+                alert(mensaje);
+            </script>
+            <!--<strong>Atencion!</strong> {{ message }}-->
+            {% endfor %} {% endif %} {% block footer %} {% endblock footer %}
             <!-- ============================================================== -->
             <!-- ============================================================== -->
             <!-- footer -->
@@ -531,8 +506,7 @@
             <footer class="footer text-center text-muted">
                 <p><a href="#">Telepercormance</a> &reg;</p>
 
-                    Designed and Developed by <a
-                    href="#">Corniel Soft</a>.
+                Designed and Developed by <a href="#">Corniel Soft</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -549,7 +523,7 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
- 	<script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'libs/popper.js/dist/umd/popper.min.js' %}"></script>
     <script src="{% static 'libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <!-- apps -->
@@ -567,18 +541,17 @@
     <script src="{% static 'libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' %}"></script>
     <script src="{% static 'extra_libs/jvector/jquery-jvectormap-2.0.2.min.js' %}"></script>
     <script src="{% static 'extra_libs/jvector/jquery-jvectormap-world-mill-en.js' %}"></script>
-     
+
 
     <!--Tablas-->
-     <script src="{% static 'extra_libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'extra_libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'dist/js/pages/datatable/datatable-basic.init.js' %}"></script>
 
 
     <script src="{% static 'dist/js/jsQR.js'%}"></script>
 
-    {% block js %}
-    {% endblock js %}
-    
+    {% block js %} {% endblock js %}
+
 
 </body>
 </body>

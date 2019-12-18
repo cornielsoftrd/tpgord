@@ -1,12 +1,6 @@
-{% extends "base/base.html" %}
-{% load staticfiles %}
-{% block title %}
+{% extends "base/base.html" %} {% load static %} {% block title %}
 <title>Formulario de Sites</title>
-{% endblock title %}
- 
-
- 
-{% block content %}
+{% endblock title %} {% block content %}
 
 
 
@@ -14,35 +8,35 @@
     <div class="form-container">
         <div class="image-holder" style="background:url({% static 'images/3.jpg'%})"></div>
         <form method="post" action="{% url 'crear_viaje' %}" class="agregar_viaje_manual">
-        {% csrf_token %}
+            {% csrf_token %}
             <h2 class="text-center"><strong>Formulario</strong> de Viajes</h2>
-            
-                <div class="form-group"><label>Viaje:</label> {{numero_viaje}}</div>
-            
-                <div class="form-group"><input type="text" class="form-control" placeholder= "Fransportista" name="transportista" value= "{{transportista}}" readonly></div>
-                <div class="form-group"><input type="text" class="form-control" placeholder= "Fecha del viaje" name="fecha_viaje" value= "{{fecha_viaje}}" readonly></div>
-                <div class="form-group"><input type="text" class="form-control" placeholder= "Hora de entrada del pasajero" name="hora_entrada" value= "{{hora_entrada}}" readonly></div>
-                <div class="form-group"><input type="text" class="form-control" placeholder= "Hora de salida del pasajero" name="hora_salida" value= "{{hora_salida}}" readonly></div>
-                <div class="form-group"><input type="text" class="form-control" placeholder= "Id" name="id_pasajero" value= "{{id_pasajero}}" readonly></div>
-                <div class="form-group"><input type="text" class="form-control" placeholder= "Nombre" name="nombre_pasajero" value= "{{nombre_pasajero}}" readonly></div>
-                <div class="form-group"><input type="text" class="form-control" placeholder= "Apellidos" name="apellido_pasajero" value= "{{apellido_pasajero}}" readonly></div>
-                <div class="form-group"><input type="text" class="form-control" placeholder= "Campaña" name="campaña_pasajero" value= "{{campaña_pasajero}}" readonly></div>
-                <div class="form-group"><input type="text" class="form-control" placeholder= "Site" name="site_pasajero" value= "{{site_pasajero}}" readonly></div>
-                <div class="form-group"><input type="text" class="form-control" placeholder= "Ruta" name="ruta_pasajero" value= "{{ruta_pasajero}}" readonly></div>
-                <div class="form-group"><input type="text" class="form-control" placeholder= "Direccion" name="direccion_pasajero" value= "{{direccion_pasajero}}" readonly></div>
 
-                <div class="form-check form-group">
-                        <input type="radio" class="form-check-input" name="excepcion" id="excepcion" checked value="True" readonly >
+            <div class="form-group"><label>Viaje:</label> {{numero_viaje}}</div>
 
-                        <label class="form-check-label" for="excepcion">Excepcion</label>
-                      </div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Fransportista" name="transportista" value="{{transportista}}" readonly></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Fecha del viaje" name="fecha_viaje" value="{{fecha_viaje}}" readonly></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Hora de entrada del pasajero" name="hora_entrada" value="{{hora_entrada}}" readonly></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Hora de salida del pasajero" name="hora_salida" value="{{hora_salida}}" readonly></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Id" name="id_pasajero" value="{{id_pasajero}}" readonly></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Nombre" name="nombre_pasajero" value="{{nombre_pasajero}}" readonly></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Apellidos" name="apellido_pasajero" value="{{apellido_pasajero}}" readonly></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Campaña" name="campaña_pasajero" value="{{campaña_pasajero}}" readonly></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Site" name="site_pasajero" value="{{site_pasajero}}" readonly></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Ruta" name="ruta_pasajero" value="{{ruta_pasajero}}" readonly></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Direccion" name="direccion_pasajero" value="{{direccion_pasajero}}" readonly></div>
 
-                <div class="form-group"><textarea required placeholder="Razon de la excepcion" name="razon_excepcion"></textarea></div>
-             
-             
+            <div class="form-check form-group">
+                <input type="radio" class="form-check-input" name="excepcion" id="excepcion" checked value="True" readonly>
+
+                <label class="form-check-label" for="excepcion">Excepcion</label>
+            </div>
+
+            <div class="form-group"><textarea required placeholder="Razon de la excepcion" name="razon_excepcion"></textarea></div>
+
+
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Agregar</button></div>
-            
-            </form>
+
+        </form>
     </div>
 </div>
 
@@ -50,9 +44,8 @@
 
 </div>
 
-    
 
-    
-            
+
+
+
 {% endblock content %}
-
