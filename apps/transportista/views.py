@@ -7,7 +7,7 @@ from apps.transportista.forms import TransportistaForm
 class crear_transportista(CreateView):
     model = Transportista
     form_class = TransportistaForm
-    template_name = "transportista_form.html"
+    template_name = "transportistas_templates/transportista_form.html"
     success_url = "/transportistas"
 
 
@@ -23,17 +23,17 @@ def listar_transportistas(request):
         "object_list": qs,
     }
 
-    return render(request, "listar_transportistas.html", context)
+    return render(request, "transportistas_templates/listar_transportistas.html", context)
 
 
 class editar_transportista(UpdateView):
     model = Transportista
     form_class = TransportistaForm
-    template_name = "transportista_form.html"
+    template_name = "transportistas_templates/transportista_form.html"
     success_url = "/transportistas"
 
 
 class borrar_transportista(DeleteView):
     model = Transportista
-    template_name = "transportista_delete.html"
+    template_name = "transportistas_templates/transportista_delete.html"
     success_url = "/transportistas"

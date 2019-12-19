@@ -71,7 +71,7 @@ def generar_viaje(request):
 
 class agregar_viaje(CreateView):
     form_class = viaje_form
-    template_name = "viaje_form.html"
+    template_name = "viajes_templates/viaje_form.html"
 
   
     def get(self, request, id_escaneado):
@@ -165,7 +165,7 @@ class agregar_viaje(CreateView):
 class crear_viaje(CreateView):
     model = Viaje
     form_class = viaje_form
-    template_name = "viaje_form.html"
+    template_name = "viajes_templates/viaje_form.html"
     success_url = "listar_pasajeros"
 
     def post(self, request):
@@ -266,7 +266,7 @@ class agregar_viaje_manual(View):
             "direccion_pasajero": direccion,
         }
 
-        return render(request, "agregar_viaje_manual.html", context)
+        return render(request, "viajes_templates/agregar_viaje_manual.html", context)
 
 
 # esta funcion devuelve los viajes en curso, tomando como filtro el numero de viaje que que esta en el momento
@@ -310,7 +310,7 @@ def listar_viaje_en_curso(request):
             "precio_por_pasajero": precio_por_pasajero,
         }
 
-        return render(request, "listar_viaje_en_curso.html", context)
+        return render(request, "viajes_templates/listar_viaje_en_curso.html", context)
     except Exception as e:
         messages.success(request, str(e) +' '+ "Debe generar un dumero de viaje primero")
         return redirect('home')
@@ -337,7 +337,7 @@ def mis_viajes(request):
         "object_list": qs,
     }
 
-    return render(request, "listar_viajes_transportista_logueado.html", context)
+    return render(request, "viajes_templates/listar_viajes_transportista_logueado.html", context)
 
 
 # Nuestra clase hereda de la vista genérica TemplateView

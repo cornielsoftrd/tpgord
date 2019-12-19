@@ -9,7 +9,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 class crear_ruta(CreateView):
     model = Ruta
     form_class = rutaForm
-    template_name = "ruta_form.html"
+    template_name = "rutas_templates/ruta_form.html"
     success_url = "/rutas"
 
 
@@ -25,17 +25,17 @@ def listar_rutas(request):
         "object_list": qs,
     }
 
-    return render(request, "listar_rutas.html", context)
+    return render(request, "rutas_templates/listar_rutas.html", context)
 
 
 class editar_ruta(UpdateView):
     model = Ruta
     form_class = rutaForm
-    template_name = "ruta_form.html"
+    template_name = "rutas_templates/ruta_form.html"
     success_url = "/rutas"
 
 
 class borrar_ruta(DeleteView):
     model = Ruta
-    template_name = "ruta_delete.html"
+    template_name = "rutas_templates/ruta_delete.html"
     success_url = "/rutas"

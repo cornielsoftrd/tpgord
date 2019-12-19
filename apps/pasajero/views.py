@@ -37,20 +37,20 @@ def listar_pasajeros(request):
         "object_list": qs,
     }
 
-    return render(request, "listar_pasajeros.html", context)
+    return render(request, "pasajeros_templates/listar_pasajeros.html", context)
 
 
 class editar_pasajero(UpdateView):
     model = Pasajero
     form_class = PasajeroForm
-    template_name = "pasajero_form.html"
+    template_name = "pasajeros_templates/pasajero_form.html"
     success_url = "/pasajeros"
 
 
 class borrar_pasajeros(DeleteView):
     model = Pasajero
     form_class = PasajeroForm
-    template_name = "pasajero_delete.html"
+    template_name = "pasajeros_templates/pasajero_delete.html"
     success_url = "/pasajeros"
 
     # CUENTAS
@@ -58,7 +58,7 @@ class borrar_pasajeros(DeleteView):
 
 class crear_cuenta(CreateView):
     model = Cuenta
-    template_name = "cuenta_form.html"
+    template_name = "cuentas_templates/cuenta_form.html"
     form_class = CuentaForm
     success_url = "/cuentas"
 
@@ -75,17 +75,17 @@ def listar_cuentas(request):
         "object_list": qs,
     }
 
-    return render(request, "listar_cuentas.html", context)
+    return render(request, "cuentas_templates/listar_cuentas.html", context)
 
 
 class editar_cuenta(UpdateView):
     model = Cuenta
     form_class = CuentaForm
-    template_name = "cuenta_form.html"
+    template_name = "cuentas_templates/cuenta_form.html"
     success_url = "/cuentas"
 
 
 class borrar_cuenta(DeleteView):
     model = Cuenta
-    template_name = "cuenta_delete.html"
+    template_name = "cuentas_templates/cuenta_delete.html"
     success_url = "/cuentas"
