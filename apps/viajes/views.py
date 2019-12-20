@@ -9,7 +9,9 @@ import pytz
 # ya q creamos un modelo de usuario personalidado, debemos llamar a ese modelo envez de llamar al modelo del Framework
 from apps.account.models import Account as User
 from datetime import datetime
-from apps.viajes.decoradores_viaje import premiso_transportista
+
+from django.utils.decorators import method_decorator
+from apps.home.decoradores_viaje import premiso_transportista
 
 
 from apps.viajes.models import Viaje, ViajeAdministrativo
@@ -24,6 +26,9 @@ from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Fo
 
 from datetime import datetime
 import random
+
+from django.utils.decorators import method_decorator
+from apps.home.decoradores_viaje import premiso_admin, premiso_transportista
 
 
 # numero_viaje: esta variable de se uililizara para crear el codigo de Viaje, este sera basado en la informacion del usuario y la fecha para asi generar un codigo unico
@@ -41,7 +46,7 @@ numero_random = random.randint(100, 10000)
 # aqui se crea el numero de viaje y se almacena en una variable de sesion, para posteriormente se urilizado
 # este numero se usara para cosas como, indicar el numero de viaje en la base de datos, filtrar y organizar los viajes por numero de viajes
 # mostrar los viajes de la sesion activa en el template listar_viaje_en_curso.html
-
+@premiso_transportista
 def generar_viaje(request):
      #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
     if not request.user.is_transportista and not request.user.is_superuser:
@@ -68,17 +73,14 @@ def generar_viaje(request):
     except KeyError:
         pass
 
-
+@method_decorator(premiso_transportista,name='dispatch')
 class agregar_viaje(CreateView):
     form_class = viaje_form
     template_name = "viajes_templates/viaje_form.html"
 
-  
+    
     def get(self, request, id_escaneado):
-         #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
-        if not request.user.is_transportista and not request.user.is_superuser:
-            messages.success(request, "No tiene permisos Para Acceder a seccion")
-            return redirect("home")
+        
 
         fecha_tiempo = datetime.now()
 
@@ -162,6 +164,7 @@ class agregar_viaje(CreateView):
             )
             return render(request, "mensaje.html")
 
+@method_decorator(premiso_transportista,name='dispatch')
 class crear_viaje(CreateView):
     model = Viaje
     form_class = viaje_form
@@ -169,10 +172,7 @@ class crear_viaje(CreateView):
     success_url = "listar_pasajeros"
 
     def post(self, request):
-         #si no es un Super usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
-        if not request.user.is_transportista and not request.user.is_superuser:
-            messages.success(request, "No tiene permisos Para Acceder a seccion")
-            return redirect("home")
+        
 
         # se valida si el pasajero existe en el viaje actual, se toma el numero de viaje q es una variable de sesion y se toma el id escaneado
         # si se detecta el id_pasajero y el numero_viaje en el mismo objero del qeryset no se agrega el pasajero a viaje puesto que ese pasajero ya esta en ese viaje
@@ -213,8 +213,9 @@ class crear_viaje(CreateView):
                 return redirect("crear_viaje")
             else:
                 messages.success(request, "Ha Habido un error Creando el Viaje")
-                return redirect("crear_viaje")
 
+                return redirect("crear_viaje")
+@method_decorator(premiso_transportista,name='dispatch')
 class agregar_viaje_manual(View):
     model = Viaje
     form_class = viaje_form
@@ -223,10 +224,7 @@ class agregar_viaje_manual(View):
 
     # obtener datos de usuario para llenar formulario automaticamente
     def get(self, request, id_ingresado):
-         #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
-        if not request.user.is_transportista and not request.user.is_superuser:
-            messages.success(request, "No tiene permisos Para Acceder a seccion")
-            return redirect("home")
+         
 
         # pasajero_escaneado = serializers.serialize('json', Pasajero.objects.filter(id_pasajero=id_escaneado))
 
@@ -270,15 +268,11 @@ class agregar_viaje_manual(View):
 
 
 # esta funcion devuelve los viajes en curso, tomando como filtro el numero de viaje que que esta en el momento
-
+@premiso_transportista
 def listar_viaje_en_curso(request):
 
     try:
-        #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
-        if not request.user.is_transportista and not request.user.is_superuser:
-            messages.success(request, "No tiene permisos Para Acceder a seccion")
-            return redirect("home")
-                
+        
         qs = Viaje.objects.filter(numero_viaje=request.session["numero_viaje"]).order_by('-fecha_viaje')
 
         # contar el numero de pasajeros en este queryset
@@ -317,12 +311,9 @@ def listar_viaje_en_curso(request):
 
 
 # esta funcion devuelve los viajes que se han realizado por el transportista logueado al momento
-
+@premiso_transportista
 def mis_viajes(request):
-     #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
-    if not request.user.is_transportista and not request.user.is_superuser:
-        messages.success(request, "No tiene permisos Para Acceder a seccion")
-        return redirect("home")
+ 
 
     numero_exacto_viaje = request.GET.get("dato")
     qs = Viaje.objects.filter(transportista=request.user.username).order_by('-fecha_viaje')
@@ -340,11 +331,11 @@ def mis_viajes(request):
     return render(request, "viajes_templates/listar_viajes_transportista_logueado.html", context)
 
 
-# Nuestra clase hereda de la vista genérica TemplateView
+@method_decorator(premiso_transportista,name='dispatch')
 class reporte_viaje_excel(TemplateView):
 
     # Usamos el método get para generar el archivo excel
-    
+    @premiso_transportista
     def get(self, request, *args, **kwargs):
          #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
         if not request.user.is_transportista and not request.user.is_superuser:
@@ -767,7 +758,7 @@ class reporte_viaje_excel(TemplateView):
 
 
 
-
+@premiso_admin
 def generar_viaje_admin(request):
      #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
      #la nomenclatura de los viajes Administrativos es la misma q los viajes normales, solo q en vez de TPG es TPGAD
@@ -792,7 +783,8 @@ def generar_viaje_admin(request):
         pass
     
 
-
+#con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
+@method_decorator(premiso_admin,name='dispatch')
 class crear_viaje_admin(CreateView):
     model = ViajeAdministrativo
     template_name = "viajes_templates/viaje_admin_form.html"
@@ -800,7 +792,7 @@ class crear_viaje_admin(CreateView):
     success_url= "viajes_admin"
 
     
-
+@premiso_admin
 def listar_viajes_admin(request):
     
     numero_viaje_exacto = request.GET.get("dato")

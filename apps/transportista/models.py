@@ -10,6 +10,8 @@ class Transportista(models.Model):
     )  # la cedula del transportista
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
+    telefono = models.CharField(max_length=50, unique=True,blank=True, null=True)
+    email = models.EmailField(max_length=100, unique=True,blank=True, null=True)
     ruta = models.ManyToManyField(Ruta)
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True, blank=True)
 

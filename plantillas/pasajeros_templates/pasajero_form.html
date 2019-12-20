@@ -1,6 +1,6 @@
 {% extends "base/base.html" %} {% load static %} {% block title %}
 <title>Formulario de Pasajeros</title>
-{% endblock title %} {% block content %} {% if request %} {% if request.user.is_superuser %}
+{% endblock title %} {% block content %} {% if request %} {% if request.user.is_admin %}
 <div class="row">
     <div class="col-12 ">
         <div class="card ">
@@ -98,4 +98,5 @@
     </div>
 
 </div>
+
 {% else %} {% endif %} {% endif %} {% endblock content %}
