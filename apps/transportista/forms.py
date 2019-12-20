@@ -10,6 +10,8 @@ class TransportistaForm(forms.ModelForm):
             "nombre",
             "apellido",
             "ruta",
+            "telefono",
+            "email",
             "vendor",
         ]
 
@@ -17,7 +19,9 @@ class TransportistaForm(forms.ModelForm):
             "codigo_transportista": "codigo del Trasnportista",
             "nombre": "Nombre",
             "apellido": "Apellido",
-            "ruta": "Ruta",
+            "telefono": "Telefono",
+            "email": "Email",
+            "ruta": "ruta",
             "vendor": "Vendor",
         }
 
@@ -30,6 +34,12 @@ class TransportistaForm(forms.ModelForm):
             ),
             "apellido": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "Apellido"}
+            ),
+            "telefono": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "telefono"}
+            ),
+            "email": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "email"}
             ),
             "ruta": forms.CheckboxSelectMultiple(),
 

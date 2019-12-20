@@ -100,11 +100,12 @@ from apps.viajes.views import (
 )
 
 
-from apps.account.views import login_view
+from apps.account.views import login_view, registrar_usuario
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("registrar/", registrar_usuario, name="registrar"),
     path("login/", login_view, name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     # manejo de contraseñas
@@ -131,7 +132,7 @@ urlpatterns = [
     # Vistas de App Transportista
     path(
         "crear_transportista/",
-        login_required(crear_transportista.as_view()),
+        login_required(crear_transportista),
         name="crear_transportista",
     ),
     path(
