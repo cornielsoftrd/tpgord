@@ -132,7 +132,7 @@ urlpatterns = [
     # Vistas de App Transportista
     path(
         "crear_transportista/",
-        login_required(crear_transportista),
+        login_required(crear_transportista.as_view()),
         name="crear_transportista",
     ),
     path(
