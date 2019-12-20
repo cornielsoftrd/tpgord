@@ -103,19 +103,27 @@ class agregar_viaje(CreateView):
         # con el escaner se bueca el pasajero este Id es pasado por la URL, y capturado como parametro en la funcion agregar_viaje
         # luego este se usa para filtrar la lista de Pasajeros , ya q es una llave primaria deberia devolver solo un pasajero y este seria el 0, primero y unico
         # una vez se obtiene ese pasajero se puede acceder a cada atributo del pasajero y asignarle el valor a cada uno de los campos del modelo Viaje para agregar pasajeros a los viajes.
+        try:
+            pasajero_escaneado = Pasajero.objects.filter(id_pasajero=id_escaneado)
+        
 
-        pasajero_escaneado = Pasajero.objects.filter(id_pasajero=id_escaneado)
+            id_pasajero = pasajero_escaneado[0].id_pasajero
+            nombre = pasajero_escaneado[0].nombre
+            apellido = pasajero_escaneado[0].apellido
+            direccion = pasajero_escaneado[0].direccion
+            telefono = pasajero_escaneado[0].telefono
+            ruta_pasajero = pasajero_escaneado[0].Ruta
+            cuenta = pasajero_escaneado[0].cuenta
+            site = pasajero_escaneado[0].site
+            hora_entrada = pasajero_escaneado[0].hora_entrada
+            hora_salida = pasajero_escaneado[0].hora_salida
 
-        id_pasajero = pasajero_escaneado[0].id_pasajero
-        nombre = pasajero_escaneado[0].nombre
-        apellido = pasajero_escaneado[0].apellido
-        direccion = pasajero_escaneado[0].direccion
-        telefono = pasajero_escaneado[0].telefono
-        ruta_pasajero = pasajero_escaneado[0].Ruta
-        cuenta = pasajero_escaneado[0].cuenta
-        site = pasajero_escaneado[0].site
-        hora_entrada = pasajero_escaneado[0].hora_entrada
-        hora_salida = pasajero_escaneado[0].hora_salida
+        except (IndexError):
+            messages.success(request, "No se encontro el pasajero o el mismo no existe")
+            return render(request,'mensaje.html')
+        except Exception as e:
+            messages.success(request, "error: "+ str(e))
+            return render(request,'mensaje.html')
 
         # para confirmar que el Pasajero esta dentro de su rango de hora para abordar el transporte
         # confirmamos que la hora actual sea igual a la hora de entrada, o que la hora actual sea igual a la hora de salida
