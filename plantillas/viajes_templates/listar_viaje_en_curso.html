@@ -31,16 +31,14 @@
                                     <table class="table">
                                         <thead class="bg-primary text-white">
                                             <tr>
-											<th> ID</th>
+											
 											<th> Viaje</th>
 											<th> Transportista</th>
 											<th> Fecha</th>
 											<th> Hora</th>
 											<th> Tipo</th>
-											<th> Pasajero</th>
 											<th> Nombre</th>
 											<th> Apellido</th>
-											<th> Campaña</th>
 											<th> Site</th>
 											<th> Ruta</th>
 											<th> Direccion</th>
@@ -52,16 +50,14 @@
 										<tbody class="border border-primary">
 										 {% for viaje in object_list  %}
 											<tr>
-												<td>{{viaje.id_viaje}}</td>
+												 
 												<td>{{viaje.numero_viaje}}</td>
 												<td>{{viaje.transportista}}</td>
 												<td>{{viaje.fecha_viaje}}</td>
 												<td>{{viaje.hora_viaje}}</td>
 												<td>{{viaje.tipo_viaje}}</td>
-												<td>{{viaje.id_pasajero}}</td>
 												<td>{{viaje.nombre_pasajero}}</td>
 												<td>{{viaje.apellido_pasajero}}</td>
-												<td>{{viaje.campaña_pasajero}}</td>
 												<td>{{viaje.site_pasajero}}</td>
 												<td>{{viaje.ruta_pasajero}}</td>
 												<td>{{viaje.direccion_pasajero}}</td>
