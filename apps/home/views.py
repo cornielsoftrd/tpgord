@@ -7,7 +7,15 @@ from apps.viajes.models import Viaje, ViajeAdministrativo
 from django.db.models import Count, Sum, Avg, Q
 
 from datetime import datetime
+
+from django.views.defaults import page_not_found
 # Create your views here.
+
+def error_404(request, Exception):
+    nombre_template = 'error_404.html'
+ 
+    return page_not_found(request, template_name=nombre_template)
+
 class home_View(View):
     def get(self, request, *args, **kwargs):
         cantidad_vendors = Vendor.objects.all().count

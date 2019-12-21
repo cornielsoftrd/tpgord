@@ -233,29 +233,35 @@ class agregar_viaje_manual(View):
     # obtener datos de usuario para llenar formulario automaticamente
     def get(self, request, id_ingresado):
          
+        try:
+            # pasajero_escaneado = serializers.serialize('json', Pasajero.objects.filter(id_pasajero=id_escaneado))
 
-        # pasajero_escaneado = serializers.serialize('json', Pasajero.objects.filter(id_pasajero=id_escaneado))
+            # con el escaner se bueca el pasajero este Id es pasado por la URL, y capturado como parametro en la funcion agregar_viaje
+            # luego este se usa para filtrar la lista de Pasajeros , ya q es una llave primaria deberia devolver solo un pasajero y este seria el 0, primero y unico
+            # una vez se obtiene ese pasajero se puede acceder a cada atributo del pasajero y asignarle el valor a cada uno de los campos del modelo Viaje para agregar pasajeros a los viajes.
 
-        # con el escaner se bueca el pasajero este Id es pasado por la URL, y capturado como parametro en la funcion agregar_viaje
-        # luego este se usa para filtrar la lista de Pasajeros , ya q es una llave primaria deberia devolver solo un pasajero y este seria el 0, primero y unico
-        # una vez se obtiene ese pasajero se puede acceder a cada atributo del pasajero y asignarle el valor a cada uno de los campos del modelo Viaje para agregar pasajeros a los viajes.
+            pasajero_escaneado = Pasajero.objects.filter(id_pasajero=id_ingresado)
+            # strftime año mes dia %Y-%m-%d  devuelve hora mintu segundo %H:%M:%S
+            fecha_tiempo = datetime.now().strftime("%Y-%m-%d")
+            usuario_logueado = User.objects.get(username=request.user.username)
 
-        pasajero_escaneado = Pasajero.objects.filter(id_pasajero=id_ingresado)
-        # strftime año mes dia %Y-%m-%d  devuelve hora mintu segundo %H:%M:%S
-        fecha_tiempo = datetime.now().strftime("%Y-%m-%d")
-        usuario_logueado = User.objects.get(username=request.user.username)
-
-        id_pasajero = pasajero_escaneado[0].id_pasajero
-        nombre = pasajero_escaneado[0].nombre
-        apellido = pasajero_escaneado[0].apellido
-        direccion = pasajero_escaneado[0].direccion
-        telefono = pasajero_escaneado[0].telefono
-        ruta_pasajero = pasajero_escaneado[0].Ruta
-        cuenta = pasajero_escaneado[0].cuenta
-        site = pasajero_escaneado[0].site
-        hora_entrada = pasajero_escaneado[0].hora_entrada
-        hora_salida = pasajero_escaneado[0].hora_salida
-
+            id_pasajero = pasajero_escaneado[0].id_pasajero
+            nombre = pasajero_escaneado[0].nombre
+            apellido = pasajero_escaneado[0].apellido
+            direccion = pasajero_escaneado[0].direccion
+            telefono = pasajero_escaneado[0].telefono
+            ruta_pasajero = pasajero_escaneado[0].Ruta
+            cuenta = pasajero_escaneado[0].cuenta
+            site = pasajero_escaneado[0].site
+            hora_entrada = pasajero_escaneado[0].hora_entrada
+            hora_salida = pasajero_escaneado[0].hora_salida
+        except (IndexError):
+            messages.success(request, "No se encontro el pasajero o el mismo no existe")
+            return render(request,'mensaje.html')
+        except Exception as e:
+            messages.success(request, "error: "+ str(e))
+            return render(request,'mensaje.html')
+            
         context = {
             "numero_viaje": request.session["numero_viaje"],
             "id_viaje": None,
