@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.conf.urls import handler404, handler500
+from django.conf.urls import handler404
 from django.urls import path, include
 
 from django.contrib.auth.views import (
@@ -32,8 +32,7 @@ from django.conf.urls.static import static
 
 from apps.home.views import (
     home_View,
-    error_404,
-    error_500,
+    
     
     )
 
@@ -219,5 +218,3 @@ urlpatterns = [
         name="agregar_viaje_manual",
     ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-handler404 = error_404
-handler500 = error_500
