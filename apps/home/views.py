@@ -16,7 +16,7 @@ def error_404(request, Exception):
  
     return page_not_found(request, template_name=nombre_template)
 
-def error_404(request, Exception):
+def error_500(request, Exception):
     nombre_template = 'error_500.html'
  
     return page_not_found(request, template_name=nombre_template)
