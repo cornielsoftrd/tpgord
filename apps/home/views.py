@@ -11,8 +11,6 @@ from datetime import datetime
 from django.views.defaults import page_not_found
 # Create your views here.
 
- 
-    return page_not_found(request, template_name=nombre_template)
 
 class home_View(View):
     def get(self, request, *args, **kwargs):
