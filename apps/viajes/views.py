@@ -11,7 +11,7 @@ from apps.account.models import Account as User
 from datetime import datetime
 
 from django.utils.decorators import method_decorator
-from apps.home.decoradores_viaje import premiso_transportista
+
 
 
 from apps.viajes.models import Viaje, ViajeAdministrativo
@@ -20,15 +20,14 @@ from apps.pasajero.models import Pasajero
 from apps.ruta.models import Ruta
 from apps.vendor.models import Vendor
 
-from openpyxl import Workbook
-from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Font
+ 
 
 
 from datetime import datetime
 import random
 
 from django.utils.decorators import method_decorator
-from apps.home.decoradores_viaje import premiso_admin, premiso_transportista
+from apps.home.decoradores_viaje import permiso_staff, permiso_transportista
 
 
 # numero_viaje: esta variable de se uililizara para crear el codigo de Viaje, este sera basado en la informacion del usuario y la fecha para asi generar un codigo unico
@@ -46,12 +45,9 @@ numero_random = random.randint(100, 10000)
 # aqui se crea el numero de viaje y se almacena en una variable de sesion, para posteriormente se urilizado
 # este numero se usara para cosas como, indicar el numero de viaje en la base de datos, filtrar y organizar los viajes por numero de viajes
 # mostrar los viajes de la sesion activa en el template listar_viaje_en_curso.html
-@premiso_transportista
+@permiso_transportista
 def generar_viaje(request):
-     #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
-    if not request.user.is_transportista and not request.user.is_superuser:
-        messages.success(request, "No tiene permisos Para Acceder a seccion")
-        return redirect("home")
+    
 
     tipo_viaje = request.POST["tipo_viaje"]
     hora_viaje = request.POST["hora_viaje"]
@@ -73,7 +69,7 @@ def generar_viaje(request):
     except KeyError:
         pass
 
-@method_decorator(premiso_transportista,name='dispatch')
+@method_decorator(permiso_transportista,name='dispatch')
 class agregar_viaje(CreateView):
     form_class = viaje_form
     template_name = "viajes_templates/viaje_form.html"
@@ -172,7 +168,7 @@ class agregar_viaje(CreateView):
             )
             return render(request, "mensaje.html")
 
-@method_decorator(premiso_transportista,name='dispatch')
+@method_decorator(permiso_transportista,name='dispatch')
 class crear_viaje(CreateView):
     model = Viaje
     form_class = viaje_form
@@ -223,7 +219,7 @@ class crear_viaje(CreateView):
                 messages.success(request, "Ha Habido un error Creando el Viaje")
 
                 return redirect("crear_viaje")
-@method_decorator(premiso_transportista,name='dispatch')
+@method_decorator(permiso_transportista,name='dispatch')
 class agregar_viaje_manual(View):
     model = Viaje
     form_class = viaje_form
@@ -282,7 +278,7 @@ class agregar_viaje_manual(View):
 
 
 # esta funcion devuelve los viajes en curso, tomando como filtro el numero de viaje que que esta en el momento
-@premiso_transportista
+@permiso_transportista
 def listar_viaje_en_curso(request):
 
     try:
@@ -325,7 +321,7 @@ def listar_viaje_en_curso(request):
 
 
 # esta funcion devuelve los viajes que se han realizado por el transportista logueado al momento
-@premiso_transportista
+@permiso_transportista
 def mis_viajes(request):
  
 
@@ -345,434 +341,8 @@ def mis_viajes(request):
     return render(request, "viajes_templates/listar_viajes_transportista_logueado.html", context)
 
 
-@method_decorator(premiso_transportista,name='dispatch')
-class reporte_viaje_excel(TemplateView):
 
-    # Usamos el método get para generar el archivo excel
-    @premiso_transportista
-    def get(self, request, *args, **kwargs):
-         #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
-        if not request.user.is_transportista and not request.user.is_superuser:
-            messages.success(request, "No tiene permisos Para Acceder a seccion")
-            return redirect("home")
-
-        # Obtenemos todas las personas de nuestra base de datos
-        viajes = Viaje.objects.all()
-        # Creamos el libro de trabajo
-        wb = Workbook()
-        # Definimos como nuestra hoja de trabajo, la hoja activa, por defecto la primera del libro
-        ws = wb.active
-        # En la celda B1 ponemos el texto 'REPORTE DE PERSONAS'
-        # Aplicamos estilo a la columna B1
-        ws["B2"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["B2"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["B2"].fill = PatternFill(
-            start_color="66FFCC", end_color="66FFCC", fill_type="solid"
-        )
-        ws["B2"].font = Font(name="Calibi", size=16, bold=True)
-        ws["B2"] = "REPORTE DE VIAJES"
-        # Juntamos las celdas desde la B1 hasta la E1, formando una sola celda
-        ws.merge_cells("B2:O2")
-        ws.row_dimensions[2].height = 25
-
-        # definimos el tamaño de cada colunma algunas las dejamos en automatico
-        ws.column_dimensions["B"].width = 8
-        ws.column_dimensions["C"].width = 20
-        ws.column_dimensions["d"].auto_size = True
-        ws.column_dimensions["E"].width = 10
-        ws.column_dimensions["F"].auto_size = True
-        ws.column_dimensions["G"].width = 8
-        ws.column_dimensions["H"].width = 10
-        ws.column_dimensions["I"].auto_size = True
-        ws.column_dimensions["J"].auto_size = True
-        ws.column_dimensions["K"].auto_size = True
-        ws.column_dimensions["L"].auto_size = True
-        ws.column_dimensions["M"].width = 15
-        ws.column_dimensions["N"].width = 30
-        ws.column_dimensions["O"].width = 30
-
-        # Creamos los encabezados desde la celda B3 hasta la E3
-        ws["B5"] = "Id"
-        ws["C5"] = "Numero de viaje"
-        ws["D5"] = "Transportista"
-        ws["E5"] = "Fecha"
-        ws["F5"] = "Hora"
-        ws["G5"] = "Tipo"
-        ws["H5"] = "Id"
-        ws["I5"] = "Nombre"
-        ws["J5"] = "Apellido"
-        ws["K5"] = "Campaña"
-        ws["L5"] = "Site"
-        ws["M5"] = "Ruta"
-        ws["N5"] = "Direccion"
-        ws["O5"] = "Excepcion"
-        # ws['P3']='Hora de entrada del pasajero'
-        # ws['P3']='Hora de salida del pasajero'
-
-        # damos Formato a cada una de las celdas utilizadas
-        ws["B5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["B5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["B5"].font = Font(name="Arial", size=10, bold=True)
-        ws["B5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["C5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["C5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["C5"].font = Font(name="Arial", size=10, bold=True)
-        ws["C5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["D5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["D5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["D5"].font = Font(name="Arial", size=10, bold=True)
-        ws["D5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["E5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["E5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["E5"].font = Font(name="Arial", size=10, bold=True)
-        ws["E5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["F5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["F5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["F5"].font = Font(name="Arial", size=10, bold=True)
-        ws["F5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["G5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["G5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["G5"].font = Font(name="Arial", size=10, bold=True)
-        ws["G5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["H5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["H5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["H5"].font = Font(name="Arial", size=10, bold=True)
-        ws["H5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["I5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["I5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["I5"].font = Font(name="Arial", size=10, bold=True)
-        ws["I5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["J5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["J5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["J5"].font = Font(name="Arial", size=10, bold=True)
-        ws["J5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["K5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["K5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["K5"].font = Font(name="Arial", size=10, bold=True)
-        ws["K5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["L5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["L5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["L5"].font = Font(name="Arial", size=10, bold=True)
-        ws["L5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["M5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["M5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["M5"].font = Font(name="Arial", size=10, bold=True)
-        ws["M5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["N5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["N5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["N5"].font = Font(name="Arial", size=10, bold=True)
-        ws["N5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        ws["O5"].alignment = Alignment(horizontal="center", vertical="center")
-        ws["O5"].border = Border(
-            left=Side(border_style="thin"),
-            right=Side(border_style="thin"),
-            top=Side(border_style="thin"),
-            bottom=Side(border_style="thin"),
-        )
-        ws["O5"].font = Font(name="Arial", size=10, bold=True)
-        ws["O5"].fill = PatternFill(
-            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
-        )
-
-        cont = 6
-        # Recorremos el conjunto de viajes y vamos escribiendo cada uno de los datos en las celdas y tambien se le asignan su respectivos estilos
-        for viaje in viajes:
-            ws.cell(row=cont, column=2).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=2).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=2).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=2).value = viaje.id_viaje
-
-            ws.cell(row=cont, column=3).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=3).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=3).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=3).value = viaje.numero_viaje
-
-            ws.cell(row=cont, column=4).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=4).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=4).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=4).value = viaje.transportista
-
-            ws.cell(row=cont, column=5).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=5).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=5).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=5).value = viaje.fecha_viaje
-
-            ws.cell(row=cont, column=6).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=6).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=6).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=6).value = viaje.hora_viaje
-
-            ws.cell(row=cont, column=7).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=7).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=7).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=7).value = viaje.tipo_viaje
-
-            ws.cell(row=cont, column=8).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=8).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=8).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=8).value = viaje.id_pasajero
-
-            ws.cell(row=cont, column=9).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=9).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=9).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=9).value = viaje.nombre_pasajero
-
-            ws.cell(row=cont, column=10).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=10).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=10).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=10).value = viaje.apellido_pasajero
-
-            ws.cell(row=cont, column=11).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=11).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=11).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=11).value = viaje.campaña_pasajero
-
-            ws.cell(row=cont, column=12).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=12).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=12).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=12).value = viaje.site_pasajero
-
-            ws.cell(row=cont, column=13).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=13).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=13).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=13).value = viaje.ruta_pasajero
-
-            ws.cell(row=cont, column=14).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=14).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=14).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=14).value = viaje.direccion_pasajero
-
-            ws.cell(row=cont, column=15).alignment = Alignment(
-                horizontal="center", vertical="center"
-            )
-            ws.cell(row=cont, column=15).border = Border(
-                left=Side(border_style="thin"),
-                right=Side(border_style="thin"),
-                top=Side(border_style="thin"),
-                bottom=Side(border_style="thin"),
-            )
-            ws.cell(row=cont, column=15).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=15).value = viaje.razon_excepcion
-
-            # ws.cell(row = cont, column =17).value = viaje.hora_entrada
-            # ws.cell(row = cont, column =18).value = viaje.hora_salida
-            cont = cont + 1
-        # Establecemos el nombre del archivo este estara compuesto por la palabra TPGP-REPORT- +dia + mes+ ano +horaactual+minutoactual
-        nombre_archivo = (
-            "TPGO-REPORT-" + dia + mes + ano + hora_actual + minuto_actual + ".xlsx"
-        )
-        # Definimos que el tipo de respuesta a devolver es un archivo de microsoft excel
-        response = HttpResponse(content_type="application/ms-excel")
-        contenido = "attachment; filename={0}".format(nombre_archivo)
-        response["Content-Disposition"] = contenido
-        wb.save(response)
-        return response
-
-
-
-
-
-@premiso_admin
+@permiso_staff
 def generar_viaje_admin(request):
      #si no es un Supe usuario o un Transportista la app manda un mensaje de eeor y lo envia al home
    
@@ -795,7 +365,7 @@ def generar_viaje_admin(request):
     
 
 #con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
-@method_decorator(premiso_admin,name='dispatch')
+@method_decorator(permiso_staff,name='dispatch')
 class crear_viaje_admin(CreateView):
     model = ViajeAdministrativo
     template_name = "viajes_templates/viaje_admin_form.html"
@@ -803,7 +373,7 @@ class crear_viaje_admin(CreateView):
     success_url= "viajes_admin"
 
     
-@premiso_admin
+@permiso_staff
 def listar_viajes_admin(request):
     
     numero_viaje_exacto = request.GET.get("dato")

@@ -13,20 +13,20 @@ from django.views.generic import (
 from apps.vendor.forms import VendorForm
 
 from django.utils.decorators import method_decorator
-from apps.home.decoradores_viaje import premiso_admin
+from apps.home.decoradores_viaje import permiso_staff
 from django.contrib.auth.models import User
 
 # Create your views here.
 
 #con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
-@method_decorator(premiso_admin,name='dispatch')
+@method_decorator(permiso_staff,name='dispatch')
 class crear_vendor(CreateView):
     model = Vendor
     form_class = VendorForm
     template_name = "vendor_templates/vendor_form.html"
     success_url = "/vendor"
 
-@premiso_admin
+@permiso_staff
 def listar_vendor(request):
 
     nombre_exato_vendor = request.GET.get("dato")
@@ -42,7 +42,7 @@ def listar_vendor(request):
     return render(request, "vendor_templates/listar_vendor.html", context)
 
 #con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
-@method_decorator(premiso_admin,name='dispatch')
+@method_decorator(permiso_staff,name='dispatch')
 class editar_vendor(UpdateView):
     model = Vendor
     form_class = VendorForm
@@ -50,7 +50,7 @@ class editar_vendor(UpdateView):
     success_url = "/vendor"
 
 #con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
-@method_decorator(premiso_admin,name='dispatch')
+@method_decorator(permiso_staff,name='dispatch')
 class borrar_vendor(DeleteView):
     model = Vendor
     template_name = "vendor_templates/vendor_delete.html"

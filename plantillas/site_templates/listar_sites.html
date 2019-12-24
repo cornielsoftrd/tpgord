@@ -1,70 +1,61 @@
-{% extends 'base/base.html' %}
-{% block content %}
+{% extends 'base/base.html' %} {% block content %} {% if request %}
 
-{% if request %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
 
-	 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                               
-                           <nav class="navbar bg-tp_magenta_pink  text-white">
-							<div class="col-6"><b class="navbar-brand" href="#">Sites</b> </div>
-								<div class="col-6" >								
-									<form method="get" name="buscar" >
-										<div class="input-group md-form form-sm    ">
-											<input class="form-control  " type="text" placeholder="Nombre del site" aria-label="Search" name="dato">
-											<div class="input-group-append">
-											<button type="submit" class="btn btn-info"><i class="fas fa-search text-grey"></i></button>
-											</div>
-										</div>
-									</form>
-								
-								</div>
-							</nav>
-
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead class="bg-primary  text-white">
-                                          <tr >
-											<th>ID</th>
-											<th >Nombre</th>
-											
-											<th colspan="2" style="width:  8%" >Acciones</th>
-											<th style="width:  5%" class="bg-dark"> <a class="fa fa-plus" href="{% url 'crear_site' %}"></a></th>  
-										</tr>
-                                        </thead>
-
-                                       {% if object_list %}
-									<tbody>
-									 {% for site in object_list  %}
-										<tr>
-											<td>{{site.id_site}}</td>
-											<td>{{site.nombre_site}}</td>
-												<!--Botones de Accion-->
-												<td><a class="icon-pencil" href=" {% url 'editar_site' site.id_site %}"></a></td>
-												<td><a class="icon-trash" href=" {% url 'borrar_site' site.id_site %}"></a></td>
-										</tr>
-									{% endfor %}
-									</tbody>
-								   {% endif %}
-                                    </table>
+                <nav class="navbar bg-tp_magenta_pink  text-white">
+                    <div class="col-6"><b class="navbar-brand" href="#">Sites</b> </div>
+                    <div class="col-6">
+                        <form method="get" name="buscar">
+                            <div class="input-group md-form form-sm    ">
+                                <input class="form-control  " type="text" placeholder="Nombre de la cuenta" aria-label="Search" name="dato">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-info"><i class="fas fa-search text-grey"></i></button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
-                   </div>
-                 {% endif %}
-	 {% endblock content %}
+                </nav>
 
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="bg-primary  text-white">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
 
+                                <th colspan="2" style="width:  8%">Acciones</th>
+                                <th style="width:  5%" class="bg-dark">
+                                    <a class="fa fa-plus" href="{% url 'crear_site' %}">
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
 
-
-
-
-
-
-
-
-
-
+                        {% if object_list %}
+                        <tbody>
+                            {% for site in object_list %}
+                            <tr>
+                                <td>{{site.id_site}}</td>
+                                <td>{{site.nombre_site}}</td>
+                                <!--Botones de Accion-->
+                                <td>
+                                    <a class="icon-pencil" href=" {% url 'editar_site' site.id_site %}"></a>
+                                </td>
+                                <td>
+                                    <a class="icon-trash" href=" {% url 'borrar_site' site.id_site %}"></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %} {% endblock content %}

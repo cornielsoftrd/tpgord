@@ -13,20 +13,20 @@ from django.views.generic import (
 from apps.sites.forms import SiteForm
 
 from django.utils.decorators import method_decorator
-from apps.home.decoradores_viaje import premiso_admin
+from apps.home.decoradores_viaje import permiso_staff
 from django.contrib.auth.models import User
 
 # Create your views here.
 
 #con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
-@method_decorator(premiso_admin,name='dispatch')
+@method_decorator(permiso_staff,name='dispatch')
 class crear_site(CreateView):
     model = Site
     form_class = SiteForm
     template_name = "site_templates/site_form.html"
     success_url = "/sites"
 
-@premiso_admin
+@permiso_staff
 def listar_sites(request):
 
     nombre_exato_site = request.GET.get("dato")
@@ -42,7 +42,7 @@ def listar_sites(request):
     return render(request, "site_templates/listar_sites.html", context)
 
 #con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
-@method_decorator(premiso_admin,name='dispatch')
+@method_decorator(permiso_staff,name='dispatch')
 class editar_site(UpdateView):
     model = Site
     form_class = SiteForm
@@ -50,7 +50,7 @@ class editar_site(UpdateView):
     success_url = "/sites"
 
 #con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
-@method_decorator(premiso_admin,name='dispatch')
+@method_decorator(permiso_staff,name='dispatch')
 class borrar_site(DeleteView):
     model = Site
     template_name = "site_templates/site_delete.html"

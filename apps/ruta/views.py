@@ -4,20 +4,20 @@ from apps.ruta.forms import rutaForm
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
 from django.utils.decorators import method_decorator
-from apps.home.decoradores_viaje import premiso_admin
+from apps.home.decoradores_viaje import permiso_staff
 from django.contrib.auth.models import User
 
 # Create your views here.
 
 #con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
-@method_decorator(premiso_admin,name='dispatch')
+@method_decorator(permiso_staff,name='dispatch')
 class crear_ruta(CreateView):
     model = Ruta
     form_class = rutaForm
     template_name = "rutas_templates/ruta_form.html"
     success_url = "/rutas"
 
-@premiso_admin
+@permiso_staff
 def listar_rutas(request):
 
     nombre_exato_ruta = request.GET.get("dato")
@@ -33,7 +33,7 @@ def listar_rutas(request):
     return render(request, "rutas_templates/listar_rutas.html", context)
 
 #con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
-@method_decorator(premiso_admin,name='dispatch')
+@method_decorator(permiso_staff,name='dispatch')
 class editar_ruta(UpdateView):
     model = Ruta
     form_class = rutaForm
@@ -41,7 +41,7 @@ class editar_ruta(UpdateView):
     success_url = "/rutas"
 
 #con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
-@method_decorator(premiso_admin,name='dispatch')
+@method_decorator(permiso_staff,name='dispatch')
 class borrar_ruta(DeleteView):
     model = Ruta
     template_name = "rutas_templates/ruta_delete.html"

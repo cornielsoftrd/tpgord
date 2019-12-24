@@ -98,16 +98,17 @@ from apps.viajes.views import (
     agregar_viaje_manual,
     listar_viaje_en_curso,
     mis_viajes,
-    reporte_viaje_excel,
+    
 )
 
+from apps.reportes.views import reporte_viaje_excel, reporte_tr
 
 from apps.account.views import login_view, registrar_usuario
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("registrar/", registrar_usuario, name="registrar"),
+    path("registrartr/", registrar_usuario, name="registrartr"),
     path("login/", login_view, name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     # manejo de contraseñas
@@ -216,4 +217,7 @@ urlpatterns = [
         login_required(agregar_viaje_manual.as_view()),
         name="agregar_viaje_manual",
     ),
+
+    path('reporte_tr', reporte_tr, name='reporte_tr'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
