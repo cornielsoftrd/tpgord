@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from apps.home.decoradores_viaje import permiso_transportista, permiso_staff
 from django.views.generic import CreateView, View, ListView, TemplateView
@@ -15,6 +16,7 @@ from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Fo
 from datetime import datetime
 import random
 
+
 # Create your views here.
 
 
@@ -26,7 +28,8 @@ mes = str(fecha_tiempo.month)
 ano = str(fecha_tiempo.year)
  
 # esta funcion devuelve los viajes que se han realizado por el transportista logueado al momento
-
+@permiso_staff
+@login_required
 def reporte_tr(request):
  
     numero_exacto_viaje = request.GET.get("dato")
@@ -46,6 +49,7 @@ def reporte_tr(request):
 
 
 @method_decorator(permiso_staff,name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class reporte_viaje_excel(TemplateView):
 
     # Usamos el método get para generar el archivo excel

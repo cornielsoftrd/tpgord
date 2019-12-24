@@ -253,7 +253,7 @@ class agregar_viaje_manual(View):
             hora_salida = pasajero_escaneado[0].hora_salida
         except (IndexError):
             messages.success(request, "No se encontro el pasajero o el mismo no existe")
-            return render(request,'mensaje.html')
+            return redirect('crear_viaje')
         except Exception as e:
             messages.success(request, "error: "+ str(e))
             return render(request,'mensaje.html')
