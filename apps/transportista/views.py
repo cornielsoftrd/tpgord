@@ -1,5 +1,5 @@
-from django.shortcuts import render, reverse
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView, FormView
+from django.shortcuts import render
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from apps.transportista.models import Transportista
 from apps.transportista.forms import TransportistaForm
 
@@ -12,21 +12,12 @@ from django.contrib.auth.models import User
 
 #con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
 @method_decorator(premiso_admin,name='dispatch')
-class crear_transportista(FormView):
+class crear_transportista(CreateView):
     model = Transportista
     form_class = TransportistaForm
     template_name = "transportistas_templates/transportista_form.html"
-    success_url = "/registrartr"
-    def post(self, request):
-        if request.method == 'POST':
-        form = registro_usuario_form(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('registrar')
-       
-        else:
-            form = TransportistaForm()
-        return render(request, 'registration/registro_susuarios.html',{'form':form})
+    success_url = "/transportistas"
+
 @premiso_admin
 def listar_transportistas(request):
 

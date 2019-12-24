@@ -18,10 +18,10 @@ class MyAccountManager(BaseUserManager):
             raise ValueError("Debe indicar un Numero de Telefono para el usuario")
 
         user = self.model(
-            email=email,
+            email=self.normalize_email(email),
             username=username,
             last_name=last_name,
-            first_name=first_name, 
+            first_name=first_name,
             phone=phone,
         )
 
