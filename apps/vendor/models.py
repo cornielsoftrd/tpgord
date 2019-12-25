@@ -6,6 +6,7 @@ class Vendor(models.Model):
         primary_key=True
     )  # la cedula del transportista
     nombre_vendor = models.CharField(max_length=50)
+    email_vendor = models.EmailField(max_length=100,blank=True,null=True)
     
 
 

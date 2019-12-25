@@ -11,12 +11,14 @@ class VendorForm(forms.ModelForm):
 
             "id_vendor",
             "nombre_vendor",
+            "email_vendor",
         ]
 
         labels = {
 
             "id_vendor": "Id del Vendor",
             "nombre_vendor" : "Nombre del Vendor",
+            "email_vendor" : "Email del Vendor",
         }
 
         widgets={
@@ -27,5 +29,9 @@ class VendorForm(forms.ModelForm):
 
             "nombre_vendor": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "Nombre del vendor"}
+            ),
+
+            "email_vendor": forms.EmailInput(
+                attrs={"class": "form-control", "placeholder": "Email del vendor"}
             ),
         }
