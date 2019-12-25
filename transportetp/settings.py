@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "apps.login",
     "apps.account",
     'apps.reportes',
+    'import_export',
 ]
 
 MIDDLEWARE = [
