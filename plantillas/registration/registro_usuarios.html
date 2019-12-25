@@ -37,23 +37,23 @@
 
 {% if request.user.is_admin %}
 
-<form method="POST" class="form-signin">
+<form method="POST" action="{% url 'registrartr' %}" class="form-signin">
     {% csrf_token %}
     <h1 class="h3 mb-3 font-weight-normal">Registro</h1>
     <div class="form-group">
-        <input name="email" class="form-control" placeholder="email" type="email" id="email" required="true">
-        <input name="username" class="form-control" placeholder="usuario" type="text" id="username" required="true">
-        <input name="first_name" class="form-control" placeholder="Nombre" type="text" id="first_name" required="true">
-        <input name="last_name" class="form-control" placeholder="Apellido" type="text" id="last_name" required="true">
-        <input name="phone" class="form-control" placeholder="Telefono" type="text" id="phone" required="true">
-        <input name="password1" class="form-control" placeholder="Contraseña" type="password" id="password" required="true">
+        <input name="email" class="form-control" placeholder="email" type="email" id="email" required="true" value="{{email}}">
+        <input name="username" class="form-control" placeholder="usuario" type="text" id="username" required="true" value="{{username}}">
+        <input name="first_name" class="form-control" placeholder="Nombre" type="text" id="first_name" required="true" value="{{first_name}}">
+        <input name="last_name" class="form-control" placeholder="Apellido" type="text" id="last_name" required="true" value="{{last_name}}">
+        <input name="phone" class="form-control" placeholder="Telefono" type="text" id="phone" required="true" value="{{phone}}">
+        <input name="password1" class="form-control" placeholder="Contraseña" type="password" id="password" required="true" >
         <input name="password2" class="form-control" placeholder="Repetor contraseña" type="password" id="password2" required="true"> {% for field in form %} {% for error in field.errors %}
         <p style="color: red">{{ error }}</p>
         {% endfor %} {% endfor %}
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Guardar</button>
     </div>
-
+    
     <br>
     <center>
         <p>

@@ -44,4 +44,4 @@ def registrar_usuario(request):
        
     else:
         form = registro_usuario_form()
-    return render(request, 'registration/registro_susuarios.html',{'form':form})
+    return render(request, 'registration/registro_usuarios.html',{'form':form})
