@@ -177,6 +177,11 @@
 
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal_generar_viaje">Generar Viaje</a>
 
+                                {% if request.session.numero_viaje  %}
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal_finalizar_viaje">Finalizar Viaje</a>
+                                {% endif %}
+                                
+
                             </div>
                         </li>
                         {% endif %}
@@ -522,6 +527,46 @@
                         </div>
 
                         </form>
+                    </div>
+                </div>
+            </div>
+            <!--Fin Modal generar viaje-->
+
+             <!-- Modal finalizar viaje, este modal se crea aqui para que el usuario pueda generar un viaje en cualquier pantalla delcsistema mediante el boton generar viaje en dropdown d ela chicharra en el navbar superior, esta opcion solo se mostrara si el usuario es trasportista -->
+             <div class="modal fade" id="modal_finalizar_viaje" tabindex="-1" role="dialog" aria-labelledby="modal_agregarTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Finalizar Viaje</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row d-flex justify-content-center align-items-center">
+
+                             
+                                    <div class="mt-3">
+
+                                        <div class="">
+                                            <b class='col-auto'>Confirma que desea Finalizar Viaje?</b>
+                                        </div>
+
+                                    </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+
+
+                            <a class="btn btn-danger" href="{% url 'finalizar_viaje' %}" >Aceptar</a>
+                            <input type='button' class="btn btn-info" data-dismiss="modal" aria-label="Close"  value="Cancelar">
+                            <!--<button type="button" class="btn btn-primary" onclick="cerrar_lector()">Save changes</button>-->
+                        </div>
+
+                       
                     </div>
                 </div>
             </div>

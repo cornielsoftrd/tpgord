@@ -66,8 +66,23 @@ def generar_viaje(request):
         request.session["hora_viaje"] = hora_viaje
         request.session["tipo_viaje"] = tipo_viaje
         return redirect("crear_viaje")
-    except KeyError:
-        pass
+    except Exception as e:
+        messages.success(request, str(e)+"Error al generar viaje")
+        return redirect("crear_viaje")
+
+@permiso_transportista
+def finalizar_viaje(request):
+    try:
+        del request.session["hora"]
+        del request.session["hora_viaje"]
+        del request.session["tipo_viaje"] 
+        del request.session["numero_viaje"]
+        return redirect("crear_viaje")
+    except Exception as e:
+        messages.success(request, str(e)+"No se ha podido Terminar el viaje, Cierre sesion para Terminar")
+        return redirect("crear_viaje")
+
+
 
 @method_decorator(permiso_transportista,name='dispatch')
 class agregar_viaje(CreateView):

@@ -22,7 +22,7 @@ class Pasajero(models.Model):
     telefono = models.CharField(unique=True, max_length=50, null=True)
 
     # ruta = models.ForeignKey(Ruta, verbose_name="Ruta Pasajero", on_delete=models.SET_DEFAULT, null=False, blank=False)
-    Ruta = models.ForeignKey(Ruta, on_delete=models.SET_DEFAULT, default=None)
+    Ruta = models.ForeignKey(Ruta, on_delete=models.CASCADE, default=None)
     cuenta = models.ForeignKey(Cuenta, on_delete=models.CASCADE)
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
     hora_entrada = models.TimeField()

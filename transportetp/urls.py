@@ -91,6 +91,7 @@ from apps.lectorQR.views import (
 from apps.viajes.views import (
     generar_viaje,
     agregar_viaje,
+    finalizar_viaje,
     crear_viaje,
     crear_viaje_admin,
     generar_viaje_admin,
@@ -98,6 +99,7 @@ from apps.viajes.views import (
     agregar_viaje_manual,
     listar_viaje_en_curso,
     mis_viajes,
+
     
 )
 
@@ -195,6 +197,7 @@ urlpatterns = [
     # Vistas para Viajes Normales
     path("crear_viaje", login_required(crear_viaje.as_view()), name="crear_viaje"),
     path("generar_viaje", login_required(generar_viaje), name="generar_viaje"),
+    path("finalizar_viaje", login_required(finalizar_viaje), name="finalizar_viaje"),
     path("viaje_en_curso", login_required(listar_viaje_en_curso), name="viaje_en_curso"),
     path("mis_viajes", login_required(mis_viajes), name="mis_viajes"),
     path("reportexls", reporte_viaje_excel.as_view(), name="reportexls"),
@@ -212,6 +215,7 @@ urlpatterns = [
         login_required(agregar_viaje.as_view()),
         name="agregar_viaje",
     ),
+    
     path(
         "agregar_viaje_manual/<id_ingresado>",
         login_required(agregar_viaje_manual.as_view()),
