@@ -1,139 +1,125 @@
-{% extends "base/base.html" %}
-{% load staticfiles %}
-
-{% block title %}
+{% extends "base/base.html" %} {% block title %}
 <title> Viajes Administrativos</title>
-{% endblock title %}
- 
-
- 
-{% block content %}
-	
-
-{% if request.user.is_admin %}
+{% endblock title %} {% block content %} {% if request.user.is_admin %}
 
 <div class="row">
-                    <div class="col-12 ">
-                        <div class="card ">
-                            <h2 class="text-center ">Formulario de <strong>Transportista</strong></h2>
-                            <div class="card-body">
-                                
-                              
-                                <form method="POST">
-                                    {% csrf_token %}
-                                    <div class="form-body">
-                                        <div class="row">
+    <div class="col-12 ">
+        <div class="card ">
+            <h2 class="text-center ">Formulario de <strong>Transportista</strong></h2>
+            <div class="card-body">
 
 
-                                            <div class="col-md-6 ">
-
-                                                 <div class="input-group mb-3">
-                                                    <input type="text" class="form-control" name="numero_viaje" placeholder="Numero de Viaje" value="{{request.session.numero_viaje_admin}}" placeholder="Usuario" readonly required>
-                                                    <div class="input-group-append">
-                                                    <a href="{% url 'generar_viaje_admin'%}" class="btn btn-info" ><i class="fas fa-sync"></i></a>
-                                                    </div>
-                                                </div>
-
-                                                 <div class="form-group"><input type="text" class="form-control" name="usuario"  value="{{request.user.username}}" placeholder="Usuario" readonly required></div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-body">
+                        <div class="row">
 
 
+                            <div class="col-md-6 ">
+
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="numero_viaje" placeholder="Numero de Viaje" value="{{request.session.numero_viaje_admin}}" placeholder="Usuario" readonly required>
+                                    <div class="input-group-append">
+                                        <a href="{% url 'generar_viaje_admin'%}" class="btn btn-info"><i class="fas fa-sync"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="form-group"><input type="text" class="form-control" name="usuario" value="{{request.user.username}}" placeholder="Usuario" readonly required></div>
 
 
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <label class="input-group-text" for="vendor">Vendor</label>
-                                                    </div>
-                                                         {{form.vendor}}
-                                                </div>
 
 
-                                                 <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <label class="input-group-text" for="fecha_viaje">Fecha</label>
-                                                    </div>
-                                                         <input type="date" class="form-control" name="fecha_viaje"  placeholder="Fecha de viaje" required>
-                                                </div>
-
-                                                 <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <label class="input-group-text" for="hora_viaje">Hora</label>
-                                                    </div>
-                                                        <input type="time" class="form-control" name="hora_viaje"  placeholder="Hora del viaje" required>
-                                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="vendor">Vendor</label>
+                                    </div>
+                                    {{form.vendor}}
+                                </div>
 
 
-                                                
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="fecha_viaje">Fecha</label>
+                                    </div>
+                                    <input type="date" class="form-control" name="fecha_viaje" placeholder="Fecha de viaje" required>
+                                </div>
 
-                                            </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="hora_viaje">Hora</label>
+                                    </div>
+                                    <input type="time" class="form-control" name="hora_viaje" placeholder="Hora del viaje" required>
+                                </div>
+
+
+
+
+                            </div>
 
 
                             <div class="col-md-6">
 
-                                                 <div class="form-group"><input type="text" class="form-control" name="origen"  placeholder="Origen" required></div>
-                                                <div class="form-group"><input type="text" class="form-control" name="destino"  placeholder="Destino" required></div>
+                                <div class="form-group"><input type="text" class="form-control" name="origen" placeholder="Origen" required></div>
+                                <div class="form-group"><input type="text" class="form-control" name="destino" placeholder="Destino" required></div>
 
 
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <label class="input-group-text" for="tipo_vehiculo">Veihiculo</label>
-                                                    </div>
-                                                       <select name="tipo_vehiculo" class="form-control" required>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="tipo_vehiculo">Veihiculo</label>
+                                    </div>
+                                    <select name="tipo_vehiculo" class="form-control" required>
                                                         <option  value="microbus">Microbus</option>
                                                         <option  value="camioneta">Camioneta</option>
                                                         <option  value="sedan ">Sedan</option> 
                                                         <option  value="lujo">Lujo</option> 
                                                         <option  value="blindado">Blindado</option>  
                                                     </select>
-                                                </div>
+                                </div>
 
-                                                
 
-                                                  <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <label class="input-group-text" for="tipo_visita">Visita</label>
-                                                    </div>
-                                                      <select name="tipo_visita" class="form-control" required>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="tipo_visita">Visita</label>
+                                    </div>
+                                    <select name="tipo_visita" class="form-control" required>
                                                         <option value="A">A</option>
                                                         <option value="B">B</option>
                                                         <option value="C">C</option>
                                                     </select>
-                                                    </div>
-
-                                           
-
-                                            <div class="form-group"><input type="text" class="form-control" placeholder = "numero de contacto" name="numero_contacto" required></div>
-                                       
-                         
-                                            </div>
-
-
                                 </div>
 
 
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                            <div class="form-group"><textarea class="form-control text-center" placeholder = "observaciones" style="size:46px;" name="observaciones" required></textarea></div>
-                                            
-                                        </div>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="form-group">{{form.errors}}</div>
 
-                                    <div class="form-actions">
-                                        <div class="text-right">
-                                            <button type="submit" class="btn btn-info">Crear</button>
-                                            <button type="reset" class="btn btn-dark">Cancelar</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                <div class="form-group"><input type="text" class="form-control" placeholder="numero de contacto" name="numero_contacto" required></div>
+
+
                             </div>
+
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group"><textarea class="form-control text-center" placeholder="observaciones" style="size:46px;" name="observaciones" required></textarea></div>
+
+                            </div>
+
                         </div>
                     </div>
-                     
-                </div>
-               {% endif %}
-{% endblock content %}
+                    <div class="form-group">{{form.errors}}</div>
 
+                    <div class="form-actions">
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-info">Crear</button>
+                            <button type="reset" class="btn btn-dark">Cancelar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-
+</div>
+{% endif %} {% endblock content %}
