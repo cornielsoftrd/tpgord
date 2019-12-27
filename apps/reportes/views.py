@@ -35,7 +35,9 @@ def reporte_tr(request):
     numero_exacto_viaje = request.GET.get("dato")
     #en Sqlite la funcion Distict no funciona con parametros, solo funciona en postgress, por tal razon si se usa Sqlite esta funcion dara error, pero para traer valores distintos en base al numero de viaje se debe hacer asi
     #en Sqlite distinct solo funciona con un solo value y sin parametros en la funcion disctint, se emplo asi aqui porque en heroku usamos postgresSQL
+    #la linea comentada, funcionara con Sqlite
     qs = Viaje.objects.values('id_viaje','numero_viaje','transportista','fecha_viaje','hora_viaje', 'tipo_viaje').distinct('numero_viaje')
+    #qs = Viaje.objects.values('id_viaje','numero_viaje','transportista','fecha_viaje','hora_viaje', 'tipo_viaje').distinct()
 
     if numero_exacto_viaje != "" and numero_exacto_viaje is not None:
         qs = qs.filter(
