@@ -7,16 +7,16 @@
             <div class="card-body">
 
 
-                <nav class="navbar  navbar-light bg-light">
-                    <div class="col-6"><b class="navbar-brand" href="#">Reporte de viajes generales</b> </div>
+                <nav class="navbar  navbar-light bg-tp_magenta_pink">
+                    <div class="col-6"><b class="navbar-brand" href="#">Lista de viajes normales</b> </div>
                     <div class="col-6">
                         <form method="get" name="buscar">
                             <div class="input-group md-form form-sm    ">
-                                <button class='btn btn-info' type="submit" value="bajar" onclick='this.form.action="reportexls";' class="btn btn-info"><i class="icon-cloud-download"></i></button cl>
+                                <button class='btn btn-info' type="submit" value="bajar" onclick='this.form.action="{% url 'reportexls' %}";' class="btn btn-info"><i class="icon-cloud-download"></i></button cl>
 
                                 <input class="form-control  " type="text" placeholder="Numero de viaje" aria-label="Search" name="dato">
                                 <div class="input-group-append">
-									<button class='btn btn-info' type="submit" value="buscar" onclick='this.form.action="reporte_tr";' class="btn btn-info"><i class="fas fa-search text-grey"></i></button cl>
+                                    <button class='btn btn-info' type="submit" value="buscar" onclick='this.form.action="reporte_tr";' class="btn btn-info"><i class="fas fa-search text-grey"></i></button cl>
                             </div>
                     </div>
                     </form>
@@ -35,13 +35,8 @@
                             <th> Fecha</th>
                             <th> Hora</th>
                             <th> Tipo</th>
-                            <th> Pasajero</th>
-                            <th> Nombre</th>
-                            <th> Apellido</th>
-                            <th> Campaña</th>
-                            <th> Site</th>
-                            <th> Ruta</th>
-                            <th> Direccion</th>
+                           
+                            <th> Acciones</th>
 
                         </tr>
                     </thead>
@@ -55,15 +50,12 @@
                             <td>{{viaje.fecha_viaje}}</td>
                             <td>{{viaje.hora_viaje}}</td>
                             <td>{{viaje.tipo_viaje}}</td>
-                            <td>{{viaje.id_pasajero}}</td>
-                            <td>{{viaje.nombre_pasajero}}</td>
-                            <td>{{viaje.apellido_pasajero}}</td>
-                            <td>{{viaje.campaña_pasajero}}</td>
-                            <td>{{viaje.site_pasajero}}</td>
-                            <td>{{viaje.ruta_pasajero}}</td>
-                            <td>{{viaje.direccion_pasajero}}</td>
+                         
+                        
                             <!--Botones de Accion-->
 
+                            <!--Botones de Accion-->
+							<td><a class="icon-book-open" href="{% url 'detalle_viaje' viaje.numero_viaje  %}"></a></td>
                         </tr>
                         {% endfor %} {%else%}
 

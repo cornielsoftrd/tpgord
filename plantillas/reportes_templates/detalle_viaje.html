@@ -1,0 +1,96 @@
+{% extends "base/base.html" %}
+
+
+{% block content %}
+
+
+ <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+
+
+                                <nav class="navbar  navbar-light bg-tp_magenta_pink">
+									<div class="col-6"><b class="navbar-brand" href="#">Detalles de viaje</b> </div>
+									<div class="col-6">
+										<form method="get" name="buscar">
+											<div class="input-group md-form form-sm    ">
+												<button class='btn btn-info' type="submit" value="bajar" onclick='this.form.action="{% url 'reportexls' %}";' class="btn btn-info"><i class="icon-cloud-download"></i></button cl>
+				
+												<input class="form-control  " type="text" placeholder="Numero de viaje" aria-label="Search" name="dato">
+												<div class="input-group-append">
+													<button class='btn btn-info' type="submit" value="buscar" onclick='this.form.action="reporte_tr";' class="btn btn-info" disabled><i class="fas fa-search text-grey"></i></button cl>
+											</div>
+									</div>
+									</form>
+				
+							</div>
+							</nav>
+
+                              
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="bg-primary text-white">
+                                            <tr>
+											<th> ID</th>
+											<th> Viaje</th>
+											<th> Transportista</th>
+											<th> Fecha</th>
+											<th> Hora</th>
+											<th> Tipo</th>
+											<th> Pasajero</th>
+											<th> Nombre</th>
+											<th> Apellido</th>
+											<th> Campaña</th>
+											<th> Site</th>
+											<th> Ruta</th>
+											<th> Direccion</th>
+											
+
+ 
+											</tr>
+                                        </thead>
+                                       {% if object_list %}
+										<tbody class="border border-primary">
+										 {% for viaje in object_list  %}
+											<tr>
+												<td>{{viaje.id_viaje}}</td>
+												<td>{{viaje.numero_viaje}}</td>
+												<td>{{viaje.transportista}}</td>
+												<td>{{viaje.fecha_viaje}}</td>
+												<td>{{viaje.hora_viaje}}</td>
+												<td>{{viaje.tipo_viaje}}</td>
+												<td>{{viaje.id_pasajero}}</td>
+												<td>{{viaje.nombre_pasajero}}</td>
+												<td>{{viaje.apellido_pasajero}}</td>
+												<td>{{viaje.campaña_pasajero}}</td>
+												<td>{{viaje.site_pasajero}}</td>
+												<td>{{viaje.ruta_pasajero}}</td>
+												<td>{{viaje.direccion_pasajero}}</td>
+													
+
+												
+											</tr>
+										{% endfor %}
+										{%else%}
+										
+										<td colspan="11" style="">No hay pasajeros en la cola del viaje</td>
+										</tbody>
+
+									   {% endif %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+         <!-- Aqui se muestra el precio del viaje que que se recibe por ql Query Set atravez del Contexto en la Vista Viajes-->
+		<div>
+			<label>Cantidad de Pasajaros:</label> <b>{{cantidad_pasajeros}}</b>
+			<label>Precio del Viaje:</label> <b>{{precio_viaje}}</b>
+			<label>Precio por Pasajero:</label> <b>{{precio_por_pasajero}}</b>
+		</div>
+
+
+{% endblock content %}

@@ -99,11 +99,16 @@ from apps.viajes.views import (
     agregar_viaje_manual,
     listar_viaje_en_curso,
     mis_viajes,
+ 
 
     
 )
 
-from apps.reportes.views import reporte_viaje_excel, reporte_tr
+from apps.reportes.views import (
+    reporte_viaje_excel, 
+    reporte_tr,
+    detalle_viaje,
+)
 
 from apps.account.views import login_view, registrar_usuario
 
@@ -223,5 +228,6 @@ urlpatterns = [
     ),
 
     path('reporte_tr', reporte_tr, name='reporte_tr'),
+    path("detalle_viaje/<numero_viaje>", login_required(detalle_viaje), name="detalle_viaje"),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
