@@ -404,15 +404,12 @@ class crear_viaje_admin(FormView):
         email_origen = settings.EMAIL_HOST_USER
         email_destinos =[
             email_vendor,
-            email_origen
+            email_origen,
 
         ]
        
-        subject = 'Thank you for registering to our site'
-        message = ' it  means a world to us '
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = ['manuelthewise@gmail.com',]
-        send_mail( subject, message, email_from, recipient_list )
+        
+        send_mail( Asunto, mensaje, email_origen, email_destinos )
         print(vendor.email_vendor)
         pass
 
