@@ -31,8 +31,6 @@
     de este modo, si no se ha generado un numero de viaje no se mostrara -->
 
 {% if request.session.numero_viaje %}
-
-
 <div class='col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 '>
     <div id="output" hidden>
         <div id="outputMessage">No se ha detectado el Qr.</div>
@@ -64,13 +62,96 @@
 
 
 {% else %}
-<h2>Debe generar un numero de viaje para poder agregar pasajeros</h2>
+
+<div class='col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 ' style="margin-top: 20%;">
+   
+    <div class="mt-5" >
+        <h2>Debe generar un numero de viaje para poder agregar pasajeros</h2>
+        <p>  <input type="button" value="Generar Viaje" class="btn btn-info" data-toggle="modal" data-target="#modal_generar_viaje" ></p>
+    </div>
+
+</div>
+
 {% endif %}
 
 
 <!--Fin de los mensajes-->
 
 <!--Lector De QR-->
+ <!-- Modal generar viaje, este modal se crea aqui para que el usuario pueda generar un viaje en cualquier pantalla delcsistema mediante el boton generar viaje en dropdown d ela chicharra en el navbar superior, esta opcion solo se mostrara si el usuario es trasportista -->
+ <div class="modal fade" id="modal_generar_viaje" tabindex="-1" role="dialog" aria-labelledby="modal_agregarTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Configuracion de viaje</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center align-items-center">
+
+                    <form action="generar_viaje" method="POST" class="form-inline ">
+                        {% csrf_token %}
+                        <div class="mt-3">
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Hora</label>
+                                </div>
+                                <input class="col-auto form-control" type="time" id="hora_viaje" name="hora_viaje" required>
+                            </div>
+
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="site_destino_origen">Site</label>
+                                </div>
+                                <select class="form-control" id="site_destino_origen" name="site_destino_origen" required>
+                                    
+                                    {% for site in lista_sites %}
+                                        <option value="{{site.nombre_site}}">{{site.nombre_site}}</option>
+                                    {% endfor %}
+                                        
+                                </select>
+                            </div>
+
+                            <!-- Radio Para Seleccionar el Tipo de Viaje que se hara, si es de entrada o de salida, este formulario se envia a pagina de generar viajes, para capturar los datos-->
+                            <!-- Default unchecked -->
+                            <b>Tipo de Viaje:</b>
+                            <div class="form-check-inline custom-radio  mt-2 ml-5">
+                                <input type="radio" value="salida" class="custom-control-input" id="viaje_salida" name="tipo_viaje" checked>
+                                <label class="custom-control-label" for="viaje_salida">Salida</label>
+                            </div>
+                            
+
+                            <div class="form-check-inline custom-radio  ml-5">
+                                <input type="radio" value="entrada" class="custom-control-input" id="viaje_entrada" name="tipo_viaje">
+                                <label class="custom-control-label" for="viaje_entrada">Entrada</label>
+                            </div>
+
+
+
+
+
+                        </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+
+                <input class="btn btn-info" type='submit' value="Generar Viaje">
+                <!--<button type="button" class="btn btn-primary" onclick="cerrar_lector()">Save changes</button>-->
+            </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!--Fin Modal generar viaje-->
 
 <!-- Modal Eviar Datos -->
 <div class="modal fade" id="modal_agregar" tabindex="-1" role="dialog" aria-labelledby="modal_agregarTitle" aria-hidden="true">

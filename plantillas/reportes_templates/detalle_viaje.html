@@ -35,6 +35,7 @@
 											<th> ID</th>
 											<th> Viaje</th>
 											<th> Transportista</th>
+											<th> SR</th> <!--Site de Ruta este seta el site que el Transportista al generar el viaje-->
 											<th> Fecha</th>
 											<th> Hora</th>
 											<th> Tipo</th>
@@ -42,9 +43,10 @@
 											<th> Nombre</th>
 											<th> Apellido</th>
 											<th> Campaña</th>
-											<th> Site</th>
+											<th> SP</th> <!--Site de pasajero, este es el site en el que esta registrado el pasajero-->
 											<th> Ruta</th>
 											<th> Direccion</th>
+											
 											
 
  
@@ -57,6 +59,7 @@
 												<td>{{viaje.id_viaje}}</td>
 												<td>{{viaje.numero_viaje}}</td>
 												<td>{{viaje.transportista}}</td>
+												<td>{{viaje.site_destino_origen}}</td>
 												<td>{{viaje.fecha_viaje}}</td>
 												<td>{{viaje.hora_viaje}}</td>
 												<td>{{viaje.tipo_viaje}}</td>

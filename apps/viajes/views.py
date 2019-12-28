@@ -18,6 +18,7 @@ from apps.viajes.models import Viaje, ViajeAdministrativo
 from apps.viajes.forms import viaje_form, viaje_admin_form
 from apps.pasajero.models import Pasajero
 from apps.ruta.models import Ruta
+from apps.sites.models import Site
 from apps.vendor.models import Vendor
 
  
@@ -65,6 +66,7 @@ def generar_viaje(request):
         request.session["hora"] = hora_actual
         request.session["hora_viaje"] = hora_viaje
         request.session["tipo_viaje"] = tipo_viaje
+        request.session["site_destino_origen"]=request.POST['site_destino_origen']
         return redirect("crear_viaje")
     except Exception as e:
         messages.success(request, str(e)+' '+"Error al generar viaje")
@@ -77,6 +79,7 @@ def finalizar_viaje(request):
         del request.session["hora_viaje"]
         del request.session["tipo_viaje"] 
         del request.session["numero_viaje"]
+        del  request.session["site_destino_origen"]
         return redirect("crear_viaje")
     except Exception as e:
         messages.success(request, str(e)+"No se ha podido Terminar el viaje, Cierre sesion para Terminar")
@@ -157,6 +160,7 @@ class agregar_viaje(CreateView):
                     numero_viaje=request.session["numero_viaje"],
                     id_viaje=None,
                     transportista=usuario_logueado,
+                    site_destino_origen=request.session["site_destino_origen"],
                     fecha_viaje=fecha_tiempo,
                     hora_viaje=request.session["hora_viaje"],
                     tipo_viaje=request.session["tipo_viaje"],
@@ -184,11 +188,20 @@ class agregar_viaje(CreateView):
             return render(request, "mensaje.html")
 
 @method_decorator(permiso_transportista,name='dispatch')
-class crear_viaje(CreateView):
+class crear_viaje(View):
     model = Viaje
     form_class = viaje_form
     template_name = "viajes_templates/viaje_form.html"
     success_url = "listar_pasajeros"
+
+    def get(self, request, *args, **kwargs):
+        lista_sites = Site.objects.all()
+
+        context ={
+        'lista_sites': lista_sites,
+
+        }
+        return render(request, "viajes_templates/viaje_form.html", context)
 
     def post(self, request):
         
@@ -209,6 +222,7 @@ class crear_viaje(CreateView):
                 numero_viaje=request.session["numero_viaje"],
                 id_viaje=None,
                 transportista=request.POST["transportista"],
+                site_destino_origen=request.session["site_destino_origen"],
                 fecha_viaje=request.POST["fecha_viaje"],
                 hora_viaje=request.session["hora_viaje"],
                 tipo_viaje=request.session["tipo_viaje"],
@@ -277,6 +291,7 @@ class agregar_viaje_manual(View):
             "numero_viaje": request.session["numero_viaje"],
             "id_viaje": None,
             "transportista": usuario_logueado,
+            'site_destino_origen':request.session["site_destino_origen"],
             "fecha_viaje": fecha_tiempo,
             "hora_entrada": hora_entrada,
             "hora_salida": hora_salida,

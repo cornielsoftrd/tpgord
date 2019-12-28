@@ -13,6 +13,7 @@ class viaje_form(forms.ModelForm):
         fields = [
             "id_viaje",
             "transportista",
+            'site_destino_origen',
             "fecha_viaje",
             "hora_viaje",
             "tipo_viaje",
@@ -34,6 +35,7 @@ class viaje_form(forms.ModelForm):
         labels = {
             "id_viaje": "Id viaje",
             "transportista": "Transportista",
+            "site_destino_origen": "site_destino_origen",
             "fecha_viaje": "Fecha de Viaje",
             "hora_viaje": "Hora de viaje",
             "tipo_viaje": "tipo de Viaje",
@@ -55,6 +57,7 @@ class viaje_form(forms.ModelForm):
         widgets = {
             "id_viaje": forms.HiddenInput(attrs={"class": "form-control"}),
             "transportista": forms.TextInput(attrs={"class": "form-control"}),
+            "site_destino_origen": forms.TextInput(attrs={"class": "form-control"}),
             "fecha_viaje": forms.TextInput(attrs={"class": "form-control"}),
             "hora_viaje": forms.TimeInput(attrs={"class": "form-control"}),
             "tipo_viaje": forms.TextInput(attrs={"class": "form-control"}),

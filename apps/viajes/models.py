@@ -10,6 +10,7 @@ class Viaje(models.Model):
     id_viaje = models.AutoField(primary_key=True)
     numero_viaje = models.CharField(max_length=1024, default="00000000")
     transportista = models.CharField(max_length=50)
+    site_destino_origen =models.CharField(max_length=50, blank=True, null=True)
     fecha_viaje = models.DateField()
     hora_viaje = models.TimeField()
     tipo_viaje = models.CharField(max_length=30, default="sin asignar")

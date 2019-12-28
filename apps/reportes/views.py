@@ -36,6 +36,7 @@ def reporte_tr(request):
     #en Sqlite la funcion Distict no funciona con parametros, solo funciona en postgress, por tal razon si se usa Sqlite esta funcion dara error, pero para traer valores distintos en base al numero de viaje se debe hacer asi
     #en Sqlite distinct solo funciona con un solo value y sin parametros en la funcion disctint, se emplo asi aqui porque en heroku usamos postgresSQL
     #la linea comentada, funcionara con Sqlite
+    
     qs = Viaje.objects.values('id_viaje','numero_viaje','transportista','fecha_viaje','hora_viaje', 'tipo_viaje').distinct('numero_viaje')
     #qs = Viaje.objects.values('id_viaje','numero_viaje','transportista','fecha_viaje','hora_viaje', 'tipo_viaje').distinct()
 
@@ -109,7 +110,7 @@ class reporte_viaje_excel(TemplateView):
                 numero_viaje__icontains=numero_exacto_viaje,
             ).order_by('-fecha_viaje')
 
-        print(numero_exacto_viaje)
+       
         # Creamos el libro de trabajo
         wb = Workbook()
         # Definimos como nuestra hoja de trabajo, la hoja activa, por defecto la primera del libro
@@ -129,7 +130,7 @@ class reporte_viaje_excel(TemplateView):
         ws["B2"].font = Font(name="Calibi", size=16, bold=True)
         ws["B2"] = "REPORTE DE VIAJES"
         # Juntamos las celdas desde la B1 hasta la E1, formando una sola celda
-        ws.merge_cells("B2:O2")
+        ws.merge_cells("B2:P2")
         ws.row_dimensions[2].height = 25
 
         # definimos el tamaño de cada colunma algunas las dejamos en automatico
@@ -147,6 +148,7 @@ class reporte_viaje_excel(TemplateView):
         ws.column_dimensions["M"].width = 15
         ws.column_dimensions["N"].width = 30
         ws.column_dimensions["O"].width = 30
+        ws.column_dimensions["P"].auto_size = True
 
         # Creamos los encabezados desde la celda B3 hasta la E3
         ws["B5"] = "Id"
@@ -159,10 +161,11 @@ class reporte_viaje_excel(TemplateView):
         ws["I5"] = "Nombre"
         ws["J5"] = "Apellido"
         ws["K5"] = "Campaña"
-        ws["L5"] = "Site"
+        ws["L5"] = "Site Pasajero"
         ws["M5"] = "Ruta"
         ws["N5"] = "Direccion"
         ws["O5"] = "Excepcion"
+        ws["P5"] = "Site Ruta"
         # ws['P3']='Hora de entrada del pasajero'
         # ws['P3']='Hora de salida del pasajero'
 
@@ -335,6 +338,20 @@ class reporte_viaje_excel(TemplateView):
             start_color="66CFCC", end_color="66CFCC", fill_type="solid"
         )
 
+        ws["P5"].alignment = Alignment(horizontal="center", vertical="center")
+        ws["P5"].border = Border(
+            left=Side(border_style="thin"),
+            right=Side(border_style="thin"),
+            top=Side(border_style="thin"),
+            bottom=Side(border_style="thin"),
+        )
+        ws["P5"].font = Font(name="Arial", size=10, bold=True)
+        ws["P5"].fill = PatternFill(
+            start_color="66CFCC", end_color="66CFCC", fill_type="solid"
+        )
+
+        
+
         cont = 6
         # Recorremos el conjunto de viajes y vamos escribiendo cada uno de los datos en las celdas y tambien se le asignan su respectivos estilos
         for viaje in viajes:
@@ -505,6 +522,18 @@ class reporte_viaje_excel(TemplateView):
             )
             ws.cell(row=cont, column=15).font = Font(name="Arial", size=8, bold=True)
             ws.cell(row=cont, column=15).value = viaje.razon_excepcion
+
+            ws.cell(row=cont, column=16).alignment = Alignment(
+                horizontal="center", vertical="center"
+            )
+            ws.cell(row=cont, column=16).border = Border(
+                left=Side(border_style="thin"),
+                right=Side(border_style="thin"),
+                top=Side(border_style="thin"),
+                bottom=Side(border_style="thin"),
+            )
+            ws.cell(row=cont, column=16).font = Font(name="Arial", size=8, bold=True)
+            ws.cell(row=cont, column=16).value = viaje.site_destino_origen
 
             # ws.cell(row = cont, column =17).value = viaje.hora_entrada
             # ws.cell(row = cont, column =18).value = viaje.hora_salida
