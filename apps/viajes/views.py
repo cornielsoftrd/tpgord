@@ -5,6 +5,7 @@ from django.core import serializers
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.core.mail import send_mail, EmailMessage
+from django.conf import settings
 
 import pytz
 
