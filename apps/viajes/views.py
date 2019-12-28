@@ -399,15 +399,19 @@ class crear_viaje_admin(FormView):
         vendor = Vendor.objects.get(id_vendor=id_vendor) #obtiene todos los datos de Vendor donde el Id_vendor sea igual al id del vendor que se otubo del formulario
         email_vendor = vendor.email_vendor
 
+        #creando direccion de viaje
+        hostname= self.request.META['HTTP_HOST']
+    
+        #datos para correo
         numero_viaje = self.request.POST.get('numero_viaje')
-
-  
-        subject = 'Nuevo Viaje Administrativo'
-        message = ' Se ha creado un Viaje Adminstravo en TPGO'
         email_from = settings.EMAIL_HOST_USER
+
+        subject = 'Nuevo Viaje Administrativo'
+        message = "Asunto %s: Enviado por: %s Acceder: %s" %(subject, email_from, '<a>'+str(hostname)+'</a>')
+       
         recipient_list = [email_vendor]
         send_mail( subject, message, email_from, recipient_list )
-        print(recipient_list, numero_viaje)
+        print(recipient_list, numero_viaje, hostname)
         pass
 
     
