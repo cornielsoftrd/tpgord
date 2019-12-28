@@ -408,7 +408,7 @@ class crear_viaje_admin(FormView):
 
         subject = 'Nuevo Viaje Administrativo'
         mensaje = "Se le ha asignado un nuevo viaje administrativo "+"El numero de viaje es: "+str(numero_viaje)+".\n Inicie sesion en link debajo para mas informacion.\n "
-        message_email = "Asunto: %s\n\n Enviado por: %s\n\n Mensaje: %s\n\nAcceder: %s\n\n" %(subject, email_from, mensaje, hostname)
+        message_email = "Asunto:\n\n %s Enviado por:\n\n %s Mensaje:\n\n %s \n\nAcceder: %s" %(subject, email_from, mensaje, hostname)
        
         recipient_list = [email_vendor]
         send_mail( subject, message_email, email_from, recipient_list )
