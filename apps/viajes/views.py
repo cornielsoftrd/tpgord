@@ -406,7 +406,7 @@ class crear_viaje_admin(FormView):
         numero_viaje = self.request.POST.get('numero_viaje')
         email_from = settings.EMAIL_HOST_USER
 
-        subject = 'Nuevo Viaje Administrativo\n\n'
+        subject = 'Nuevo Viaje Administrativo'
         mensaje = "Se le ha asignado un nuevo viaje administrativo\n\n "+"El numero de viaje es: "+str(numero_viaje)+".\n\n"+ "Inicie sesion en link debajo para mas informacion. \n\n"
         message_email = "Asunto: %s\n\nEnviado por: %s\n\nMensaje: %s\n\nAcceder: %s\n\n" %(subject, email_from, mensaje, hostname)
        
