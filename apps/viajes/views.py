@@ -409,7 +409,7 @@ class crear_viaje_admin(FormView):
         ]
        
         
-        send_mail( Asunto, mensaje, email_origen, email_destinos )
+        send_mail( asunto, mensaje, email_origen, email_destinos )
         print(vendor.email_vendor)
         pass
 
