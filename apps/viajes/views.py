@@ -4,7 +4,7 @@ from django.views.generic import CreateView, View, ListView, TemplateView, FormV
 from django.core import serializers
 from django.contrib import messages
 from django.utils.decorators import method_decorator
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 
 import pytz
 
@@ -396,7 +396,25 @@ class crear_viaje_admin(FormView):
         #se busca el email del vendor elegigo
         id_vendor = self.request.POST.get('vendor') #obtiene el Id del vendor
         vendor = Vendor.objects.get(id_vendor=id_vendor) #obtiene todos los datos de Vendor donde el Id_vendor sea igual al id del vendor que se otubo del formulario
+        email_vendor = vendor.email_vendor
 
+        asunto ="Nuevo Viaje Administrativo"
+        mensaje ="Se ha creado un Viaje Adminstravo en TPGO"
+        email_origen = settings.EMAIL_HOST_USER
+        email_destinos =[
+            email_vendor,
+            email_origen
+
+        ]
+       
+        send_mail(
+        asunto,
+        mensaje,
+        email_origen,
+        email_destinos,
+        fail_silently=False,
+
+        )
         print(vendor.email_vendor)
         pass
 
