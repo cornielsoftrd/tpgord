@@ -29,6 +29,7 @@
                                           <tr >
 											<th>ID</th>
 											<th >Nombre</th>
+											<th >Email</th>
 											<th colspan="2" style="width:  8%" >Acciones</th>
 											<th style="width:  5%" class="bg-dark"> <a class="fa fa-plus" href="{% url 'crear_vendor' %}"><a></th>  
 										</tr>
@@ -40,6 +41,7 @@
 											<tr>
 												<td>{{vendor.id_vendor}}</td>
 												<td>{{vendor.nombre_vendor}}</td>
+												<td>{{vendor.email_vendor}}</td>
 													<!--Botones de Accion-->
 													<td><a class="icon-pencil" href=" {% url 'editar_vendor' vendor.id_vendor %}"></a></td>
 													<td><a class="icon-trash" href=" {% url 'borrar_vendor' vendor.id_vendor %}"></a></td>

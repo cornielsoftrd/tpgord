@@ -100,7 +100,7 @@ class viaje_admin_form(forms.ModelForm):
         labels = {
             "numero_viaje" : "Numero de viaje",
             "usuario" : "Usuario",
-            "vendor" : "Transportista",
+            "vendor" : "Vendor",
             "fecha_viaje" : "Fecha de viaje",
             "hora_viaje" : "Hora del viaje",
             "origen" : "Origen",
@@ -116,7 +116,7 @@ class viaje_admin_form(forms.ModelForm):
 
             "numero_viaje" : forms.TextInput(attrs={"class": "form-control" , "placeholder" :"Numero de viaje"}),
             "usuario" : forms.TextInput(attrs={"class": "form-control" , "placeholder":"Usuario"}),
-            "vendor" : forms.Select(attrs={"class": "form-control" , "placeholder":"Transportista"}),
+            "vendor" : forms.Select(attrs={"class": "form-control" , "placeholder":"Vendor", 'name' : "vendor"}),
             "fecha_viaje" : forms.DateInput(attrs={"class": "form-control" , "placeholder":"Fecha de viaje"}),
             "hora_viaje" : forms.TimeInput(attrs={"class": "form-control" , "placeholder":"Hora del viaje"}),
             "origen" : forms.TextInput(attrs={"class": "form-control" , "placeholder":"Origen"}),

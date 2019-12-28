@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect, get_list_or_404
 from django.http import HttpResponse
-from django.views.generic import CreateView, View, ListView, TemplateView
+from django.views.generic import CreateView, View, ListView, TemplateView, FormView
 from django.core import serializers
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.core.mail import send_mail
+
 import pytz
 
 # from django.contrib.auth.models import User
@@ -22,12 +25,10 @@ from apps.sites.models import Site
 from apps.vendor.models import Vendor
 
  
-
-
 from datetime import datetime
 import random
 
-from django.utils.decorators import method_decorator
+
 from apps.home.decoradores_viaje import permiso_staff, permiso_transportista
 
 
@@ -373,11 +374,31 @@ def generar_viaje_admin(request):
 
 #con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
 @method_decorator(permiso_staff,name='dispatch')
-class crear_viaje_admin(CreateView):
-    model = ViajeAdministrativo
+class crear_viaje_admin(FormView):
+    form_class =viaje_admin_form
     template_name = "viajes_templates/viaje_admin_form.html"
-    form_class= viaje_admin_form
-    success_url= "viajes_admin"
+    success_url = 'viajes_admin'
+    
+    #con esta funcion se guarda el viaje administrativo, y se llama al metodo de enviar correo, para enviar un correo al vendor con la indormacion del Viaje para que este le de seguimiento
+    def form_valid(self, form):
+
+        try:
+            form.save()
+            self.enviar_correo()
+            messages.success(self.request,"Viaje Creado, se enviaron una notificacion al vendor")
+            return redirect('viajes_admin')
+        except IndexError as e:
+            messages.success(self.request,str(e)+ " "+ "Error")
+            return redirect('crear_viaje_admin')
+            
+
+    def enviar_correo(self):
+        #se busca el email del vendor elegigo
+        id_vendor = self.request.POST.get('vendor') #obtiene el Id del vendor
+        vendor = Vendor.objects.get(id_vendor=id_vendor) #obtiene todos los datos de Vendor donde el Id_vendor sea igual al id del vendor que se otubo del formulario
+
+        print(vendor.email_vendor)
+        pass
 
     
 @permiso_staff
