@@ -8,6 +8,7 @@ from django.views.generic import (
     ListView,
     UpdateView,
     DeleteView,
+    FormView,
 )
 
 from apps.vendor.forms import VendorForm
@@ -55,3 +56,4 @@ class borrar_vendor(DeleteView):
     model = Vendor
     template_name = "vendor_templates/vendor_delete.html"
     success_url = "/vendor"
+

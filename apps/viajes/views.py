@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_list_or_404
 from django.http import HttpResponse
-from django.views.generic import CreateView, View, ListView, TemplateView, FormView
+from django.views.generic import CreateView, View, ListView, TemplateView, FormView, UpdateView
 from django.core import serializers
 from django.contrib import messages
 from django.utils.decorators import method_decorator
@@ -30,7 +30,7 @@ from datetime import datetime
 import random
 
 
-from apps.home.decoradores_viaje import permiso_staff, permiso_transportista
+from apps.home.decoradores_viaje import permiso_staff, permiso_transportista, permiso_vendor
 
 
 # numero_viaje: esta variable de se uililizara para crear el codigo de Viaje, este sera basado en la informacion del usuario y la fecha para asi generar un codigo unico
@@ -430,3 +430,31 @@ def listar_viajes_admin(request):
     }
 
     return render(request, "viajes_templates/listar_viajes_administrativos.html", context)
+
+
+#aqui se listan las solictudes de viajes administrativos para el vendor logueado
+
+def solicitudes(request, *args, **kwargs):
+    try:
+        vendor_logueado = request.user.username
+        numero_viaje_exacto = request.GET.get("dato")
+        qs = ViajeAdministrativo.objects.filter(vendor=vendor_logueado)
+
+        if numero_viaje_exacto != "" and numero_viaje_exacto is not None:
+            qs = qs.filter(numero_viaje__icontains=numero_viaje_exacto)
+
+        context = {
+            "object_list": qs,
+        }
+
+        return render(request, "viajes_templates/listar_solicicitures_vendor.html", context)
+    except Exception as e:
+        pass
+
+
+class cambiar_estatus_viaje(UpdateView):
+    model = ViajeAdministrativo
+    form_class = viaje_admin_form
+    template_name = "viajes_templates/cambiar_estado_viaje.html"
+    success_url ="solicitudes"
+    

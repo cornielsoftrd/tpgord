@@ -28,4 +28,15 @@ def permiso_staff(function):
     
     return wrap
 
- 
+ #este decorador lo hago para usarlo en clases con la el decorador method decorators de django.util.decoratos
+def permiso_vendor(function):
+    def wrap(request, *args, **kwargs):
+        #si no es un usuario Admin la app manda un mensaje de eeor y lo envia al home
+        if  request.user.is_vendor or request.user.is_superuser:
+            return function(request, *args, **kwargs)
+
+        else:
+            messages.success(request, "No tiene permisos Para acceder a seccion")
+            return redirect('home')
+    
+    return wrap

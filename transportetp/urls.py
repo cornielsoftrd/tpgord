@@ -99,6 +99,9 @@ from apps.viajes.views import (
     agregar_viaje_manual,
     listar_viaje_en_curso,
     mis_viajes,
+    solicitudes,
+    cambiar_estatus_viaje,
+
  
 
     
@@ -212,6 +215,8 @@ urlpatterns = [
     path("generar_viaje_admin", login_required(generar_viaje_admin), name="generar_viaje_admin"),
     path("crear_viaje_admin", login_required(crear_viaje_admin.as_view()), name="crear_viaje_admin"),
     path("viajes_admin", login_required(listar_viajes_admin), name="viajes_admin"),
+    path("solicitudes", login_required(solicitudes), name="solicitudes"),
+    path("estado_viaje/<pk>", login_required(cambiar_estatus_viaje.as_view()), name="estado_viaje"),
 
 
     # esta vista es accesada desde el base.html cuando la camara escanea el QR pasado como parametro el codigo del QR con el cual se genera toda la informacion en la aplicacion Viaje

@@ -1,0 +1,73 @@
+{% extends "base/base.html" %} {% load static %} {% block title %}
+<title>Formulario de Sites</title>
+{% endblock title %} {% block content %}
+
+
+
+
+
+
+
+<div class="row">
+
+    <div class="col-sm-12 col-md-12">
+        <div class="card">
+            <h2 class="text-center">Formulario de <strong>Transportistas</strong></h2>
+            <div class="card-body">
+
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-body">
+
+                        <div class="row">
+                            <div class="col-md-4 m-auto">
+
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="vendor">Estado</label>
+                                    </div>
+                                    <select name="estado" id="estado">
+
+                                <option value="Aceptado">Aceptado</option>
+                                <option value="Rechazado">Rechazado</option>
+                                <option value="En proceso">En proceso</option>
+                                <option value="Completado">Completado</option>
+                            </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="form-actions mt-4">
+                        <div class="text-center">
+                            {{form.errors}}
+                        </div>
+                    </div>
+
+
+                    <div class="form-actions mt-4">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-info">Guardar</button>
+                            <a href="{% url 'solicitudes' %}" class="btn btn-dark">Cancelar</a>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}
