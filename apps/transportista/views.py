@@ -22,21 +22,7 @@ class crear_transportista(FormView):
         form = TransportistaForm(request.POST)
         if form.is_valid():
             form.save()
-
-            #form2 = TransportistaForm(request.POST)
-
-            #estos datos se usan para rellenar el formulario de registro de usuario para crear el usuario del Transportista
-            context = {
-                "email":request.POST.get('email'),
-                "username":request.POST.get('codigo_transportista'),
-                "first_name":request.POST.get('nombre'),
-                "last_name":request.POST.get('apellido'),
-                "phone":request.POST.get('telefono'),
-                
-                
-            }
-            return render(request,'registration/registro_usuarios.html',context)
-        
+            return redirect('transportistas')
         else:
             form = TransportistaForm()
         return render(request, 'registration/registro_usuarios.html',{'form':form})

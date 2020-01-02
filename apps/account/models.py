@@ -1,5 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from apps.vendor.models import Vendor
+from apps.transportista.models import Transportista
+
 
 # Create your models here.
 
@@ -24,6 +29,10 @@ class MyAccountManager(BaseUserManager):
             first_name=first_name,
             phone=phone,
         )
+        
+        user.is_vendor = False
+        user.is_staff = False
+        user.is_transportista = False
 
         user.set_password(password)
         user.save(using=self._db)
@@ -78,3 +87,46 @@ class Account(AbstractBaseUser, PermissionsMixin):
     # este usuario tiene permiso para ver esa app, si siempre
     def has_module_perms(self, app_label):
         return True
+
+
+
+
+
+
+
+#aqui estan los signals de este modelo, los cuales son usados para crear usuarios especificos, al guardarse los delos espeficiados
+
+#al guardarse un vendor se crea un usuario tipo Vendor con la contrase es el telefono, el usuario es el id tel vendor
+@receiver(post_save, sender=Vendor)
+def crear_usuario_vendor(sender, instance, **kwargs):
+    if kwargs['created']:
+        usuario_vendor = Account.objects.create_user(
+            email=instance.email_vendor,
+            username=instance.id_vendor,
+            first_name=instance.nombre_vendor,
+            last_name=instance.nombre_vendor,
+            phone=instance.telefono_vendor,
+            password=instance.telefono_vendor,
+            
+        )
+        usuario_vendor.is_vendor=True
+        usuario_vendor.save()    
+post_save.connect(crear_usuario_vendor, sender=Vendor)
+
+
+#al guardarse un transportista se crea un usuario tipo transportista , la contrase es el telefono, el usuario es el id tel transportista
+@receiver(post_save, sender=Transportista)
+def crear_usuario_transportista(sender, instance, **kwargs):
+    if kwargs['created']:
+        usuario_transportista = Account.objects.create_user(
+            email=instance.email,
+            username=instance.codigo_transportista,
+            first_name=instance.nombre,
+            last_name=instance.apellido,
+            phone=instance.telefono,
+            password=instance.telefono,
+            
+        )
+        usuario_transportista.is_transportista=True
+        usuario_transportista.save()    
+post_save.connect(crear_usuario_transportista, sender=Vendor)
