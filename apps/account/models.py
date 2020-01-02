@@ -5,7 +5,6 @@ from django.dispatch import receiver
 from apps.vendor.models import Vendor
 from apps.transportista.models import Transportista
 
-
 # Create your models here.
 
 
@@ -88,15 +87,8 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def has_module_perms(self, app_label):
         return True
 
-
-
-
-
-
-
-#aqui estan los signals de este modelo, los cuales son usados para crear usuarios especificos, al guardarse los delos espeficiados
-
-#al guardarse un vendor se crea un usuario tipo Vendor con la contrase es el telefono, el usuario es el id tel vendor
+#aqui estan los Signals para crear usuarios especificos al guardar otros modelos
+#al guardarse un Vendor se crea un usuario tipo Vendor , la contrase es el telefono, el usuario es el id tel Vendor
 @receiver(post_save, sender=Vendor)
 def crear_usuario_vendor(sender, instance, **kwargs):
     if kwargs['created']:
@@ -110,7 +102,8 @@ def crear_usuario_vendor(sender, instance, **kwargs):
             
         )
         usuario_vendor.is_vendor=True
-        usuario_vendor.save()    
+        usuario_vendor.save()
+       
 post_save.connect(crear_usuario_vendor, sender=Vendor)
 
 
@@ -125,8 +118,8 @@ def crear_usuario_transportista(sender, instance, **kwargs):
             last_name=instance.apellido,
             phone=instance.telefono,
             password=instance.telefono,
-            
         )
         usuario_transportista.is_transportista=True
         usuario_transportista.save()    
-post_save.connect(crear_usuario_transportista, sender=Vendor)
+post_save.connect(crear_usuario_transportista, sender=Transportista)
+
