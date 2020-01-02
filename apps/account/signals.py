@@ -2,6 +2,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from apps.vendor.models import Vendor
 from apps.transportista.models import Transportista
+from apps.account.models import Account
 
 #aqui estan los Signals del modelo Account, para crear usuarios y demas
 @receiver(post_save, sender=Vendor)

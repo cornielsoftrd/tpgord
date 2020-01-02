@@ -88,6 +88,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
         return True
 
 #aqui estan los Signals para crear usuarios especificos al guardar otros modelos
+
 #al guardarse un Vendor se crea un usuario tipo Vendor , la contrase es el telefono, el usuario es el id tel Vendor
 @receiver(post_save, sender=Vendor)
 def crear_usuario_vendor(sender, instance, **kwargs):
