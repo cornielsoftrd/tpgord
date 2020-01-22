@@ -125,7 +125,9 @@
 
                     <div class="form-group mx-sm-3 mb-2 align-left" >
                       
-                      <select name="dato" id="dato" class="form-control custom-select-set bg-white border-0 custom-shadow">
+                      
+                        <select class="form-control bg-white border-0 custom-shadow" id="dato" name="site_destino_origen" required>
+                            
                         {% if lista_anos %}
                         {% for ano_viaje in lista_anos %}
                         <option selected>{{ano_viaje.fecha_viaje__year}}</option>
