@@ -111,7 +111,7 @@
         <div class="card">
             <div class="card-body">
                 <form class="form-inline">
-                   
+
                     <div class="align-self-center">
                         <h3 class="page-title text-truncate text-primary font-weight-medium mb-1 ">Graficos</h3>
                         <div class="d-flex align-items-center ">
@@ -123,10 +123,10 @@
                         </div>
                     </div>
 
-                    <div class="form-group mx-sm-3 mb-2 align-left" >
-                      
-                      
-                        <select class="form-control bg-white border-0 custom-shadow" id="dato" name="site_destino_origen" required>
+                    <div class="form-group mx-sm-3 mb-2 align-left">
+
+
+                        <select class="form-control bg-white border-0 custom-shadow" id="dato" name="dato" required>
                             
                         {% if lista_anos %}
                         {% for ano_viaje in lista_anos %}
@@ -137,12 +137,12 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary mb-2 btn-lg">Cambiar</button>
-                  </form>
+                </form>
             </div>
         </div>
     </div>
 
-    
+
     <!--FIN Filttro de Año para cargar Graficos por Años-->
 
     <div class="col-lg-4 col-md-12">
@@ -544,8 +544,6 @@
     {% endblock content %} {% block js %}
 
     <script type="text/javascript">
-    
-
         $(function() {
             // ==============================================================
             // Gaficos de viajes Viajes
@@ -644,7 +642,7 @@
             ];
             new Chartist.Bar('.viajes_por_mes', data, options, responsiveOptions);
 
-            
+
             // ============================================================== 
             // viajes por mes, estos datos son tomados de contexto de la vista Home
             // ============================================================== 
@@ -687,9 +685,9 @@
                 width: '100%'
             };
 
-             color: {
+            color: {
                 '#0000'
-                }
+            }
 
             var responsiveOptions = [
                 ['screen and (max-width: 640px)', {
