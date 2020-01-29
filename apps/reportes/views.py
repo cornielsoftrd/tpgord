@@ -37,8 +37,8 @@ def reporte_tr(request):
     #en Sqlite distinct solo funciona con un solo value y sin parametros en la funcion disctint, se emplo asi aqui porque en heroku usamos postgresSQL
     #la linea comentada, funcionara con Sqlite
     
-    qs = Viaje.objects.values('id_viaje','numero_viaje','transportista','fecha_viaje','hora_viaje', 'tipo_viaje').distinct('numero_viaje').order_by('-fecha_viaje')
-    #qs = Viaje.objects.values('id_viaje','numero_viaje','transportista','fecha_viaje','hora_viaje', 'tipo_viaje').distinct().order_by('-fecha_viaje')
+    qs = Viaje.objects.values('id_viaje','numero_viaje','transportista','fecha_viaje','hora_viaje', 'tipo_viaje').distinct('numero_viaje').order_by('-numero_viaje')
+    #qs = Viaje.objects.values('id_viaje','numero_viaje','transportista','fecha_viaje','hora_viaje', 'tipo_viaje').distinct().order_by('-numero_viaje')
 
     if numero_exacto_viaje != "" and numero_exacto_viaje is not None:
         qs = qs.filter(
