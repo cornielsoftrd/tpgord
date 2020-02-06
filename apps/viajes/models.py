@@ -22,7 +22,7 @@ class Viaje(models.Model):
     campaña_pasajero = models.CharField(max_length=50)
     site_pasajero = models.CharField(max_length=50)
     ruta_pasajero = models.CharField(max_length=50)
-    direccion_pasajero = models.CharField(max_length=50)
+    direccion_pasajero = models.CharField(max_length=150)
 
     # estos dos ultimos campos se ulizaran al momento de agregar al los pasajeros de modo manual cuando esten fuera de su horario o por cualquier otra razon
     # si el pasajero se agrega de manera manual, el transportista debera poner la razon de la excepcion y la excepcion se cambiara a True para luego poder filtrar los pasajeros con excepciones
