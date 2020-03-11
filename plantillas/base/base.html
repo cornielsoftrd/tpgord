@@ -19,6 +19,11 @@
     <!-- Custom CSS -->
     <link href="{% static 'dist/css/style.css' %}" rel="stylesheet">
     <link href="{% static 'extra_libs/datatables.net-bs4/css/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+    <!-- este el CSS del pluguin Javascript DATA TABLE que sirve para crear filtros y paginacion en tablas de HTML, esta acompañado de un Script JS que esta en la Seccion de JS junto con el CDN del plugin-->
+    <!--https://datatables.net/-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+  
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -177,6 +182,8 @@
                                 
                                 <a class="dropdown-item" href="/viajes_templates/viaje_form.html" data-toggle="modal" data-target="#modal_generar_viaje">Generar Viaje</a>
                                 {% if request.session.numero_viaje %}
+
+                                <a class="dropdown-item" href="/viajes_templates/viaje_form.html" data-toggle="modal" data-target="#modal_viaje_rapido">Viaje Rapido</a>
                                 
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal_finalizar_viaje">Finalizar Viaje</a> {% endif %}
 
@@ -602,8 +609,14 @@
     <script src="{% static 'extra_libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'dist/js/pages/datatable/datatable-basic.init.js' %}"></script>
 
-
     <script src="{% static 'dist/js/jsQR.js'%}"></script>
+
+    <!-- este el JS del pluguin Javascript DATA TABLE que sirve para crear filtros y paginacion en tablas de HTML, esta acompañado de un CSS que esta en la Seccion de CSS llamado por CDN-->
+    <!--https://datatables.net/-->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+
+    
 
     {% block js %} {% endblock js %}
 

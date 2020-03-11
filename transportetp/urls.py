@@ -98,6 +98,7 @@ from apps.viajes.views import (
     listar_viajes_admin,
     agregar_viaje_manual,
     listar_viaje_en_curso,
+    excluir_pasajero,
     mis_viajes,
     solicitudes,
     cambiar_estatus_viaje,
@@ -207,6 +208,7 @@ urlpatterns = [
     path("generar_viaje", login_required(generar_viaje), name="generar_viaje"),
     path("finalizar_viaje", login_required(finalizar_viaje), name="finalizar_viaje"),
     path("viaje_en_curso", login_required(listar_viaje_en_curso), name="viaje_en_curso"),
+    path("excluir_pasajero/<pk>", login_required(excluir_pasajero.as_view()), name="excluir_pasajero"),
     path("mis_viajes", login_required(mis_viajes), name="mis_viajes"),
     path("reportexls", reporte_viaje_excel.as_view(), name="reportexls"),
 

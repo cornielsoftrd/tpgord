@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_list_or_404
 from django.http import HttpResponse
-from django.views.generic import CreateView, View, ListView, TemplateView, FormView, UpdateView
+from django.views.generic import CreateView, View, ListView, TemplateView, FormView, UpdateView, DeleteView
 from django.core import serializers
 from django.contrib import messages
 from django.utils.decorators import method_decorator
@@ -88,7 +88,7 @@ def finalizar_viaje(request):
         return redirect("crear_viaje")
 
 
-
+#con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
 @method_decorator(permiso_transportista,name='dispatch')
 class agregar_viaje(CreateView):
     form_class = viaje_form
@@ -188,7 +188,7 @@ class agregar_viaje(CreateView):
                 "El Pasajero esta Fuera de su hora, si desea agregaro debe elegir la opcion manual",
             )
             return render(request, "mensaje.html")
-
+#con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
 @method_decorator(permiso_transportista,name='dispatch')
 class crear_viaje(View):
     model = Viaje
@@ -250,6 +250,7 @@ class crear_viaje(View):
                 messages.success(request, "Ha Habido un error Creando el Viaje")
 
                 return redirect("crear_viaje")
+#con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
 @method_decorator(permiso_transportista,name='dispatch')
 class agregar_viaje_manual(View):
     model = Viaje
@@ -327,6 +328,13 @@ def listar_viaje_en_curso(request):
     except Exception as e:
         messages.success(request, str(e) +' '+ "Debe generar un dumero de viaje primero")
         return redirect('home')
+
+#esta funcion es para exluir a los pasajeros de los viajes en curso, asi se puede sacar un pasajero del viaje antes de comenzar y concluir el viaje
+@method_decorator(permiso_transportista,name='dispatch')
+class excluir_pasajero(DeleteView):
+    model = Viaje
+    template_name = "viajes_templates/excluir_pasajero.html"
+    success_url="/viaje_en_curso"
 
 
 # esta funcion devuelve los viajes que se han realizado por el transportista logueado al momento
