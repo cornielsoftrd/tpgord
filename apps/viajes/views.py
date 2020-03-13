@@ -309,6 +309,42 @@ class agregar_viaje_manual(View):
 
         return render(request, "viajes_templates/agregar_viaje_manual.html", context)
 
+#con method decorator se pueden poner decoradores sobre las clases, y hay q soobrescribir el nombre dispacth
+#agregar un viaje casual es un pasajero que no esta registrado en la base de datos
+@method_decorator(permiso_transportista,name='dispatch')
+class agregar_viaje_casual(View):
+    model = Viaje
+    form_class = viaje_form
+    # template_name = 'agregar_viaje_manual.html'
+    success_url = "#"
+
+    # obtener datos de usuario para llenar formulario automaticamente
+    def get(self, request):
+         
+        try:
+
+            fecha_tiempo = datetime.now().strftime("%Y-%m-%d")
+            usuario_logueado = User.objects.get(username=request.user.username)
+
+        except (IndexError):
+            messages.success(request, "Error")
+            return redirect('crear_viaje')
+        except Exception as e:
+            messages.success(request, "error: "+ str(e))
+            return render(request,'mensaje.html')
+            
+        context = {
+            "numero_viaje": request.session["numero_viaje"],
+            "id_viaje": None,
+            "transportista": usuario_logueado,
+            'site_destino_origen':request.session["site_destino_origen"],
+            "fecha_viaje": fecha_tiempo,
+         
+        }
+
+        return render(request, "viajes_templates/agregar_viaje_casual.html", context)
+
+
 
 # esta funcion devuelve los viajes en curso, tomando como filtro el numero de viaje que que esta en el momento
 @permiso_transportista

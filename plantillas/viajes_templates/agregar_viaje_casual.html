@@ -1,7 +1,6 @@
 {% extends "base/base.html" %} {% load static %} {% block title %}
-<title>Viaje Manual</title>
+<title>Viaje Casual</title>
 {% endblock title %} {% block content %}
-
 
 <div class="row">
 
@@ -10,83 +9,83 @@
             <div class="card-body">
                 <h2 class="text-center">Formulario de <strong>Viajes</strong></h2>
 
-                <form method="POST" action="{% url 'crear_viaje' %}" class="agregar_viaje_manual">
+                <form method="POST">
                     {% csrf_token %}
                     <div class="form-body">
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <div class="form-group"><input type="text" class="form-control" placeholder="Fransportista" name="transportista" value="{{transportista}}" readonly ></div>
+                                <div class="form-group"><input type="text" class="form-control" placeholder="Fransportista" name="transportista" value="{{transportista}}" readonly></div>
 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <div class="form-group"><input type="text" class="form-control" placeholder="Fecha del viaje" name="fecha_viaje" value="{{fecha_viaje}}" readonly ></div>
+                                <div class="form-group"><input type="text" class="form-control" placeholder="Fecha del viaje" name="fecha_viaje" value="{{fecha_viaje}}" readonly></div>
                                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <div class="form-group"><input type="time" class="form-control" placeholder="Hora de entrada del pasajero" name="hora_entrada" value="{{hora_entrada}}" readonly ></div>
+                                <div class="form-group"><input type="time" class="form-control" placeholder="Hora de entrada del pasajero" name="hora_entrada" value="{{hora_entrada}}" ></div>
                                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <div class="form-group"><input type="time" class="form-control" placeholder="Hora de salida del pasajero" name="hora_salida" value="{{hora_salida}}" readonly ></div>
+                                <div class="form-group"><input type="time" class="form-control" placeholder="Hora de salida del pasajero" name="hora_salida" value="{{hora_salida}}" ></div>
                                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <div class="form-group"><input type="text" class="form-control" placeholder="Id" name="id_pasajero" value="{{id_pasajero}}" readonly ></div>
+                                <div class="form-group"><input type="text" class="form-control" placeholder="Id" name="id_pasajero" value="{{id_pasajero}}" ></div>
                                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <div class="form-group"><input type="text" class="form-control" placeholder="Nombre" name="nombre_pasajero" value="{{nombre_pasajero}}" readonly ></div>
+                                <div class="form-group"><input type="text" class="form-control" placeholder="Nombre" name="nombre_pasajero" value="{{nombre_pasajero}}" ></div>
                                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <div class="form-group"><input type="text" class="form-control" placeholder="Apellidos" name="apellido_pasajero" value="{{apellido_pasajero}}" readonly ></div>
+                                <div class="form-group"><input type="text" class="form-control" placeholder="Apellidos" name="apellido_pasajero" value="{{apellido_pasajero}}" ></div>
                                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <div class="form-group"><input type="text" class="form-control" placeholder="Campaña" name="campaña_pasajero" value="{{campaña_pasajero}}" readonly ></div>
+                                <div class="form-group"><input type="text" class="form-control" placeholder="Campaña" name="campaña_pasajero" value="{{campaña_pasajero}}" ></div>
                                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <div class="form-group"><input type="text" class="form-control" placeholder="Site" name="site_pasajero" value="{{site_pasajero}}" readonly ></div>
+                                <div class="form-group"><input type="text" class="form-control" placeholder="Site" name="site_pasajero" value="{{site_pasajero}}" ></div>
                                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <div class="form-group"><input type="text" class="form-control" placeholder="Ruta" name="ruta_pasajero" value="{{ruta_pasajero}}" readonly ></div>
+                                <div class="form-group"><input type="text" class="form-control" placeholder="Ruta" name="ruta_pasajero" value="{{ruta_pasajero}}" ></div>
                                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <div class="form-group"><input type="text" class="form-control" placeholder="Direccion" name="direccion_pasajero" value="{{direccion_pasajero}}" readonly ></div>
+                                <div class="form-group"><input type="text" class="form-control" placeholder="Direccion" name="direccion_pasajero" value="{{direccion_pasajero}}" ></div>
                                 
                             </div>
                         </div>
@@ -104,7 +103,7 @@
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <textarea required placeholder="Razon de la excepcion" name="razon_excepcion"></textarea>
+                                <textarea required placeholder="Razon de la excepcion" name="razon_excepcion" readonly hidden>Casual</textarea>
                             </div>
                         </div>
 
@@ -134,6 +133,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 
 

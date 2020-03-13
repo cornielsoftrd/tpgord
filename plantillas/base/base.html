@@ -180,10 +180,10 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                                 
-                                <a class="dropdown-item" href="/viajes_templates/viaje_form.html" data-toggle="modal" data-target="#modal_generar_viaje">Generar Viaje</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal_generar_viaje">Generar Viaje</a>
                                 {% if request.session.numero_viaje %}
 
-                                <a class="dropdown-item" href="/viajes_templates/viaje_form.html" data-toggle="modal" data-target="#modal_viaje_rapido">Viaje Rapido</a>
+                                <a class="dropdown-item" href="{% url 'agregar_viaje_casual' %}">Viaje casual</a>
                                 
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal_finalizar_viaje">Finalizar Viaje</a> {% endif %}
 

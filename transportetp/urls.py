@@ -97,6 +97,7 @@ from apps.viajes.views import (
     generar_viaje_admin,
     listar_viajes_admin,
     agregar_viaje_manual,
+    agregar_viaje_casual,
     listar_viaje_en_curso,
     excluir_pasajero,
     mis_viajes,
@@ -232,6 +233,12 @@ urlpatterns = [
         "agregar_viaje_manual/<id_ingresado>",
         login_required(agregar_viaje_manual.as_view()),
         name="agregar_viaje_manual",
+    ),
+
+    path(
+        "agregar_viaje_casual",
+        login_required(agregar_viaje_casual.as_view()),
+        name="agregar_viaje_casual",
     ),
 
     path('reporte_tr', reporte_tr, name='reporte_tr'),
