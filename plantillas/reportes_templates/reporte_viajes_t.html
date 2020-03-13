@@ -69,7 +69,7 @@
     </div>
 </div>
 </div>
-
+ 
 {% block js %}
 
 <!--Este Script es para manejar el plugin de javascript llamado DATA TABLE, en conjunto con los CSS y JS que estan en la plantilla base.html se encargan de crear una paginacion y un biscador para las tabla html con el buscador se puede filtrar automaticamente cualquier palabla que este en la tabla-->
@@ -87,8 +87,8 @@ $('#tabla_viajes_comunes').DataTable( {
         lengthMenu:    "Mostrar _MENU_ ",
         info:           "Mostrando elementos del _START_ al _END_ de _TOTAL_ elementos",
         //infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-        //infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-        //infoPostFix:    "",
+        infoFiltered:   "(filtrado de un total de _MAX_  elementos)",
+        infoPostFix:    "",
         loadingRecords: "Cargando...",
         zeroRecords:    "Ninguno",
         emptyTable:     "No hay datos disponibles en la tabla",
