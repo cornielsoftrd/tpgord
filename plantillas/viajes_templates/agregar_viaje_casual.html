@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h2 class="text-center">Formulario de <strong>Viajes</strong></h2>
 
-                <form method="POST">
+                <form method="POST" action="{% url 'crear_viaje' %}">
                     {% csrf_token %}
                     <div class="form-body">
 
