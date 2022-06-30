@@ -1,0 +1,76 @@
+
+{% extends 'base/base.html' %}
+{% block content %}
+
+{% if request %}
+
+	 <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                               
+                           <nav class="navbar bg-tp_magenta_pink  text-white">
+							<div class="col-xs-6 col-lg-6 col-md-6 col-sm-6 col-xl-6"><b class="navbar-brand" href="#">Tipos de Ruta</b> </div>
+								<div class="col-xs-6 col-lg-6 col-md-6 col-sm-6 col-xl-6" >								
+									<form method="get" name="buscar" >
+										<div class="input-group md-form form-sm    ">
+											<input class="form-control  " type="text" placeholder="Nombre del Tipo de ruta" aria-label="Search" name="dato">
+											<div class="input-group-append">
+											<button type="submit" class="btn btn-info"><i class="fas fa-search text-grey"></i></button>
+											</div>
+										</div>
+									</form>
+								
+								</div>
+							</nav>
+
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="bg-primary  text-white">
+                                         <tr>
+										<th>ID</th>
+										<th>Nombre</th>
+									
+										
+										<th colspan="2" style="width:  8%" >Acciones</th>
+										<th style="width:  5%" class="bg-dark"> <a class="fa fa-plus" href="{% url 'crear_tipo_ruta' %}"></a></th>  
+										</tr>
+                                        </thead>
+
+                                       {% if object_list %}
+									<tbody>
+									{% for tipo_ruta in object_list  %}
+										<tr>
+											<td>{{tipo_ruta.id}}</td>
+											<td>{{tipo_ruta.nombre}}</td>
+											
+										
+											<!--Botones de Accion-->
+											<td><a class="icon-pencil" href=" {% url 'editar_tipo_ruta' tipo_ruta.id %}"></a></td>
+								            <td><a class="icon-trash" href=" {% url 'borrar_tipo_ruta' tipo_ruta.id %}"></a></td>
+										</tr> 
+									{% endfor %}
+									</tbody>
+
+							    {% endif %}
+
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                 {% endif %}
+	 {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+

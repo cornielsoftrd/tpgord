@@ -31,6 +31,9 @@ from django.conf.urls.static import static
 
 from apps.home.views import (
     home_View,
+    costos,
+    cuentas_overview,
+
     
     
     )
@@ -66,6 +69,11 @@ from apps.ruta.views import (
     listar_rutas, 
     editar_ruta, 
     borrar_ruta,
+
+    crear_tipo_ruta, 
+    listar_tipo_rutas, 
+    editar_tipo_ruta, 
+    borrar_tipo_ruta,
     
     )
 
@@ -100,9 +108,16 @@ from apps.viajes.views import (
     agregar_viaje_casual,
     listar_viaje_en_curso,
     excluir_pasajero,
+    borrar_viaje,
     mis_viajes,
     solicitudes,
     cambiar_estatus_viaje,
+    crear_excepcion,
+    listar_excepciones,
+    editar_excepcion,
+    borrar_excepcion,
+
+
 
  
 
@@ -137,6 +152,8 @@ urlpatterns = [
     # vistas de la App Home
     path("home", login_required(home_View.as_view()), name="home"),
     path("", login_required(home_View.as_view()), name="home"),
+    path("costos", costos, name="costos"),
+    path("cuentas_overview", cuentas_overview, name="cuentas_overview"),
 
     # Vistas de App Vendor
     path("crear_vendor/", login_required(crear_vendor.as_view()), name="crear_vendor"),
@@ -167,6 +184,12 @@ urlpatterns = [
     path("rutas/", login_required(listar_rutas), name="rutas"),
     path("editar_ruta/<pk>", login_required(editar_ruta.as_view()), name="editar_ruta"),
     path("borrar_ruta/<pk>", login_required(borrar_ruta.as_view()), name="borrar_ruta"),
+
+    #tipo de ruta
+    path("crear_tipo_ruta/", login_required(crear_tipo_ruta.as_view()), name="crear_tipo_ruta"),
+    path("tipo_ruta/", login_required(listar_tipo_rutas), name="tipo_ruta"),
+    path("editar_tipo_ruta/<pk>", login_required(editar_tipo_ruta.as_view()), name="editar_tipo_ruta"),
+    path("borrar_tipo_ruta/<pk>", login_required(borrar_tipo_ruta.as_view()), name="borrar_tipo_ruta"),
     # Vistas de App Cuenta
     path("crear_cuenta/", login_required(crear_cuenta.as_view()), name="crear_cuenta"),
     path("cuentas/", login_required(listar_cuentas), name="cuentas"),
@@ -204,14 +227,26 @@ urlpatterns = [
     path("sites", login_required(listar_sites), name="sites"),
     path("editar_site/<pk>", login_required(editar_site.as_view()), name="editar_site"),
     path("site/<pk>", login_required(borrar_site.as_view()), name="borrar_site"),
+
+
+    # Vistas de App Exepciones
+    path("crear_excepcion/", login_required(crear_excepcion), name="crear_excepcion"),
+    path("excepciones", login_required(listar_excepciones), name="excepciones"),
+    path("editar_excepcion/<pk>", login_required(editar_excepcion), name="editar_excepcion"),
+    path("borrar_excepcion/<pk>", login_required(borrar_excepcion), name="borrar_excepcion"),
+  
+
+
     # Vistas para Viajes Normales
     path("crear_viaje", login_required(crear_viaje.as_view()), name="crear_viaje"),
     path("generar_viaje", login_required(generar_viaje), name="generar_viaje"),
     path("finalizar_viaje", login_required(finalizar_viaje), name="finalizar_viaje"),
     path("viaje_en_curso", login_required(listar_viaje_en_curso), name="viaje_en_curso"),
     path("excluir_pasajero/<pk>", login_required(excluir_pasajero.as_view()), name="excluir_pasajero"),
+    path("borrar_viaje/<numero_viaje>", login_required(borrar_viaje), name="borrar_viaje"),
     path("mis_viajes", login_required(mis_viajes), name="mis_viajes"),
     path("reportexls", reporte_viaje_excel.as_view(), name="reportexls"),
+    
 
 
         #Vistas Viajes Administrativos
@@ -243,5 +278,10 @@ urlpatterns = [
 
     path('reporte_tr', reporte_tr, name='reporte_tr'),
     path("detalle_viaje/<numero_viaje>", login_required(detalle_viaje), name="detalle_viaje"),
+
+
+    path('settings/', include('django_mfa.urls'), name="mfa"),
+
+    
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

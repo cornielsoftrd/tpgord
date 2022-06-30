@@ -48,7 +48,12 @@ INSTALLED_APPS = [
     "apps.login",
     "apps.account",
     'apps.reportes',
+    'apps.home',
     'import_export',
+    'django_mfa',
+    'django.contrib.humanize',#se usa para separa por Comas las cantidades en los Templates con el filtro |intcomma
+    
+   
 ]
 
 MIDDLEWARE = [
@@ -60,6 +65,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django_mfa.middleware.MfaMiddleware",
 ]
 
 ROOT_URLCONF = "transportetp.urls"
@@ -87,16 +93,34 @@ WSGI_APPLICATION = "transportetp.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#'default': {
-# 'ENGINE': 'django.db.backends.sqlite3',
-#'NAME': os.path.join(BASE_DIR, 'db.trasporte'),
-# }
-# }
+'''
+DATABASES = {
+'default': {
+ 'ENGINE': 'django.db.backends.sqlite3',
+'NAME': os.path.join(BASE_DIR, 'db.trasporte'),
+ }
+ }
+ '''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'tpgoDB',
+        'USER': 'postgres',
+        'PASSWORD': 'caterin161993',
+        'HOST': 'localhost',
+        'PORT':'',
+
+
+    }
+}
+
+'''
 import dj_database_url
 from decouple import config
 
 DATABASES = {"default": dj_database_url.config(default=config("DATABASE_URL"))}
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -162,4 +186,4 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "TPGO TEAM <tpgoapp@gmail.com>"
 
 # configuraciones adicionales
-SECURE_SSL_REDIRECT = True
+#SECURE_SSL_REDIRECT = True

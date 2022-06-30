@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class PasajeroConfig(AppConfig):
-    name = "pasajero"
+    name = "apps.pasajero"

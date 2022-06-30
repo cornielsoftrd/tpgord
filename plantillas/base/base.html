@@ -298,8 +298,13 @@
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{% url 'home' %}" aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
 
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"  data-toggle="modal" data-target="#modal_ruta" aria-expanded="false"><i data-feather="dollar-sign" class="feather-icon"></i><span
+                                    class="hide-menu">Costos Generales</span></a></li>
 
-                        <li class="list-divider"></li>
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"  data-toggle="modal" data-target="#modal_cuentas_overview" aria-expanded="false"><i data-feather="dollar-sign" class="feather-icon"></i><span
+                                    class="hide-menu">Costos de Cuentas</span></a></li>
+
+                       
 
 
 
@@ -366,6 +371,11 @@
                                         </span></a>
                                 </li>
 
+                                <li class="sidebar-item"><a href="{% url 'tipo_ruta' %}" class="sidebar-link"><span
+                                            class="hide-menu">Tipo de Ruta
+                                        </span></a>
+                                </li>
+
                                 <li class="sidebar-item"><a href="{% url 'cuentas' %}" class="sidebar-link"><span
                                             class="hide-menu">Cuentas
                                         </span></a>
@@ -375,6 +385,11 @@
                                             class="hide-menu">Sites
                                         </span></a>
                                 </li>
+
+                                <li class="sidebar-item"><a href="{% url 'excepciones' %}" class="sidebar-link"><span
+                                    class="hide-menu">Excepciones
+                                </span></a>
+                        </li>
                             </ul>
                         </li>
 
@@ -511,7 +526,127 @@
     en el archivo base ya que este esta heredado en todas las plantillas, si se genera un mensaje el alerta saldra con el texto del mensaje
     este Script solo se vera agregado en plantillas que no hereden de la base.html-->
 
+<div class="modal fade" id="modal_ruta" tabindex="-1" role="dialog" aria-labelledby="modal_ruta"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Viajas por ruta</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
+<form action="{% url 'costos' %}" method="GET">
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <select class="form-control"  name="dato" id="dato">
+                        <option value="" disabled selected>Tipo de Ruta</option>
+
+                        {% for tipo_ruta in lista_tipo_ruta %}
+                            <option value='{{tipo_ruta.id}}' selected>{{tipo_ruta.nombre}}</option>
+                        {% endfor %}
+                    
+                      </select>
+                  </div>
+
+                  <div class="col-sm">
+                    <select  class="form-control" name="ano" id="ano">
+                        <option value="" disabled selected>Ruta</option>
+
+                        {% if lista_anos %}
+                        {% for ano_viaje in lista_anos %}
+                        <option selected>{{ano_viaje.fecha_viaje__year}}</option>
+                        {% endfor %}
+                        {% endif %}
+                               
+                      </select>
+                  </div>
+                  
+                </div>
+              </div>
+           
+          </div>
+        
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <input type="submit" class="btn btn-unique" value="Ver Costo">
+      </div>
+    </form>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="modal_cuentas_overview" tabindex="-1" role="dialog" aria-labelledby="modal_cuentas_overview"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Viajas por cuenta</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+<form action="{% url 'cuentas_overview' %}" method="GET">
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <select class="form-control"  name="dato" id="dato">
+                        <option value="" disabled selected>Tipo de Ruta</option>
+
+                        {% for tipo_ruta in lista_tipo_ruta %}
+                            <option value='{{tipo_ruta.id}}' selected>{{tipo_ruta.nombre}}</option>
+                        {% endfor %}
+                    
+                      </select>
+                  </div>
+
+                  <div class="col-sm">
+                    <select class="form-control"  name="cuenta" id="cuenta">
+                        <option value="" disabled selected>Cuenta</option>
+
+                        {% for cuenta in lista_cuentas %}
+                            <option value='{{cuenta.id_cuenta}}' selected>{{cuenta.nombre_cuenta}}</option>
+                        {% endfor %}
+                    
+                      </select>
+                  </div>
+
+                  <div class="col-sm">
+                    <select  class="form-control" name="ano" id="ano">
+                        <option value="" disabled selected>Ruta</option>
+
+                        {% if lista_anos %}
+                        {% for ano_viaje in lista_anos %}
+                        <option selected>{{ano_viaje.fecha_viaje__year}}</option>
+                        {% endfor %}
+                        {% endif %}
+                               
+                      </select>
+                  </div>
+                  
+                </div>
+              </div>
+           
+          </div>
+        
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <input type="submit" class="btn btn-unique" value="Ver Costo">
+      </div>
+    </form>
+
+      </div>
+    </div>
+  </div>
 
 
             <!-- Modal finalizar viaje, este modal se crea aqui para que el usuario pueda generar un viaje en cualquier pantalla delcsistema mediante el boton generar viaje en dropdown d ela chicharra en el navbar superior, esta opcion solo se mostrara si el usuario es trasportista -->
@@ -553,14 +688,7 @@
                 </div>
             </div>
             <!--Fin Modal generar viaje-->
-
-            {% if messages %} {% for message in messages %}
-            <script>
-                mensaje = '{{ message }}';
-                alert(mensaje);
-            </script>
-            <!--<strong>Atencion!</strong> {{ message }}-->
-            {% endfor %} {% endif %} {% block footer %} {% endblock footer %}
+ {% block footer %} {% endblock footer %}
             <!-- ============================================================== -->
             <!-- ============================================================== -->
             <!-- footer -->
@@ -610,15 +738,38 @@
     <script src="{% static 'dist/js/pages/datatable/datatable-basic.init.js' %}"></script>
 
     <script src="{% static 'dist/js/jsQR.js'%}"></script>
+    
+     <!-- cdn para sweet alert-->
+     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 
     <!-- este el JS del pluguin Javascript DATA TABLE que sirve para crear filtros y paginacion en tablas de HTML, esta acompañado de un CSS que esta en la Seccion de CSS llamado por CDN-->
     <!--https://datatables.net/-->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
 
     
+    <!--Mensajes-->
 
-    {% block js %} {% endblock js %}
+    {% if messages %}
+    <script>
+
+'{% for mensaje in messages %}'
+        Swal.fire('{{mensaje}}')
+'{% endfor %}'
+
+    </script>
+
+    {% endif %}
+
+    <!--Fin Mensajes-->
+
+    {% block js %} 
+    
+    {% endblock js %}
 
 
 </body>

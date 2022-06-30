@@ -30,3 +30,12 @@ class Pasajero(models.Model):
 
     def __str__(self):
         return "%s %s" % (self.nombre, self.apellido)
+
+class Horario(models.Model):
+    pasajero=models.ForeignKey(Pasajero,on_delete=models.CASCADE,null=True,blank=True)
+    dia=models.CharField(max_length=30,null=True,blank=True)
+    hora_entrada = models.TimeField(null=True,blank=True)
+    hora_salida = models.TimeField(null=True,blank=True)
+
+    def __str__(self):
+            return "%s" % (str(self.pasajero) + " :   " + str(self.pasajero.id_pasajero) + " :   " + str(self.dia))

@@ -104,7 +104,23 @@
 
                         <div class="row">
                             <div class="col-md-4 m-auto">
-                                <textarea required placeholder="Razon de la excepcion" name="razon_excepcion"></textarea>
+                                <div class="form-check form-group">
+                                   
+                                    <label class="form-check-label" for="excepcion">Excepciones frecuentes:</label>
+                                     
+                                    <select name="excepcion_frecuente" id="excepcion_frecuente" onchange="transcribir_excepcion()">
+                                        {%for excepcion in excepciones %}
+                                            <option >{{excepcion.nombre_excepcion}}</option>
+                                        {%endfor%}
+                                    </select>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 m-auto">
+                                <textarea required placeholder="Razon de la excepcion" id="razon_excepcion" name="razon_excepcion"></textarea>
                             </div>
                         </div>
 
@@ -138,3 +154,18 @@
 
 
 {% endblock content %}
+
+{% block js %}
+
+<script>
+    function transcribir_excepcion(){
+        var excepcion=document.getElementById('excepcion_frecuente').value
+        
+        
+        document.getElementById('razon_excepcion').value=excepcion
+
+        
+    }
+</script>
+
+{% endblock %}

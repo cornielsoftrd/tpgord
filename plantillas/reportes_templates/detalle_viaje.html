@@ -46,6 +46,7 @@
 											<th> SP</th> <!--Site de pasajero, este es el site en el que esta registrado el pasajero-->
 											<th> Ruta</th>
 											<th> Direccion</th>
+											<th> Acciones</th>
 											
 											
 
@@ -70,6 +71,8 @@
 												<td>{{viaje.site_pasajero}}</td>
 												<td>{{viaje.ruta_pasajero}}</td>
 												<td>{{viaje.direccion_pasajero}}</td>
+
+												<td><a class="fa fa-trash fa-lg" href="{% url 'excluir_pasajero' viaje.id_viaje %}"></a></td>
 													
 
 												

@@ -15,6 +15,7 @@ from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Fo
 
 from datetime import datetime
 import random
+from django.db.models import Count, Sum, Avg, Q
 
 
 # Create your views here.
@@ -34,11 +35,11 @@ def reporte_tr(request):
  
     numero_exacto_viaje = request.GET.get("dato")
     #en Sqlite la funcion Distict no funciona con parametros, solo funciona en postgress, por tal razon si se usa Sqlite esta funcion dara error, pero para traer valores distintos en base al numero de viaje se debe hacer asi
-    #en Sqlite distinct solo funciona con un solo value y sin parametros en la funcion disctint, se emplo asi aqui porque en heroku usamos postgresSQL
+    #en Sqlite distinct solo funciona con un solo value y sin parametros en la funcion distinct, se emplo asi aqui porque en heroku usamos postgresSQL
     #la linea comentada, funcionara con Sqlite
     
     #qs = Viaje.objects.values('id_viaje','numero_viaje','transportista','fecha_viaje','hora_viaje', 'tipo_viaje').distinct('numero_viaje').order_by('-numero_viaje')
-    qs = Viaje.objects.values('id_viaje','numero_viaje','transportista','fecha_viaje','hora_viaje', 'tipo_viaje').distinct().order_by('-numero_viaje')
+    qs = Viaje.objects.values('id_viaje','numero_viaje','transportista','fecha_viaje','hora_viaje', 'tipo_viaje').distinct('numero_viaje').order_by('-numero_viaje')
 
     if numero_exacto_viaje != "" and numero_exacto_viaje is not None:
         qs = qs.filter(
@@ -365,7 +366,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=2).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=2).value = viaje.id_viaje
+            ws.cell(row=cont, column=2).value = str(viaje.id_viaje)
 
             ws.cell(row=cont, column=3).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -377,7 +378,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=3).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=3).value = viaje.numero_viaje
+            ws.cell(row=cont, column=3).value = str(viaje.numero_viaje)
 
             ws.cell(row=cont, column=4).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -389,7 +390,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=4).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=4).value = viaje.transportista
+            ws.cell(row=cont, column=4).value = str(viaje.transportista)
 
             ws.cell(row=cont, column=5).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -401,7 +402,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=5).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=5).value = viaje.fecha_viaje
+            ws.cell(row=cont, column=5).value = str(viaje.fecha_viaje)
 
             ws.cell(row=cont, column=6).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -413,7 +414,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=6).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=6).value = viaje.hora_viaje
+            ws.cell(row=cont, column=6).value = str(viaje.hora_viaje)
 
             ws.cell(row=cont, column=7).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -425,7 +426,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=7).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=7).value = viaje.tipo_viaje
+            ws.cell(row=cont, column=7).value = str(viaje.tipo_viaje)
 
             ws.cell(row=cont, column=8).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -437,7 +438,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=8).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=8).value = viaje.id_pasajero
+            ws.cell(row=cont, column=8).value = str(viaje.id_pasajero)
 
             ws.cell(row=cont, column=9).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -449,7 +450,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=9).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=9).value = viaje.nombre_pasajero
+            ws.cell(row=cont, column=9).value = str(viaje.nombre_pasajero)
 
             ws.cell(row=cont, column=10).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -461,7 +462,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=10).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=10).value = viaje.apellido_pasajero
+            ws.cell(row=cont, column=10).value = str(viaje.apellido_pasajero)
 
             ws.cell(row=cont, column=11).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -473,7 +474,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=11).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=11).value = viaje.campaña_pasajero
+            ws.cell(row=cont, column=11).value = str(viaje.campaña_pasajero)
 
             ws.cell(row=cont, column=12).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -485,7 +486,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=12).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=12).value = viaje.site_pasajero
+            ws.cell(row=cont, column=12).value = str(viaje.site_pasajero)
 
             ws.cell(row=cont, column=13).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -497,7 +498,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=13).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=13).value = viaje.ruta_pasajero
+            ws.cell(row=cont, column=13).value = str(viaje.ruta_pasajero)
 
             ws.cell(row=cont, column=14).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -509,7 +510,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=14).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=14).value = viaje.direccion_pasajero
+            ws.cell(row=cont, column=14).value = str(viaje.direccion_pasajero)
 
             ws.cell(row=cont, column=15).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -521,7 +522,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=15).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=15).value = viaje.razon_excepcion
+            ws.cell(row=cont, column=15).value = str(viaje.razon_excepcion)
 
             ws.cell(row=cont, column=16).alignment = Alignment(
                 horizontal="center", vertical="center"
@@ -533,7 +534,7 @@ class reporte_viaje_excel(TemplateView):
                 bottom=Side(border_style="thin"),
             )
             ws.cell(row=cont, column=16).font = Font(name="Arial", size=8, bold=True)
-            ws.cell(row=cont, column=16).value = viaje.site_destino_origen
+            ws.cell(row=cont, column=16).value = str(viaje.site_destino_origen)
 
             # ws.cell(row = cont, column =17).value = viaje.hora_entrada
             # ws.cell(row = cont, column =18).value = viaje.hora_salida

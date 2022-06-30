@@ -30,6 +30,8 @@
                                          <tr>
 										<th>ID</th>
 										<th>Nombre</th>
+										<th>Tipo</th>
+										<th>Precio</th>
 										
 										<th colspan="2" style="width:  8%" >Acciones</th>
 										<th style="width:  5%" class="bg-dark"> <a class="fa fa-plus" href="{% url 'crear_ruta' %}"></a></th>  
@@ -42,6 +44,8 @@
 										<tr>
 											<td>{{ruta.id_ruta}}</td>
 											<td>{{ruta.nombre_ruta}}</td>
+											<td>{{ruta.tipo_ruta}}</td>
+											<td>{{ruta.precio_ruta}}</td>
 										
 											<!--Botones de Accion-->
 											<td><a class="icon-pencil" href=" {% url 'editar_ruta' ruta.id_ruta %}"></a></td>

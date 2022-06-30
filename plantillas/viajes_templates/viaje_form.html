@@ -116,6 +116,22 @@
                                 </select>
                             </div>
 
+                           {% if user.is_admin %}
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="transportista_asignado">Transportista</label>
+                                </div>
+                                
+                                <select class="form-control" id="transportista_asignado" name="transportista_asignado">
+                                    
+                                    {% for transportista in lista_transportistas %}
+                                        <option value="{{transportista.codigo_transportista}}">{{transportista.nombre}} {{transportista.apellido}}</option>
+                                    {% endfor %}
+                                        
+                                </select>
+                            </div>
+                        {% endif %}
+
                             <!-- Radio Para Seleccionar el Tipo de Viaje que se hara, si es de entrada o de salida, este formulario se envia a pagina de generar viajes, para capturar los datos-->
                             <!-- Default unchecked -->
                             <b>Tipo de Viaje:</b>
@@ -298,17 +314,11 @@
         } else {
 
             var valor_label_id_pasajero = document.getElementById('label_id_pasajero').textContent;
-            var confirmacion = confirm('Desea agregar a ' + valor_label_id_pasajero + ' al Viaje?');
-
-        }
-
-        if (confirmacion == true) {
-
-            //con esta variable direccion_url se detecta la direccion principal de la aplicaion de modo q no importa en que domino esta 
-            var direcion_url = window.location.protocol + "//" + window.location.host + "/"
+              //con esta variable direccion_url se detecta la direccion principal de la aplicaion de modo q no importa en que domino esta 
+              var direcion_url = window.location.protocol + "//" + window.location.host + "/"
             if (modo_agregado == "automatico") {
                 //vetana_leido = window.open('https://togo.herokuapp.com/agregar_viaje/' + valor_label_id_pasajero, "_blank");
-                vetana_leido = window.open(direcion_url + 'agregar_viaje/' + valor_label_id_pasajero, "_blank");
+                vetana_leido = window.open(direcion_url + 'agregar_viaje/' + valor_label_id_pasajero, "_self");
 
             }
 
@@ -322,6 +332,8 @@
             $('#modal_agregar').modal('hide');
 
         }
+
+       
 
 
     }

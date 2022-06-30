@@ -24,23 +24,30 @@
             </div>
             </nav>
 
-
-            <div class="table-responsive">
-                <table class="table" id="tabla_viajes_comunes">
-                    <thead class="bg-primary text-white">
-                        <tr>
-                            <th> ID</th>
-                            <th> Viaje</th>
-                            <th> Transportista</th>
-                            <th> Fecha</th>
-                            <th> Hora</th>
-                            <th> Tipo</th>
+              <!-- basic table -->
+              <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Viajes</h4>
                            
-                            <th> Acciones</th>
+                            <div class="table-responsive">
+                                <table id="zero_config" class="table table-striped table-bordered no-wrap">
+                                    <thead>
+                                        <tr>
+                                            <th> ID</th>
+                                            <th> Viaje</th>
+                                            <th> Transportista</th>
+                                            <th> Fecha</th>
+                                            <th> Hora</th>
+                                            <th> Tipo</th>
+                                           
+                                            <th> Acciones</th>
+                                        </tr>
+                                    </thead>
+                                   
 
-                        </tr>
-                    </thead>
-                    {% if object_list %}
+                                    {% if object_list %}
                     <tbody class="border border-primary">
                         {% for viaje in object_list %}
                         <tr>
@@ -55,7 +62,14 @@
                             <!--Botones de Accion-->
 
                             <!--Botones de Accion-->
-							<td><a class="icon-book-open" href="{% url 'detalle_viaje' viaje.numero_viaje  %}"></a></td>
+							<td>
+                                
+                                <a class="icon-book-open" href="{% url 'detalle_viaje' viaje.numero_viaje  %}"></a>
+                                |
+                                <a class="fa fa-trash fa-lg" href="{% url 'borrar_viaje' viaje.numero_viaje %}"></a>
+                            
+                            </td>
+                            
                         </tr>
                         {% endfor %} {%else%}
 
@@ -63,8 +77,27 @@
                     </tbody>
 
                     {% endif %}
-                </table>
+                             
+                     
+                                    <tfoot>
+                                        <tr>
+                                            <th> ID</th>
+                                            <th> Viaje</th>
+                                            <th> Transportista</th>
+                                            <th> Fecha</th>
+                                            <th> Hora</th>
+                                            <th> Tipo</th>
+                                           
+                                            <th> Acciones</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- order table -->
         </div>
     </div>
 </div>

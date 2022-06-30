@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
-from apps.pasajero.models import Pasajero, Cuenta
+from apps.pasajero.models import Pasajero, Cuenta,Horario
 from apps.pasajero.forms import PasajeroForm, CuentaForm
+
 
 
 

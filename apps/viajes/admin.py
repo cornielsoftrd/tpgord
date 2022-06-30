@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.viajes.models import Viaje, ViajeAdministrativo
+from apps.viajes.models import Viaje, ViajeAdministrativo,Excepciones
 
 from import_export.admin import ImportExportModelAdmin
 
@@ -8,6 +8,6 @@ from import_export.admin import ImportExportModelAdmin
 #admin.site.register(Viaje)
 #admin.site.register(ViajeAdministrativo)
 
-@admin.register(Viaje, ViajeAdministrativo)
+@admin.register(Viaje, ViajeAdministrativo,Excepciones)
 class ViewAdmin(ImportExportModelAdmin):
     pass
