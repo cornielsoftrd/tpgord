@@ -280,7 +280,7 @@ urlpatterns = [
     path("detalle_viaje/<numero_viaje>", login_required(detalle_viaje), name="detalle_viaje"),
 
 
-    path('settings/', include('django_mfa.urls'), name="mfa"),
+    #path('settings/', include('django_mfa.urls'), name="mfa"),
 
     
 

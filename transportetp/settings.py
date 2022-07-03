@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'apps.reportes',
     'apps.home',
     'import_export',
-    'django_mfa',
+    #'django_mfa',
     'django.contrib.humanize',#se usa para separa por Comas las cantidades en los Templates con el filtro |intcomma
     
    
@@ -65,7 +65,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django_mfa.middleware.MfaMiddleware",
+    #"django_mfa.middleware.MfaMiddleware",
 ]
 
 ROOT_URLCONF = "transportetp.urls"
@@ -105,9 +105,9 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'tpgoDB',
-        'USER': 'postgres',
-        'PASSWORD': 'caterin161993',
+        'NAME': 'tpgodr_db',
+        'USER': 'tpgodr',
+        'PASSWORD': 'Teleperformance+50$',
         'HOST': 'localhost',
         'PORT':'',
 
@@ -148,7 +148,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
