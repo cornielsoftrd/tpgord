@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     #'django_mfa',
     'django.contrib.humanize',#se usa para separa por Comas las cantidades en los Templates con el filtro |intcomma
     
-   
 ]
 
 MIDDLEWARE = [
